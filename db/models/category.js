@@ -1,10 +1,26 @@
 var connection = require("../connection");
 const Schema = connection.Schema;
 const CategorysSchema = new Schema({
- cat_type: {
+  cat_type: {
     type: String,
-    required:true 
-  }
+    required: true,
+    unique: true,
+  },
 });
 const CategoryModel = connection.model("Categories", CategorysSchema);
 module.exports = CategoryModel;
+
+// Horror;
+// Romance,
+// Fiction;
+// Fantasy;
+// Detective & Mystery;
+// Comic;
+// Action;
+// Business;
+// Tech;
+// Cooking;
+// Health & Fitness;
+// Travel;
+// Medical;
+// Biographies;

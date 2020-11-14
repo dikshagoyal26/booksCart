@@ -3,28 +3,32 @@ const Schema = connection.Schema;
 const UsersSchema = new Schema({
   firstName: {
     type: String,
-    required:true
+    required: true,
   },
   lastName: {
     type: String,
-    required:true
+    required: true,
   },
   userName: {
     type: String,
     unique: true,
-    required:true
+    required: true,
   },
   password: {
     type: String,
-    required:true
+    required: true,
   },
   gender: {
     type: String,
-    required:true
+    required: true,
   },
   created_at: {
     type: Date,
     default: Date.now(),
+  },
+  user_type: {
+    type: Number,
+    required: true,
   },
 });
 const UsersModel = connection.model("Users", UsersSchema);
