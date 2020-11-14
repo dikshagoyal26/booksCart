@@ -20,6 +20,6 @@ booksRouter.get("/fetch", (req, res) => {
 
 booksRouter.get("/fetch/:id", (req, res) => {
   const book = req.params.id;
-  booksCrud.fetchBookById(id, res);
+  booksCrud.fetchBookById(book, res);
 }); 
 module.exports = booksRouter;

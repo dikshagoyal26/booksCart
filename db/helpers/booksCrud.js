@@ -58,7 +58,7 @@ const bookOperations = {
     });
   },
   fetchBookById(bookId, response) {
-    BooksModel.find({ _id: bookId }, (err, data) => {
+    BooksModel.findOne({ _id: bookId }, (err, data) => {
       if (err) {
         console.log("Error in book Search", err);
         response.status(500).json({
