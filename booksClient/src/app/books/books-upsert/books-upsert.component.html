@@ -1,0 +1,11 @@
+<form [formGroup]="bookForm">
+    <input type="text" placeholder="Title" formControlName="title">
+    <input type="text" placeholder="Author" formControlName="author">
+    <input type="text" placeholder="Price" formControlName="price">
+    <input type="text" placeholder="Currency" formControlName="currency">
+    <input type="text" placeholder="cover" formControlName="cover">
+    <select formControlName="category">
+        <option *ngFor="let category of categories" [value]="category._id" >{{category.cat_type}}</option>
+    </select>
+    <button (click)="saveBook()">Save Details</button>
+</form>

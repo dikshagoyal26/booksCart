@@ -1,0 +1,9 @@
+<ol>
+  <li *ngFor="let book of books;index as i">
+    <p>Title : {{ book.title }}</p>
+    <p>author : {{ book.author }}</p>
+    <p>price : {{ book.price }}</p>
+    <p>currency : {{ book.currency }}</p>
+    <button routerLink="/books/upsert/{{book._id}}">Edit Book</button>
+  </li>
+</ol>
