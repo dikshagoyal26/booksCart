@@ -75,5 +75,23 @@ const bookOperations = {
       }
     });
   },
+  searchByCategory(category, response) {
+    BooksModel.find({ category }, (err, data) => {
+      if (err) {
+        console.log("Error in books Search", err);
+        response.status(500).json({
+          status: "E",
+          message: "Error while listing book : " + err,
+        });
+      } else {
+        console.log("books Found..");
+        response.status(200).json({
+          status: "S",
+          message: "books Found..",
+          record: data,
+        });
+      }
+    });
+  },
 };
 module.exports = bookOperations;

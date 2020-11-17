@@ -15,11 +15,15 @@ booksRouter.post("/update", (req, res) => {
 });
 
 booksRouter.get("/fetch", (req, res) => {
-  booksCrud.fetchBooks(res);
+  if (!!req.query && !!req.query.category) {
+    booksCrud.searchByCategory(req.query.category, res);
+  } else {
+    booksCrud.fetchBooks(res);
+  }
 });
 
 booksRouter.get("/fetch/:id", (req, res) => {
   const book = req.params.id;
   booksCrud.fetchBookById(book, res);
-}); 
+});
 module.exports = booksRouter;
