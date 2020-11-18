@@ -1,1 +1,24 @@
-<p>book-card works!</p>
+<div class="card">
+  <img
+    class="card-img-top"
+    *ngIf="book.cover"
+    src="{{ book.cover }}"
+    alt="Book image cap"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ book.title }}</h5>
+    <p class="card-text">
+      {{ book.author }}
+    </p>
+    <p class="card-text">
+      <small class="text-muted">{{ book.price }} {{ book.currency }}</small>
+    </p>
+    <!-- <button
+      class="btn btn-disabled mr-1"
+      routerLink="/books/update/{{ book._id }}"
+    >
+      Edit Book
+    </button> -->
+    <button class="btn btn-disabled">View Book</button>
+  </div>
+</div>

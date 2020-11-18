@@ -4,20 +4,30 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BooksComponent } from './books/books.component';
 import { BooksListComponent } from './books/books-list/books-list.component';
-import { BooksUpsertComponent } from './books/books-upsert/books-upsert.component';
 import { BookCardComponent } from './books/book-card/book-card.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BooksFormComponent } from './books/books-form/books-form.component';
+import { AdminBooksComponent } from './admin/admin-books/admin-books.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BooksComponent,
     BooksListComponent,
-    BooksUpsertComponent,
     BookCardComponent,
+    NavbarComponent,
+    BooksFormComponent,
+    AdminBooksComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule,ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
