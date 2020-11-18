@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import backendUrl from './backendUrl.model';
+import { Url } from './backendUrl.model';
 @Injectable({
   providedIn: 'root',
 })
 export class BooksService {
   private backendUrl: string;
   constructor(private http: HttpClient) {
-    this.backendUrl = backendUrl;
+    this.backendUrl = Url.backendUrl;
   }
   fetchBooks() {
     return this.http.get(this.backendUrl + 'books/fetch');
