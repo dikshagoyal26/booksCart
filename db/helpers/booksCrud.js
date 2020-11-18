@@ -93,5 +93,23 @@ const bookOperations = {
       }
     });
   },
+  searchByTitle(title, response) {
+    BooksModel.find({ title }, (err, data) => {
+      if (err) {
+        console.log("Error in books Search", err);
+        response.status(500).json({
+          status: "E",
+          message: "Error while listing book : " + err,
+        });
+      } else {
+        console.log("book Found..");
+        response.status(200).json({
+          status: "S",
+          message: "book Found..",
+          record: data,
+        });
+      }
+    });
+  },
 };
 module.exports = bookOperations;

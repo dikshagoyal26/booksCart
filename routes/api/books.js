@@ -17,6 +17,8 @@ booksRouter.post("/update", (req, res) => {
 booksRouter.get("/fetch", (req, res) => {
   if (!!req.query && !!req.query.category) {
     booksCrud.searchByCategory(req.query.category, res);
+  } else if (!!req.query && !!req.query.title) {
+    booksCrud.searchByCategory(req.query.title, res);
   } else {
     booksCrud.fetchBooks(res);
   }
