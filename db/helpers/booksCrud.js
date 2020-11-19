@@ -70,7 +70,7 @@ const bookOperations = {
         response.status(200).json({
           status: "S",
           message: "book Found..",
-          record: data,
+          record: [data],
         });
       }
     });
@@ -106,7 +106,7 @@ const bookOperations = {
         response.status(200).json({
           status: "S",
           message: "book Found..",
-          record: data,
+          record: [data],
         });
       }
     });

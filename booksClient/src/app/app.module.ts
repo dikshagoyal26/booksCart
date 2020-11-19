@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BooksFormComponent } from './books/books-form/books-form.component';
 import { AdminBooksComponent } from './admin/admin-books/admin-books.component';
+import { BookDetailsComponent } from './books/book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AdminBooksComponent } from './admin/admin-books/admin-books.component';
     NavbarComponent,
     BooksFormComponent,
     AdminBooksComponent,
+    BookDetailsComponent,
   ],
   imports: [
     BrowserModule,
