@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BooksListComponent } from './books/books-list/books-list.component';
 import { BooksFormComponent } from './books/books-form/books-form.component';
 import { AdminBooksComponent } from './admin/admin-books/admin-books.component';
+import { BookDetailsComponent } from './books/book-details/book-details.component';
 
 const routes: Routes = [
   // {
@@ -13,20 +14,27 @@ const routes: Routes = [
   // },
   {
     path: 'admin',
-    component: AdminBooksComponent,
+    // component: AdminBooksComponent,
     children: [
-      // { path: '', component: AdminBooksComponent, pathMatch: 'full' },
-      { path: 'books/add', component: BooksFormComponent },
+      { path: '', component: AdminBooksComponent, pathMatch: 'full' },
+      { path: 'books/add', component: BooksFormComponent, pathMatch: 'full' },
       {
         path: 'books/update/:id',
         component: BooksFormComponent,
+        pathMatch: 'full',
       },
     ],
   },
   {
     path: 'books',
-    component: BooksListComponent,
-    // children: [{ path: '', component: BooksListComponent, pathMatch: 'full' }],
+    children: [
+      { path: '', component: BooksListComponent, pathMatch: 'full' },
+      {
+        path: 'details/:id',
+        component: BookDetailsComponent,
+        pathMatch: 'full',
+      },
+    ],
   },
 ];
 
