@@ -10,7 +10,7 @@ import { Response } from '../../shared/response.model';
   styleUrls: ['./book-details.component.scss'],
 })
 export class BookDetailsComponent implements OnInit {
-  private book: Book[];
+  public book: Book;
   constructor(
     private route: ActivatedRoute,
     private booksService: BooksService

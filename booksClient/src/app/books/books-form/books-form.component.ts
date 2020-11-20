@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from 'src/app/shared/books.service';
 import { CategoriesService } from 'src/app/shared/categories.service';
@@ -9,20 +14,21 @@ import { CategoriesService } from 'src/app/shared/categories.service';
   styleUrls: ['./books-form.component.scss'],
 })
 export class BooksFormComponent implements OnInit {
-  bookForm = new FormGroup({
-    title: new FormControl('', Validators.required),
-    author: new FormControl('', Validators.required),
-    category: new FormControl('', Validators.required),
-    price: new FormControl('', Validators.required),
-    cover: new FormControl(''),
-    currency: new FormControl('', Validators.required),
+  bookForm = this.fb.group({
+    title: ['', Validators.required],
+    author: ['', Validators.required],
+    category: ['', Validators.required],
+    price: ['', Validators.required],
+    cover: [''],
+    currency: ['', Validators.required],
   });
   categories: any = [];
   constructor(
     private categoriesService: CategoriesService,
     private booksService: BooksService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {}
   private id: string = '';
   ngOnInit(): void {
@@ -32,17 +38,13 @@ export class BooksFormComponent implements OnInit {
         this.initEditBook(params.id);
       }
     });
-    this.categoriesService.fetchCategories().subscribe((data: any) => {
-      if (data.status == 'S') {
-        this.categories = data.record;
-      } else {
-        alert(data.message);
-      }
-    });
+    this.fetchCategories();
+  }
+  fetchCategories() {
+    this.categories = this.categoriesService.getCategories();
   }
   initEditBook(bookId) {
     this.booksService.fetchBookById(bookId).subscribe((data: any) => {
-      console.log(data);
       this.bookForm.patchValue({
         title: data.record.title,
         author: data.record.author,
@@ -67,7 +69,6 @@ export class BooksFormComponent implements OnInit {
         });
     } else {
       this.booksService.addBook(this.bookForm.value).subscribe((data: any) => {
-        console.log(data);
         if (data.status == 'S') {
           alert('book updated successfully');
           this.router.navigate(['/books']);
