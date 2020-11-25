@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Book } from 'src/app/shared/books.model';
-import { BooksService } from 'src/app/shared/books.service';
-import { CartService } from 'src/app/shared/cart.service';
-import { Response } from '../../shared/response.model';
+import { Book } from 'src/app/shared/models/books.model';
+import { BooksService } from 'src/app/shared/services/books.service';
+import { CartService } from 'src/app/shared/services/cart.service';
+import { Response } from '../../shared/models/response.model';
 
 @Component({
   selector: 'app-book-details',

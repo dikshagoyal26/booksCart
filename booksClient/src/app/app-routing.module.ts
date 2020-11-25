@@ -6,23 +6,17 @@ import { BooksFormComponent } from './books/books-form/books-form.component';
 import { AdminBooksComponent } from './admin/admin-books/admin-books.component';
 import { BookDetailsComponent } from './books/book-details/book-details.component';
 import { BookCartComponent } from './books/book-cart/book-cart.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   pathMatch: 'full',
-  //   redirectTo: 'books',
-  // },
   {
     path: 'admin',
-    // component: AdminBooksComponent,
     children: [
       { path: '', component: AdminBooksComponent, pathMatch: 'full' },
-      { path: 'books/add', component: BooksFormComponent, pathMatch: 'full' },
+      { path: 'books/add', component: BooksFormComponent },
       {
         path: 'books/update/:id',
         component: BooksFormComponent,
-        pathMatch: 'full',
       },
     ],
   },
@@ -38,6 +32,8 @@ const routes: Routes = [
       { path: 'cart', component: BookCartComponent, pathMatch: 'full' },
     ],
   },
+  { path: '', redirectTo: '/books', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

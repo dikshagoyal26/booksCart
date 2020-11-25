@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from 'src/app/shared/books.model';
-import { CartService } from 'src/app/shared/cart.service';
+import { Book } from 'src/app/shared/models/books.model';
+import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({
   selector: 'app-book-cart',

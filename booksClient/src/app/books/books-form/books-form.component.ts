@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BooksService } from 'src/app/shared/books.service';
-import { CategoriesService } from 'src/app/shared/categories.service';
+import { BooksService } from 'src/app/shared/services/books.service';
+import { CategoriesService } from 'src/app/shared/services/categories.service';
 @Component({
   selector: 'app-books-form',
   templateUrl: './books-form.component.html',
@@ -45,13 +45,16 @@ export class BooksFormComponent implements OnInit {
   }
   initEditBook(bookId) {
     this.booksService.fetchBookById(bookId).subscribe((data: any) => {
-      this.bookForm.patchValue({
-        title: data.record.title,
-        author: data.record.author,
-        category: data.record.category,
-        price: data.record.price,
-        cover: data.record.cover,
-      });
+      if (data.status == 200) {
+        let record = data.record[0];
+        this.bookForm.patchValue({
+          title: record.title,
+          author: record.author,
+          category: record.category,
+          price: record.price,
+          cover: record.cover,
+        });
+      }
     });
   }
   saveBook() {

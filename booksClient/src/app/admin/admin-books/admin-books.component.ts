@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Book } from 'src/app/shared/books.model';
-import { BooksService } from 'src/app/shared/books.service';
-import { CategoriesService } from 'src/app/shared/categories.service';
-import { Response } from './../../shared/response.model';
+import { Book } from 'src/app/shared/models/books.model';
+import { BooksService } from 'src/app/shared/services/books.service';
+import { CategoriesService } from 'src/app/shared/services/categories.service';
+import { Response } from 'src/app/shared/models/response.model';
 
 @Component({
   selector: 'app-admin-books',
