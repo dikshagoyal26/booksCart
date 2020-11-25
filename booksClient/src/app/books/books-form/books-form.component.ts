@@ -60,7 +60,7 @@ export class BooksFormComponent implements OnInit {
       this.booksService
         .updateBook(this.id, this.bookForm.value)
         .subscribe((data: any) => {
-          if (data.status == 'S') {
+          if (data.status == 200) {
             alert('book added successfully');
             this.router.navigate(['/books']);
           } else {
@@ -69,7 +69,7 @@ export class BooksFormComponent implements OnInit {
         });
     } else {
       this.booksService.addBook(this.bookForm.value).subscribe((data: any) => {
-        if (data.status == 'S') {
+        if (data.status == 200) {
           alert('book updated successfully');
           this.router.navigate(['/books']);
         } else {

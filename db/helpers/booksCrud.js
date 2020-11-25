@@ -16,7 +16,7 @@ const bookOperations = {
       } else {
         console.log("Book Added..");
         response.status(200).json({
-          status: "S",
+          status: 200,
           message: "Book Added",
         });
       }
@@ -33,7 +33,7 @@ const bookOperations = {
       } else {
         console.log("Book Updated..");
         response.status(200).json({
-          status: "S",
+          status: 200,
           message: "Book Updated",
         });
       }
@@ -50,7 +50,7 @@ const bookOperations = {
       } else {
         console.log("books Found..");
         response.status(200).json({
-          status: "S",
+          status: 200,
           message: "books Found..",
           record: data,
         });
@@ -68,7 +68,7 @@ const bookOperations = {
       } else {
         console.log("book Found..");
         response.status(200).json({
-          status: "S",
+          status: 200,
           message: "book Found..",
           record: [data],
         });
@@ -86,7 +86,7 @@ const bookOperations = {
       } else {
         console.log("books Found..");
         response.status(200).json({
-          status: "S",
+          status: 200,
           message: "books Found..",
           record: data,
         });
@@ -104,9 +104,26 @@ const bookOperations = {
       } else {
         console.log("book Found..");
         response.status(200).json({
-          status: "S",
+          status: 200,
           message: "book Found..",
           record: [data],
+        });
+      }
+    });
+  },
+  deleteBookById(book, response) {
+    BooksModel.remove({ _id: book }, (err) => {
+      if (err) {
+        console.log("Error in books Delete", err);
+        response.status(500).json({
+          status: "E",
+          message: "Error while deleting book : " + err,
+        });
+      } else {
+        console.log("book deleted..");
+        response.status(200).json({
+          status: 200,
+          message: "book deleted..",
         });
       }
     });

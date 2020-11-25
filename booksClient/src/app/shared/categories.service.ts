@@ -16,7 +16,7 @@ export class CategoriesService {
     this.http
       .get(this.backendUrl + 'category/fetch')
       .subscribe((data: Response) => {
-        if (data.status == 'S') {
+        if (data.status == 200) {
           this.categories = data.record;
           console.log(data);
         } else {

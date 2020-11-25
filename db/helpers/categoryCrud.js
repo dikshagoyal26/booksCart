@@ -11,7 +11,7 @@ const categoryOperations = {
       } else {
         console.log("Categories Found..");
         response.status(200).json({
-          status: "S",
+          status: 200,
           message: "Categories Found..",
           record: data,
         });
@@ -31,7 +31,7 @@ const categoryOperations = {
         } else {
           console.log("Category Added..");
           response.status(200).json({
-            status: "S",
+            status: 200,
             message: "Category Added",
           });
         }
@@ -63,7 +63,7 @@ const categoryOperations = {
         } else {
           console.log("Categories Added..");
           response.status(200).json({
-            status: "S",
+            status: 200,
             message: "Categories Added",
             record: data,
           });

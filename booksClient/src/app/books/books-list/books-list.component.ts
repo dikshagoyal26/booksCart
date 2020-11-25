@@ -14,10 +14,10 @@ export class BooksListComponent implements OnInit {
   ngOnInit(): void {
     this.booksService.fetchBooks().subscribe((data: any) => {
       console.log(data);
-      if (data.status == 'S') {
+      if (data.status == 200) {
         this.books = data.record;
-      }else{
-        alert(data.message)
+      } else {
+        alert(data.message);
       }
     });
   }

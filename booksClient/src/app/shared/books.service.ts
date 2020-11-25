@@ -27,4 +27,9 @@ export class BooksService {
       data: bookObj,
     });
   }
+  deleteBook(bookId) {
+    return this.http.delete<Response>(
+      this.backendUrl + 'books/delete/' + bookId
+    );
+  }
 }

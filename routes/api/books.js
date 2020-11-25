@@ -28,4 +28,10 @@ booksRouter.get("/fetch/:id", (req, res) => {
   const book = req.params.id;
   booksCrud.fetchBookById(book, res);
 });
+
+booksRouter.delete("/delete/:id", (req, res) => {
+  const book = req.params.id;
+  booksCrud.deleteBookById(book, res);
+});
+
 module.exports = booksRouter;

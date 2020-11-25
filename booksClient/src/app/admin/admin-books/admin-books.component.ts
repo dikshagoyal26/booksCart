@@ -19,8 +19,11 @@ export class AdminBooksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.fetchBooks();
+  }
+  fetchBooks() {
     this.booksService.fetchBooks().subscribe((res: Response) => {
-      if (res.status == 'S') {
+      if (res.status == 200) {
         this.books = res.record;
       }
     });
@@ -30,11 +33,21 @@ export class AdminBooksComponent implements OnInit {
   }
   getCategory(categoryId: string) {
     let category: any = this.categoryService.getCategoryById(categoryId);
-    console.log({ category });
     if (category && category.cat_type) {
       return category.cat_type;
     }
-    console.log({ category, categoryId });
     return '-';
+  }
+  deleteBook(bookId) {
+    if (confirm('Are you sure you want to delete the book')) {
+      this.booksService.deleteBook(bookId).subscribe((res: Response) => {
+        if (res.status == 200) {
+          alert('book deleted successfully');
+          this.fetchBooks();
+        } else {
+          alert('error while deleting book');
+        }
+      });
+    }
   }
 }
