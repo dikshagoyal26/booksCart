@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from 'src/app/shared/books.model';
 import { BooksService } from 'src/app/shared/books.service';
+import { CartService } from 'src/app/shared/cart.service';
 import { Response } from '../../shared/response.model';
 
 @Component({
@@ -13,7 +14,8 @@ export class BookDetailsComponent implements OnInit {
   public book: Book;
   constructor(
     private route: ActivatedRoute,
-    private booksService: BooksService
+    private booksService: BooksService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -28,5 +30,8 @@ export class BookDetailsComponent implements OnInit {
     this.booksService.fetchBookById(BookId).subscribe((data: Response) => {
       this.book = data.record;
     });
+  }
+  addToCart() {
+    this.cartService.addToCart(this.book);
   }
 }

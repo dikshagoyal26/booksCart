@@ -5,6 +5,7 @@ import { BooksListComponent } from './books/books-list/books-list.component';
 import { BooksFormComponent } from './books/books-form/books-form.component';
 import { AdminBooksComponent } from './admin/admin-books/admin-books.component';
 import { BookDetailsComponent } from './books/book-details/book-details.component';
+import { BookCartComponent } from './books/book-cart/book-cart.component';
 
 const routes: Routes = [
   // {
@@ -34,6 +35,7 @@ const routes: Routes = [
         component: BookDetailsComponent,
         pathMatch: 'full',
       },
+      { path: 'cart', component: BookCartComponent, pathMatch: 'full' },
     ],
   },
 ];
