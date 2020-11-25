@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from 'src/app/shared/books.service';
 import { CategoriesService } from 'src/app/shared/categories.service';
@@ -15,12 +10,12 @@ import { CategoriesService } from 'src/app/shared/categories.service';
 })
 export class BooksFormComponent implements OnInit {
   bookForm = this.fb.group({
-    title: ['', Validators.required],
-    author: ['', Validators.required],
+    title: ['', [Validators.required, Validators.minLength(5)]],
+    author: ['', [Validators.required, Validators.minLength(4)]],
     category: ['', Validators.required],
-    price: ['', Validators.required],
+    price: ['', [Validators.required]],
     cover: [''],
-    currency: ['', Validators.required],
+    currency: ['INR', Validators.required],
   });
   categories: any = [];
   constructor(
@@ -38,7 +33,12 @@ export class BooksFormComponent implements OnInit {
         this.initEditBook(params.id);
       }
     });
+  }
+  ngAfterViewInit() {
     this.fetchCategories();
+  }
+  get bookFormControl() {
+    return this.bookForm.controls;
   }
   fetchCategories() {
     this.categories = this.categoriesService.getCategories();

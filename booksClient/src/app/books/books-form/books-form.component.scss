@@ -4,6 +4,15 @@
 //   max-width: 380px;
 //   flex-direction: column;
 // }
+div.form {
+  display: flex;
+  justify-content: center;
+}
+div.form form {
+  max-width: 380px;
+  border: 2px solid #eee;
+  background: white;
+}
 .books {
   display: flex;
   flex-direction: column;
@@ -13,4 +22,13 @@
   display: flex;
   justify-content: right;
   float: right;
+}
+.invalid-feedback {
+  display: inline;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+form label {
+  text-transform: capitalize;
 }
