@@ -29,9 +29,9 @@ const routes: Routes = [
         component: BookDetailsComponent,
         pathMatch: 'full',
       },
-      { path: 'cart', component: BookCartComponent, pathMatch: 'full' },
     ],
   },
+  { path: 'cart', component: BookCartComponent, pathMatch: 'full' },
   { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

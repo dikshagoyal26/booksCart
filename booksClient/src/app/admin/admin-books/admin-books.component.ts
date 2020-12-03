@@ -33,8 +33,8 @@ export class AdminBooksComponent implements OnInit {
   }
   getCategory(categoryId: string) {
     let category: any = this.categoryService.getCategoryById(categoryId);
-    if (category && category.cat_type) {
-      return category.cat_type;
+    if (category && category.category_type) {
+      return category.category_type;
     }
     return '-';
   }

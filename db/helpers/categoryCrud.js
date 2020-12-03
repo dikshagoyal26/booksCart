@@ -21,7 +21,7 @@ const categoryOperations = {
   addCategory(category, response) {
     if (category) {
       category = category.toLowerCase();
-      CategoryModel.create({ cat_type: category }, (err) => {
+      CategoryModel.create({ category_type: category }, (err) => {
         if (err) {
           console.log("Error in Category Add", err);
           response.status(500).json({
@@ -50,7 +50,7 @@ const categoryOperations = {
     }
     let insertCat = [];
     categories.forEach((category) => {
-      insertCat.push({ cat_type: category.toLowerCase() });
+      insertCat.push({ category_type: category.toLowerCase() });
     });
     if (insertCat.length > 0) {
       CategoryModel.insertMany(insertCat, (err, data) => {

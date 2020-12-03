@@ -1,12 +1,7 @@
 <div class="card">
-  <img
-    class="card-img-top"
-    *ngIf="book.cover"
-    src="{{ book.cover }}"
-    alt="Book image cap"
-  />
+  <img class="card-img-top" *ngIf="book.cover" src="{{ book.cover }}" alt="Book image cap" />
   <div class="card-body">
-    <h5 class="card-title">{{ book.title }}</h5>
+    <h5 class="card-title" appSnackbar>{{ book.title }}</h5>
     <p class="card-text">
       {{ book.author }}
     </p>
@@ -19,9 +14,7 @@
     >
       Edit Book
     </button> -->
-    <a class="btn btn-disabled" routerLink="/books/details/{{ book._id }}"
-      >View Book</a
-    >
+    <a class="btn btn-disabled" routerLink="/books/details/{{ book._id }}">View Book</a>
     <button (click)="addToCart()" class="btn btn-success">Add to Cart</button>
   </div>
 </div>

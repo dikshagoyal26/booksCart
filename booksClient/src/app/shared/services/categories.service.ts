@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Url } from '../models/backendUrl.model';
 import { Response } from '../models/response.model';
 @Injectable({
@@ -8,6 +9,7 @@ import { Response } from '../models/response.model';
 export class CategoriesService {
   private backendUrl: string;
   private categories: [];
+  public categorySubject = new Subject<any>();
   constructor(private http: HttpClient) {
     this.backendUrl = Url.backendUrl;
   }
@@ -18,6 +20,7 @@ export class CategoriesService {
       .subscribe((data: Response) => {
         if (data.status == 200) {
           this.categories = data.record;
+          this.categorySubject.next(this.categories);
           console.log(data);
         } else {
           this.categories = [];
@@ -32,8 +35,5 @@ export class CategoriesService {
       }
     });
     return category && category.length == 1 ? category[0] : {};
-  }
-  getCategories() {
-    return this.categories ? this.categories.slice() : [];
   }
 }

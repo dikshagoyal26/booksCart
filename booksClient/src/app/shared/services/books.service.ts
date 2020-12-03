@@ -13,8 +13,13 @@ export class BooksService {
   fetchBooks() {
     return this.http.get<Response>(this.backendUrl + 'books/fetch');
   }
-  fetchBookById(id) {
+  fetchBookById(id: string) {
     return this.http.get<Response>(this.backendUrl + 'books/fetch/' + id);
+  }
+  fetchBooksByCategoryId(categoryId: string) {
+    return this.http.get<Response>(
+      this.backendUrl + 'books/fetch?category=' + categoryId
+    );
   }
   addBook(bookObj) {
     return this.http.post<Response>(this.backendUrl + 'books/add', {

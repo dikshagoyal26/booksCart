@@ -35,7 +35,7 @@
       <div class="input-group">
         <select formControlName="category" class="form-control">
           <option class="dropdown form-control" *ngFor="let category of categories" [ngValue]="category._id">
-            {{ category.cat_type }}
+            {{ category.category_type }}
           </option>
         </select>
       </div>
@@ -48,6 +48,7 @@
       <label for="cover">cover</label>
       <input type="text" class="form-control" formControlName="cover" />
     </div>
+    <button class="btn" routerLink="/admin">Back</button>
     <button type="submit" class="btn btn-primary" (click)="saveBook()" [disabled]="bookForm.invalid">
       Submit
     </button>

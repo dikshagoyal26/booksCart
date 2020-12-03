@@ -5,6 +5,13 @@ const booksCrud = require("../../db/helpers/booksCrud");
 
 booksRouter.post("/add", (req, res) => {
   const json = req.body.book;
+  if (json.cover) {
+    console.log(json);
+    if (json.cover.trim().length == 0) {
+      delete json[cover];
+    }
+    console.log(json);
+  }
   booksCrud.addBook(json, res);
 });
 

@@ -1,7 +1,7 @@
 var connection = require("../connection");
 const Schema = connection.Schema;
 const CategorysSchema = new Schema({
-  cat_type: {
+  category_type: {
     type: String,
     required: true,
     unique: true,

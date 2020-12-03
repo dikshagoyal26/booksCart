@@ -1,9 +1,19 @@
-<section>
-  <div class="books">
-    <div class="card-deck text-center mt-3">
+<section class="row">
+  <div class="categories col-md-3">
+    <div *ngFor="let category of categories">
+      <button class="btn btn-link" (click)="fetchBooksByCategories(category._id)">
+        {{category.category_type}}
+      </button>
+    </div>
+  </div>
+  <div class="books col-md-9">
+    <div class="card-deck text-center mt-3" *ngIf="books.length>0">
       <div *ngFor="let book of books; let i = index">
         <app-book-card [book]="book"> </app-book-card>
       </div>
+    </div>
+    <div *ngIf=" books.length==0" class="card-deck text-center mt-3">
+      <p>Uh-oh! No books found</p>
     </div>
   </div>
 </section>

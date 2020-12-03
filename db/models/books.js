@@ -29,6 +29,8 @@ const BooksSchema = new Schema({
   },
   cover: {
     type: String,
+    default: "https://www.forewordreviews.com/books/covers/not-for-profit.jpg",
+    required: true,
   },
   created_at: {
     type: Date,

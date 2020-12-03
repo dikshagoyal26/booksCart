@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from './shared/services/categories.service';
+import { SnackbarService } from './shared/services/snackbar.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,12 @@ import { CategoriesService } from './shared/services/categories.service';
 })
 export class AppComponent implements OnInit {
   title = 'booksClient';
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(
+    private categoriesService: CategoriesService,
+    private snackbarService: SnackbarService
+  ) {}
   ngOnInit() {
     this.categoriesService.fetchCategories();
+    this.snackbarService.show('app started');
   }
 }

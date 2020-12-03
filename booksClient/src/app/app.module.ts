@@ -13,6 +13,8 @@ import { AdminBooksComponent } from './admin/admin-books/admin-books.component';
 import { BookDetailsComponent } from './books/book-details/book-details.component';
 import { BookCartComponent } from './books/book-cart/book-cart.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SnackbarComponent } from './snackbar/snackbar.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BookDetailsComponent,
     BookCartComponent,
     PageNotFoundComponent,
+    SnackbarComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
