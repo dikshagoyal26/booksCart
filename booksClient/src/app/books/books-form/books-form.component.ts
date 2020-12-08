@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Response } from 'src/app/shared/models/response.model';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 @Component({
   selector: 'app-books-form',
   templateUrl: './books-form.component.html',
@@ -15,7 +16,8 @@ export class BooksFormComponent implements OnInit {
     private booksService: BooksService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackbarService: SnackbarService
   ) {}
 
   bookForm = this.fb.group({
@@ -76,10 +78,10 @@ export class BooksFormComponent implements OnInit {
   addBook() {
     this.booksService.addBook(this.bookForm.value).subscribe((data: any) => {
       if (data.status == 200) {
-        alert('book added successfully');
-        // this.router.navigate(['/books']);
+        this.snackbarService.show('book added successfully');
+        this.router.navigate(['/books']);
       } else {
-        alert('issue in book update');
+        this.snackbarService.show('issue in book add', 'danger');
       }
     });
   }
@@ -88,10 +90,10 @@ export class BooksFormComponent implements OnInit {
       .updateBook(this.id, this.bookForm.value)
       .subscribe((data: any) => {
         if (data.status == 200) {
-          alert('book updated successfully');
-          // this.router.navigate(['/books']);
+          this.snackbarService.show('book updated successfully');
+          this.router.navigate(['/books']);
         } else {
-          alert('issue in book add');
+          this.snackbarService.show('issue in book update', 'danger');
         }
       });
   }

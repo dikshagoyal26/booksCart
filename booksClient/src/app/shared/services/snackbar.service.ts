@@ -5,11 +5,10 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class SnackbarService {
-  public snackbarSubject = new BehaviorSubject<any>(null);
-  public snackbarState = this.snackbarSubject.asObservable();
+  public snackbar$ = new BehaviorSubject<any>(null);
 
   constructor() {}
   show(message: string, type?: string) {
-    this.snackbarSubject.next({ show: true, message, type });
+    this.snackbar$.next({ show: true, message, type });
   }
 }

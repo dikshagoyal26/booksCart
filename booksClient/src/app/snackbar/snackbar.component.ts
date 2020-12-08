@@ -13,15 +13,13 @@ export class SnackbarComponent implements OnInit {
   constructor(private snackbarService: SnackbarService) {}
 
   ngOnInit(): void {
-    this.snackbarService.snackbarSubject.subscribe((state) => {
-      console.log('inside subscribe');
-      //show,message,type
-      // this.type = state.type || 'success';
-      // this.message = state.message;
-      // this.showSnackbar = state.show;
-      // setTimeout(() => {
-      //   this.showSnackbar = false;
-      // }, 3000);
+    this.snackbarService.snackbar$.subscribe((state) => {
+      this.type = state.type || 'success';
+      this.message = state.message;
+      this.showSnackbar = state.show;
+      setTimeout(() => {
+        this.showSnackbar = false;
+      }, 3000);
     });
   }
 }

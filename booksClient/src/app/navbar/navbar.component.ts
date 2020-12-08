@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../shared/services/cart.service';
 import { CategoriesService } from '../shared/services/categories.service';
 
 @Component({
@@ -7,7 +8,12 @@ import { CategoriesService } from '../shared/services/categories.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor() {}
+  cartItems: Number;
+  constructor(private cartService: CartService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cartService.cartItemcount$.subscribe((length: Number) => {
+      this.cartItems = length;
+    });
+  }
 }

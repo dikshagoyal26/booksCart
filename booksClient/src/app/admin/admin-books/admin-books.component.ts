@@ -5,6 +5,7 @@ import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Response } from 'src/app/shared/models/response.model';
 import { Categories } from 'src/app/shared/models/categories.model';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-admin-books',
@@ -17,7 +18,8 @@ export class AdminBooksComponent implements OnInit {
   constructor(
     private booksService: BooksService,
     private router: Router,
-    private categoryService: CategoriesService
+    private categoryService: CategoriesService,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -50,10 +52,10 @@ export class AdminBooksComponent implements OnInit {
     if (confirm('Are you sure you want to delete the book')) {
       this.booksService.deleteBook(bookId).subscribe((res: Response) => {
         if (res.status == 200) {
-          alert('book deleted successfully');
+          this.snackbarService.show('book deleted successfully');
           this.fetchBooks();
         } else {
-          alert('error while deleting book');
+          this.snackbarService.show('error while deleting book', 'danger');
         }
       });
     }

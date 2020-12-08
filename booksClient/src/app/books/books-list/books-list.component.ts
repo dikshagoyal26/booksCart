@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Response } from 'src/app/shared/models/response.model';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-books-list',
@@ -13,7 +14,8 @@ export class BooksListComponent implements OnInit {
   categories: any = [];
   constructor(
     private booksService: BooksService,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private snackBarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +27,7 @@ export class BooksListComponent implements OnInit {
       if (data.status == 200) {
         this.books = data.record;
       } else {
-        alert(data.message);
+        this.snackBarService.show(data.message, 'danger');
       }
     });
   }
@@ -36,7 +38,7 @@ export class BooksListComponent implements OnInit {
         if (data.status == 200) {
           this.books = data.record;
         } else {
-          alert(data.message);
+          this.snackBarService.show(data.message, 'danger');
         }
       });
   }
