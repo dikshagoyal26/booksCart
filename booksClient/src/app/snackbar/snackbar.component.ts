@@ -14,7 +14,7 @@ export class SnackbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.snackbarService.snackbarSubject.subscribe((state) => {
-      console.log(state);
+      console.log('inside subscribe');
       //show,message,type
       // this.type = state.type || 'success';
       // this.message = state.message;

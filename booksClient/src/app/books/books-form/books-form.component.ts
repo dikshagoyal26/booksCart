@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
+import { Response } from 'src/app/shared/models/response.model';
 @Component({
   selector: 'app-books-form',
   templateUrl: './books-form.component.html',
@@ -29,9 +30,8 @@ export class BooksFormComponent implements OnInit {
 
   private id: string = '';
   ngOnInit(): void {
-    this.categoriesService.categorySubject.subscribe((categories) => {
-      console.log(categories);
-      this.categories = categories;
+    this.categoriesService.categories$.subscribe((categories: Response) => {
+      this.categories = categories.record;
     });
     this.route.params.subscribe((params: any) => {
       if (params?.id) {
@@ -60,35 +60,39 @@ export class BooksFormComponent implements OnInit {
     });
   }
   saveBook() {
-    console.log(this.bookForm.value);
     if (!this.bookForm.value.cover) {
       this.bookForm.patchValue({
         cover:
           'https://www.forewordreviews.com/books/covers/not-for-profit.jpg',
       });
     }
-    console.log(this.bookForm.value);
 
     if (this.id) {
-      this.booksService
-        .updateBook(this.id, this.bookForm.value)
-        .subscribe((data: any) => {
-          if (data.status == 200) {
-            alert('book updated successfully');
-            // this.router.navigate(['/books']);
-          } else {
-            alert('issue in book add');
-          }
-        });
+      this.updateBook();
     } else {
-      this.booksService.addBook(this.bookForm.value).subscribe((data: any) => {
+      this.addBook();
+    }
+  }
+  addBook() {
+    this.booksService.addBook(this.bookForm.value).subscribe((data: any) => {
+      if (data.status == 200) {
+        alert('book added successfully');
+        // this.router.navigate(['/books']);
+      } else {
+        alert('issue in book update');
+      }
+    });
+  }
+  updateBook() {
+    this.booksService
+      .updateBook(this.id, this.bookForm.value)
+      .subscribe((data: any) => {
         if (data.status == 200) {
-          alert('book added successfully');
+          alert('book updated successfully');
           // this.router.navigate(['/books']);
         } else {
-          alert('issue in book update');
+          alert('issue in book add');
         }
       });
-    }
   }
 }

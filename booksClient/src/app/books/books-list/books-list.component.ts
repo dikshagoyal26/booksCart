@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
+import { Response } from 'src/app/shared/models/response.model';
 
 @Component({
   selector: 'app-books-list',
@@ -16,9 +17,10 @@ export class BooksListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoriesService.categorySubject.subscribe((categories) => {
-      this.categories = categories;
+    this.categoriesService.categories$.subscribe((categories: Response) => {
+      this.categories = categories.record;
     });
+
     this.booksService.fetchBooks().subscribe((data: any) => {
       if (data.status == 200) {
         this.books = data.record;

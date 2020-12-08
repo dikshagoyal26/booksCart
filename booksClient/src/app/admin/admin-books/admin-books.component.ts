@@ -4,6 +4,7 @@ import { Book } from 'src/app/shared/models/books.model';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Response } from 'src/app/shared/models/response.model';
+import { Categories } from 'src/app/shared/models/categories.model';
 
 @Component({
   selector: 'app-admin-books',
@@ -12,6 +13,7 @@ import { Response } from 'src/app/shared/models/response.model';
 })
 export class AdminBooksComponent implements OnInit {
   public books: Book[];
+  private categories: Categories[] = [];
   constructor(
     private booksService: BooksService,
     private router: Router,
@@ -20,6 +22,9 @@ export class AdminBooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchBooks();
+    this.categoryService.categories$.subscribe((categories: Response) => {
+      this.categories = categories.record;
+    });
   }
   fetchBooks() {
     this.booksService.fetchBooks().subscribe((res: Response) => {
@@ -32,11 +37,14 @@ export class AdminBooksComponent implements OnInit {
     this.router.navigate([`/admin/books/update/${this.books[i]._id}`]);
   }
   getCategory(categoryId: string) {
-    let category: any = this.categoryService.getCategoryById(categoryId);
-    if (category && category.category_type) {
-      return category.category_type;
-    }
-    return '-';
+    let category: Categories[] = [];
+    if (this.categories)
+      category = this.categories.filter((category: Categories) => {
+        if (category._id === categoryId) {
+          return category;
+        }
+      });
+    return category && category.length == 1 ? category[0].category_type : {};
   }
   deleteBook(bookId) {
     if (confirm('Are you sure you want to delete the book')) {

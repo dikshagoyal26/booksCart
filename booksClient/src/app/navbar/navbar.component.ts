@@ -7,9 +7,7 @@ import { CategoriesService } from '../shared/services/categories.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private categoryService: CategoriesService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.categoryService.fetchCategories();
-  }
+  ngOnInit(): void {}
 }
