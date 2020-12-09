@@ -15,6 +15,8 @@ import { BookCartComponent } from './books/book-cart/book-cart.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { CommonModule } from '@angular/common';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { CommonModule } from '@angular/common';
     BookCartComponent,
     PageNotFoundComponent,
     SnackbarComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,

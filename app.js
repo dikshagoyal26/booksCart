@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //TODO: add logger
 //TODO: learn how to set environments in node
-
+app.use("/user", require("./routes/api/user"));
 app.use("/books", require("./routes/api/books"));
 app.use("/category", require("./routes/api/categories"));
 
