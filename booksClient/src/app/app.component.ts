@@ -9,8 +9,6 @@ import { SnackbarService } from './shared/services/snackbar.service';
 })
 export class AppComponent implements OnInit {
   title = 'booksClient';
-  constructor(private snackbarService: SnackbarService) {}
-  ngOnInit() {
-    this.snackbarService.show('app started');
-  }
+  constructor() {}
+  ngOnInit() {}
 }

@@ -23,6 +23,24 @@ export class BooksListComponent implements OnInit {
       this.categories = categories.record;
     });
 
+    this.fetchBooks();
+  }
+  fetchBooksByCategories(categoryId: string = null) {
+    if (categoryId) {
+      this.booksService
+        .fetchBooksByCategoryId(categoryId)
+        .subscribe((data: any) => {
+          if (data.status == 200) {
+            this.books = data.record;
+          } else {
+            this.snackBarService.show(data.message, 'danger');
+          }
+        });
+    } else {
+      this.fetchBooks();
+    }
+  }
+  fetchBooks() {
     this.booksService.fetchBooks().subscribe((data: any) => {
       if (data.status == 200) {
         this.books = data.record;
@@ -30,16 +48,5 @@ export class BooksListComponent implements OnInit {
         this.snackBarService.show(data.message, 'danger');
       }
     });
-  }
-  fetchBooksByCategories(categoryId: string) {
-    this.booksService
-      .fetchBooksByCategoryId(categoryId)
-      .subscribe((data: any) => {
-        if (data.status == 200) {
-          this.books = data.record;
-        } else {
-          this.snackBarService.show(data.message, 'danger');
-        }
-      });
   }
 }

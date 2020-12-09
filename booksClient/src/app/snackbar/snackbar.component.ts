@@ -14,12 +14,14 @@ export class SnackbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.snackbarService.snackbar$.subscribe((state) => {
-      this.type = state.type || 'success';
-      this.message = state.message;
-      this.showSnackbar = state.show;
-      setTimeout(() => {
-        this.showSnackbar = false;
-      }, 3000);
+      if (state) {
+        this.type = state.type || 'success';
+        this.message = state.message;
+        this.showSnackbar = state.show;
+        setTimeout(() => {
+          this.showSnackbar = false;
+        }, 3000);
+      }
     });
   }
 }
