@@ -1,20 +1,22 @@
-<section class="row">
-  <div class="categories col-md-3">
-    <button class="btn btn-link" (click)="fetchBooksByCategories()">ALL</button>
-    <div *ngFor="let category of categories">
-      <button class="btn btn-link" (click)="fetchBooksByCategories(category._id)">
-        {{category.category_type}}
-      </button>
+<section class="container-fluid mt-3">
+  <div class="row">
+    <div class="categories col-md-3">
+      <ul class="category-section list-group list-group-flush">
+        <li class="list-group-item" (click)="fetchBooksByCategories()">ALL</li>
+        <li *ngFor="let category of categories" class="list-group-item" (click)="fetchBooksByCategories(category._id)">
+          {{category.category_type}}
+        </li>
+      </ul>
     </div>
-  </div>
-  <div class="books col-md-9">
-    <div class="card-deck text-center mt-3" *ngIf="books.length>0">
-      <div *ngFor="let book of books; let i = index">
-        <app-book-card [book]="book"> </app-book-card>
+    <div class="books col-md-9">
+      <div class="card-deck text-center" *ngIf="books.length>0">
+        <div *ngFor="let book of books; let i = index">
+          <app-book-card [book]="book"> </app-book-card>
+        </div>
       </div>
-    </div>
-    <div *ngIf=" books.length==0" class="card-deck text-center mt-3">
-      <p>Uh-oh! No books found</p>
+      <div *ngIf=" books.length==0" class="card-deck text-center mt-3">
+        <h1>Uh-oh! No books found.</h1>
+      </div>
     </div>
   </div>
 </section>

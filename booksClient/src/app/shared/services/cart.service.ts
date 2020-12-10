@@ -26,7 +26,7 @@ export class CartService {
       length++;
     }
     this.setCartItemCount(length);
-    this.snackbarService.show('book added to cart');
+    this.snackbarService.show('One Item Added to Cart');
   }
   setCartItemCount(value: number) {
     this.cartItemcount$.next(value);

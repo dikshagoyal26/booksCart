@@ -16,4 +16,10 @@ export class NavbarComponent implements OnInit {
       this.cartItems = length;
     });
   }
+  isAdmin() {
+    return true;
+  }
+  isLoggedIn() {
+    return true;
+  }
 }

@@ -4,10 +4,29 @@ const userOperations = {
   loginUser(user, response) {
     UserModel.find({ userName: user.userName }, (err, data) => {
       if (err) {
+        console.log("Error while logging in user", err);
+        response.status(500).json({
+          status: "E",
+          message: "User Not logged in due to Error" + err,
+        });
       } else {
         if (data) {
-          //check for password
+          if (encryptOperations.comparePassword(user.password, data.password)) {
+            response.status(200).json({
+              status: 200,
+              message: "User Logged in",
+            });
+          } else {
+            response.status(400).json({
+              status: "E",
+              message: "Invalid Username or password",
+            });
+          }
         } else {
+          response.status(400).json({
+            status: "E",
+            message: "Invalid Username or password",
+          });
         }
       }
     });
@@ -34,9 +53,19 @@ const userOperations = {
   validateUsername(userName, response) {
     UserModel.find({ userName }, (err, data) => {
       if (err) {
+        console.log("Error in Validating Username", err);
+        response.status(500).json({
+          status: "E",
+          message: "Username Not Validated Due to Error" + err,
+        });
       } else {
         if (data) {
+          response.status(400).json({
+            status: "E",
+            message: "Invalid Username or password",
+          });
         } else {
+          response.status(200).json({ status: "S" });
         }
       }
     });

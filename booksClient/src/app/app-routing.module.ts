@@ -8,9 +8,11 @@ import { BookDetailsComponent } from './books/book-details/book-details.componen
 import { BookCartComponent } from './books/book-cart/book-cart.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
   {
     path: 'admin',
     children: [

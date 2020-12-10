@@ -2,7 +2,7 @@
     <form [formGroup]="registerForm" class="p-4 mt-4">
         <h1>Register User</h1>
         <div class="form-group mt-2">
-            <label for="firstName">firstName</label>
+            <label for="firstName">First Name</label>
             <input type="firstName" class="form-control" placeholder="Enter firstName" formControlName="firstName" />
             <div class="invalid-feedback"
                 *ngIf="registerFormControl.firstName.touched && registerFormControl.firstName.errors?.required">
@@ -24,6 +24,10 @@
         <div class="form-group">
             <label for="userName">userName</label>
             <input type="text" class="form-control" formControlName="userName" />
+            <div class="invalid-feedback"
+                *ngIf="registerFormControl.userName.touched && registerFormControl.userName.errors?.required">
+                This field is required!
+            </div>
             <div class="invalid-feedback"
                 *ngIf="registerFormControl.userName.touched && registerFormControl.userName.errors?.required">
                 This field is required!

@@ -1,4 +1,30 @@
-nav {
-  background-color: #fff !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+// nav {
+//   background-color: #fff !important;
+//   border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+// }
+.nav-item .btn-link,
+.nav-item .dropdown {
+  color: #fff;
+  text-decoration: none;
+}
+.nav-item i {
+  color: #fff;
+  font-size: 1.2rem;
+}
+.cart-count {
+  background-color: red;
+  color: #fff;
+  border-radius: 8px;
+  padding: 1px 6px;
+  font-size: 12px;
+  text-align: center;
+  position: absolute;
+  top: 15px;
+}
+.nav-item .btn-link:hover {
+  background: #545b62; // #212529;
+}
+.dropdown-item:hover {
+  background: #212529;
+  color: #fff;
 }

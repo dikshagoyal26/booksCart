@@ -1,15 +1,14 @@
 <div class="card">
-  <img class="card-img-top pointer" *ngIf="book.cover" src="{{ book.cover }}" alt="Book image cap"
-    routerLink="/books/details/{{ book._id }}" />
+  <div class="book-img">
+    <img class="book-img-top pointer" *ngIf="book.cover" src="{{ book.cover }}" alt="Book image cap"
+      routerLink="/books/details/{{ book._id }}" />
+  </div>
   <div class="card-body">
     <h5 class="card-title pointer" routerLink="/books/details/{{ book._id }}">{{ book.title }}</h5>
     <p class="card-text">
-      {{ book.author }}
+      <small>{{ book.price | currency : 'INR' }} </small>
     </p>
-    <p class="card-text">
-      <small class="text-muted">{{ book.price| currency : 'INR' }} </small>
-    </p>
-    <button (click)="addToCart()" class="btn btn-success"><i class="fa fa-cart-plus" aria-hidden="true"></i>
+    <button (click)="addToCart()" class="btn btn-info"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart
     </button>
   </div>
 </div>
