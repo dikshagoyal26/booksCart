@@ -8,8 +8,8 @@ import { CategoriesService } from '../shared/services/categories.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  cartItems: Number;
   constructor(private cartService: CartService) {}
+  public cartItems: Number;
 
   ngOnInit(): void {
     this.cartService.cartItemcount$.subscribe((length: Number) => {

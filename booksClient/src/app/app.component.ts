@@ -10,5 +10,8 @@ import { SnackbarService } from './shared/services/snackbar.service';
 export class AppComponent implements OnInit {
   title = 'booksClient';
   constructor() {}
-  ngOnInit() {}
+  ngOnInit() {
+    const token = window.localStorage.getItem('token');
+    console.log(token);
+  }
 }

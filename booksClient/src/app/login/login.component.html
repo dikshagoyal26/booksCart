@@ -9,16 +9,28 @@
             </div>
             <div class="row">
                 <div class="card p-2 my-2 ">
-                    <form>
+                    <form [formGroup]="loginForm">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" placeholder="Enter username" name="username" />
+                            <input type="text" class="form-control" formControlName="userName"
+                                placeholder="Enter username" name="username" />
+                            <div class="invalid-feedback"
+                                *ngIf="LoginFormControl.userName.touched && LoginFormControl.userName.errors?.required">
+                                This field is required!
+                            </div>
                         </div>
+
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" placeholder="Enter password" name="password" />
+                            <input type="password" class="form-control" formControlName="password"
+                                placeholder="Enter password" name="password" />
+                            <div class="invalid-feedback"
+                                *ngIf="LoginFormControl.password.touched && LoginFormControl.password.errors?.required">
+                                This field is required!
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" (click)="loginUser()" class="btn btn-primary"
+                            [disabled]="loginForm.invalid">
                             Submit
                         </button>
                     </form>
