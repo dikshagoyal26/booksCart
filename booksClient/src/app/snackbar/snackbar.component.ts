@@ -19,9 +19,10 @@ export class SnackbarComponent implements OnInit {
         this.type = state.type || 'success';
         this.message = state.message;
         this.showSnackbar = state.show;
+        if (this.timer) clearTimeout(this.timer);
         this.timer = setTimeout(() => {
           this.showSnackbar = false;
-        }, 3000);
+        }, 1000);
       }
     });
   }

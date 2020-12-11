@@ -1,7 +1,4 @@
-<div *ngIf="showSnackbar" [ngClass]="['snackbar-wrap',type]" class="toast">
-    <div class="toast-body">
-        <span class="snackbar-text">{{message}}</span>
-    </div>
-    <button class="btn btn-link" (click)="closeSnackbar()">Close</button>
+<div *ngIf="showSnackbar" class="toast snackbar-wrap" [ngClass]="type">
+    <span class="snackbar-text">{{message}}</span>
+    <i class="fa fa-times pointer" aria-hidden="true" (click)="closeSnackbar()"></i>
 </div>
-<!-- [ngClass]="['snackbar-wrap',type]" -->
