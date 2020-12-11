@@ -15,7 +15,7 @@ import { UserService } from '../shared/services/user.service';
 export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private userService: UserService) {}
 
-  registerForm = this.fb.group({
+  public registerForm = this.fb.group({
     firstName: ['', [Validators.required, Validators.minLength(5)]],
     lastName: ['', [Validators.required, Validators.minLength(4)]],
     userName: ['', Validators.required],
@@ -23,6 +23,9 @@ export class RegisterComponent implements OnInit {
     confirmPassword: ['', Validators.required],
     gender: ['', Validators.required],
   });
+  public showPassword: boolean = false;
+  public showConfirmPassword: boolean = false;
+
   categories: any = [];
 
   private id: string = '';

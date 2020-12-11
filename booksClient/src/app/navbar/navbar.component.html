@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" routerLink="/books">
-    <h2> <i class="fa fa-book" aria-hidden="true"></i>BookCart</h2>
+    <h2 class="nav-title"> <i class="fa fa-book" aria-hidden="true"></i>BookCart</h2>
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,10 +31,10 @@
             <i class="fa fa-user-circle" aria-hidden="true"></i> User
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Orders</a>
-            <a class="dropdown-item" href="#">Change Password</a>
+            <a class="dropdown-item">Orders</a>
+            <a class="dropdown-item">Change Password</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Logout</a>
+            <a class="dropdown-item" routerLink="/login">Logout</a>
           </div>
         </div>
       </li>

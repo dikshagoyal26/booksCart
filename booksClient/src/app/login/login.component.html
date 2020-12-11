@@ -3,7 +3,7 @@
         <div class="login">
             <div class="login-header">
                 <h1 class="text-center mx-5 my-5">Login</h1>
-                <div>
+                <div routerLink="/register">
                     New User? <button>Register</button>
                 </div>
             </div>
@@ -22,8 +22,13 @@
 
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" formControlName="password"
-                                placeholder="Enter password" name="password" />
+                            <div class="password-div">
+                                <input [type]="showPassword?'text':'password'" class="form-control"
+                                    formControlName="password" placeholder="Enter password" name="password" />
+                                <i class="fa pointer" [ngClass]="{'fa-eye':showPassword,'fa-eye-slash':!showPassword}"
+                                    [title]="!showPassword?'Show Password':'Hide Password'" aria-hidden="true"
+                                    (click)="showPassword=!showPassword"></i>
+                            </div>
                             <div class="invalid-feedback"
                                 *ngIf="LoginFormControl.password.touched && LoginFormControl.password.errors?.required">
                                 This field is required!
@@ -37,5 +42,10 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="container">
+    <div class="d-flex">
+
     </div>
 </div>
