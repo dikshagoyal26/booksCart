@@ -1,3 +1,7 @@
-<div *ngIf="showSnackbar" [ngClass]="['snackbar-wrap',type]">
-    <p class="snackbar-text">{{message}}</p>
+<div *ngIf="showSnackbar" [ngClass]="['snackbar-wrap',type]" class="toast">
+    <div class="toast-body">
+        <span class="snackbar-text">{{message}}</span>
+    </div>
+    <button class="btn btn-link" (click)="closeSnackbar()">Close</button>
 </div>
+<!-- [ngClass]="['snackbar-wrap',type]" -->

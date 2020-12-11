@@ -4,7 +4,7 @@
       routerLink="/books/details/{{ book._id }}" />
   </div>
   <div class="card-body">
-    <h5 class="card-title pointer" routerLink="/books/details/{{ book._id }}">{{ book.title }}</h5>
+    <h5 class="card-title pointer capitalise" routerLink="/books/details/{{ book._id }}">{{ book.title }}</h5>
     <p class="card-text">
       <small>{{ book.price | currency : 'INR' }} </small>
     </p>

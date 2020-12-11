@@ -10,6 +10,7 @@ export class SnackbarComponent implements OnInit {
   public showSnackbar: boolean = false;
   public message: string = 'this is a test snackbar';
   public type: string = 'success';
+  public timer: any;
   constructor(private snackbarService: SnackbarService) {}
 
   ngOnInit(): void {
@@ -18,10 +19,16 @@ export class SnackbarComponent implements OnInit {
         this.type = state.type || 'success';
         this.message = state.message;
         this.showSnackbar = state.show;
-        setTimeout(() => {
+        this.timer = setTimeout(() => {
           this.showSnackbar = false;
         }, 3000);
       }
     });
+  }
+  closeSnackbar() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.showSnackbar = false;
+    }
   }
 }
