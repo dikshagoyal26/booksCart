@@ -1,56 +1,72 @@
-<div class="form">
-  <form [formGroup]="bookForm" class="p-4 mt-4">
-    <h1>Add a new Book</h1>
-    <div class="form-group mt-2">
-      <label for="title">Book Title</label>
-      <input type="title" class="form-control" placeholder="Enter Title" formControlName="title" />
-      <div class="invalid-feedback" *ngIf="bookFormControl.title.touched && bookFormControl.title.errors?.required">
-        This field is required!
+<div class="container-fluid mt-3">
+  <div class="d-flex">
+    <div class="upsert">
+      <div class="upsert-header">
+        <span class="heading">{{formTitle}} Book</span>
       </div>
-      <div class="invalid-feedback" *ngIf="bookFormControl.title.dirty && bookFormControl.title.errors?.minlength">
-        Minimum required Length is 5.
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="author">Book Author</label>
-      <input type="text" class="form-control" placeholder="Book Author" formControlName="author" />
-      <div class="invalid-feedback" *ngIf="bookFormControl.author.touched && bookFormControl.author.errors?.required">
-        This field is required!
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="price">Price</label>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1" value="100">₹</span>
+      <div class="upsert-form ">
+        <div class="card p-2 my-2 ">
+          <form [formGroup]="bookForm">
+            <div class="form-group mt-2">
+              <label class="capitalise" for="title">Title</label>
+              <input type="title" class="form-control" placeholder="Enter Title" formControlName="title" />
+              <div class="invalid-feedback"
+                *ngIf="bookFormControl.title.touched && bookFormControl.title.errors?.required">
+                Title is required!
+              </div>
+              <div class="invalid-feedback"
+                *ngIf="bookFormControl.title.dirty && bookFormControl.title.errors?.minlength">
+                Minimum required Length is 5.
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="capitalise" for="author">Author</label>
+              <input type="text" class="form-control" placeholder="Enter Author" formControlName="author" />
+              <div class="invalid-feedback"
+                *ngIf="bookFormControl.author.touched && bookFormControl.author.errors?.required">
+                Author is required!
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="capitalise" for="price">Price</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1" value="100">₹</span>
+                </div>
+                <input type="number" class="form-control" placeholder="Enter Price" formControlName="price" min="1" />
+              </div>
+              <div class="invalid-feedback"
+                *ngIf="bookFormControl.price.touched && bookFormControl.price.errors?.required">
+                Price is required!
+              </div>
+            </div>
+            <div class="form-group" *ngIf="categories && categories.length > 0">
+              <label class="capitalise" for="category">Category</label>
+              <div class="input-group">
+                <select formControlName="category" class="form-control" placeholder="Select Category">
+                  <option class="dropdown form-control" *ngFor="let category of categories" [ngValue]="category._id">
+                    {{ category.category_type }}
+                  </option>
+                </select>
+              </div>
+              <div class="invalid-feedback"
+                *ngIf="bookFormControl.category.touched && bookFormControl.category.errors?.required">
+                Category is required!
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="capitalise" for="cover">Image</label>
+              <input type="text" class="form-control" formControlName="cover" placeholder="Enter Image URL" />
+            </div>
+            <div class="flex-end">
+              <button class="btn btn-light mr-3" routerLink="/admin">Cancel</button>
+              <button type="submit" class="btn btn-primary" (click)="saveBook()" [disabled]="bookForm.invalid">
+                Save Book
+              </button>
+            </div>
+          </form>
         </div>
-        <input type="number" class="form-control" formControlName="price" min="1" />
-      </div>
-      <div class="invalid-feedback" *ngIf="bookFormControl.price.touched && bookFormControl.price.errors?.required">
-        This field is required!
       </div>
     </div>
-    <div class="form-group" *ngIf="categories && categories.length > 0">
-      <label for="category">Book Category</label>
-      <div class="input-group">
-        <select formControlName="category" class="form-control">
-          <option class="dropdown form-control" *ngFor="let category of categories" [ngValue]="category._id">
-            {{ category.category_type }}
-          </option>
-        </select>
-      </div>
-      <div class="invalid-feedback"
-        *ngIf="bookFormControl.category.touched && bookFormControl.category.errors?.required">
-        This field is required!
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="cover">cover</label>
-      <input type="text" class="form-control" formControlName="cover" />
-    </div>
-    <button class="btn" routerLink="/admin">Back</button>
-    <button type="submit" class="btn btn-primary" (click)="saveBook()" [disabled]="bookForm.invalid">
-      Submit
-    </button>
-  </form>
+  </div>
 </div>

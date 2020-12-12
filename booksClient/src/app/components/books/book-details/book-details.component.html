@@ -1,45 +1,49 @@
 <!-- <button routerLink="/books">Back</button> -->
-<div class="container book">
-    <div class="details-header">
-        <h1 class="heading">Book Details</h1>
-    </div>
-    <div class="details">
-        <div class="row">
-            <div class="col-md-4 book-img">
-                <img [src]="book.cover" alt="book cover" [title]="book.title">
+<div class="container-fluid mt-3 book">
+    <div class="d-flex">
+        <div class="details">
+            <div class="details-header">
+                <span class="heading">Book Details</span>
             </div>
-            <div class="col-md-8">
-                <ul class=" list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="d-flex">
-                            <h4>Title</h4>
-                            <p class="uppercase">{{book.title}}</p>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="d-flex">
-                            <h4>Author</h4>
-                            <p class="capitalise"> {{book.author}}</p>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="d-flex capitalise">
-                            <h4>Category</h4>
-                            <p>{{getCategory(book.category)}}</p>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="d-flex">
-                            <h4>Price</h4>
-                            <p> {{book.price | currency : 'INR'}}</p>
-                        </div>
-                    </li>
+            <div class="details-form" *ngIf="book">
+                <div class="row">
+                    <div class="col-md-4 book-img">
+                        <img [src]="book.cover" alt="book cover" [title]="book.title">
+                    </div>
+                    <div class="col-md-8">
+                        <ul class=" list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="d-flex">
+                                    <h4>Title</h4>
+                                    <p class="uppercase">{{book.title}}</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="d-flex">
+                                    <h4>Author</h4>
+                                    <p class="capitalise"> {{book.author}}</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="d-flex capitalise">
+                                    <h4>Category</h4>
+                                    <p>{{getCategory(book.category)}}</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="d-flex">
+                                    <h4>Price</h4>
+                                    <p> {{book.price | currency : 'INR'}}</p>
+                                </div>
+                            </li>
 
-                </ul>
-                <button (click)="addToCart()" class="btn btn-info mt-3"><i class="fa fa-cart-plus"
-                        aria-hidden="true"></i>
-                    Add to Cart
-                </button>
+                        </ul>
+                        <button (click)="addToCart()" class="btn btn-info mt-3"><i class="fa fa-cart-plus"
+                                aria-hidden="true"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

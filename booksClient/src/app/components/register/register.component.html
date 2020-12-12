@@ -17,7 +17,7 @@
                                 formControlName="firstName" />
                             <div class="invalid-feedback"
                                 *ngIf="registerFormControl.firstName.touched && registerFormControl.firstName.errors?.required">
-                                This field is required!
+                                First Name is required!
                             </div>
                             <div class="invalid-feedback"
                                 *ngIf="registerFormControl.firstName.dirty && registerFormControl.firstName.errors?.minlength">
@@ -30,16 +30,16 @@
                                 formControlName="lastName" />
                             <div class="invalid-feedback"
                                 *ngIf="registerFormControl.lastName.touched && registerFormControl.lastName.errors?.required">
-                                This field is required!
+                                Last Name is required!
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="userName">User Name</label>
                             <input type="text" class="form-control" formControlName="userName"
-                                placeholder="Enter User Name" /> {{registerFormControl.userName.errors|json}}
+                                placeholder="Enter User Name" />
                             <div class="invalid-feedback"
                                 *ngIf="registerFormControl.userName.touched && registerFormControl.userName.errors?.required">
-                                This field is required!
+                                User Name is required!
                             </div>
                             <div class="invalid-feedback"
                                 *ngIf="registerFormControl.userName.touched && registerFormControl.userName.errors?.notAvailable ">
@@ -57,7 +57,12 @@
                             </div>
                             <div class="invalid-feedback"
                                 *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.required">
-                                This field is required!
+                                Password is required!
+                            </div>
+                            <div class="invalid-feedback"
+                                *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.invalidPassword">
+                                Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                                letter and 1 number
                             </div>
                         </div>
                         <div class="form-group">
@@ -72,7 +77,11 @@
                             </div>
                             <div class="invalid-feedback"
                                 *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.required">
-                                This field is required!
+                                Confirm Password is required!
+                            </div>
+                            <div class="invalid-feedback"
+                                *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.passwordMismatch">
+                                Password do not match!
                             </div>
                         </div>
                         <div class="form-group">
@@ -90,7 +99,7 @@
 
                             <div class="invalid-feedback"
                                 *ngIf="registerFormControl.gender.touched && registerFormControl.gender.errors?.required">
-                                This field is required!
+                                Gender is required!
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary" (click)="register()"

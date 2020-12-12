@@ -5,9 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
   transform(value: any, filter?: string): unknown {
-    console.log(value, filter);
+    if (!value) return null;
     if (!filter) return value;
-
     return value.filter((val) => {
       let rval =
         val.title.toLocaleLowerCase().includes(filter.toLocaleLowerCase()) ||

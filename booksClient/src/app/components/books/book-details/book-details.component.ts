@@ -24,7 +24,6 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((param) => {
-      console.log(param);
       if (param && param.id) {
         this.fetchDetails(param.id);
       }

@@ -20,7 +20,7 @@ export class BooksFormComponent implements OnInit {
     private snackbarService: SnackbarService
   ) {}
 
-  bookForm = this.fb.group({
+  public bookForm = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(5)]],
     author: ['', [Validators.required, Validators.minLength(4)]],
     category: ['', Validators.required],
@@ -28,8 +28,8 @@ export class BooksFormComponent implements OnInit {
     cover: [''],
     currency: ['INR', Validators.required],
   });
-  categories: any = [];
-
+  public categories: any = [];
+  public formTitle: string = 'Add';
   private id: string = '';
   ngOnInit(): void {
     this.categoriesService.categories$.subscribe((categories: Response) => {
@@ -37,8 +37,11 @@ export class BooksFormComponent implements OnInit {
     });
     this.route.params.subscribe((params: any) => {
       if (params?.id) {
+        this.formTitle = 'Edit';
         this.id = params.id;
         this.initEditBook(params.id);
+      } else {
+        this.formTitle = 'Add';
       }
     });
   }

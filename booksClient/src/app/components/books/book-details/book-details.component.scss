@@ -5,9 +5,31 @@
 .d-flex {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 .d-flex p,
 .d-flex h4 {
   margin-bottom: 0;
+}
+.list-group-item .d-flex {
+  justify-content: space-between;
+}
+.details {
+  min-width: 40rem;
+  border: 1px solid #dee2e6;
+}
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #5aaaff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+}
+.details-header .heading {
+  font-size: 28px;
+}
+.details-form {
+  padding: 10px;
 }

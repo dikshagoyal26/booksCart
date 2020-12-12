@@ -17,7 +17,7 @@
                                 placeholder="Enter username" name="username" />
                             <div class="invalid-feedback"
                                 *ngIf="LoginFormControl.userName.touched && LoginFormControl.userName.errors?.required">
-                                This field is required!
+                                Username is required!
                             </div>
                         </div>
 
@@ -32,7 +32,7 @@
                             </div>
                             <div class="invalid-feedback"
                                 *ngIf="LoginFormControl.password.touched && LoginFormControl.password.errors?.required">
-                                This field is required!
+                                Password is required!
                             </div>
                         </div>
                         <button type="submit" (click)="loginUser()" class="btn btn-primary d-block"

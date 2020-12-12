@@ -1,34 +1,35 @@
-// section {
-//   display: flex;
-//   justify-content: center;
-//   max-width: 380px;
-//   flex-direction: column;
-// }
-div.form {
-  display: flex;
-  justify-content: center;
-}
-div.form form {
-  max-width: 380px;
-  border: 2px solid #eee;
-  background: white;
-}
-.books {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.addbook {
-  display: flex;
-  justify-content: right;
-  float: right;
-}
 .invalid-feedback {
   display: inline;
 }
 button:disabled {
   cursor: not-allowed;
 }
-form label {
-  text-transform: capitalize;
+.upsert {
+  min-width: 40rem;
+  border: 1px solid #dee2e6;
+}
+.upsert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #5aaaff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+.upsert-header .heading {
+  font-size: 28px;
+}
+.upsert-form {
+  padding: 10px;
+}
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
 }

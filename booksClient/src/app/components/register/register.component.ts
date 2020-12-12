@@ -16,20 +16,31 @@ export class RegisterComponent implements OnInit {
     private customValidators: CustomValidationsService
   ) {}
 
-  public registerForm = this.fb.group({
-    firstName: ['', [Validators.required, Validators.minLength(5)]],
-    lastName: ['', [Validators.required, Validators.minLength(4)]],
-    userName: [
-      '',
-      [
-        Validators.required,
-        this.customValidators.customValidator.bind(this.customValidators),
+  public registerForm = this.fb.group(
+    {
+      firstName: ['', [Validators.required, Validators.minLength(5)]],
+      lastName: ['', [Validators.required, Validators.minLength(4)]],
+      userName: [
+        '',
+        [
+          Validators.required,
+          this.customValidators.usernameValidator.bind(this.customValidators),
+        ],
       ],
-    ],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
-    gender: ['', Validators.required],
-  });
+      password: [
+        '',
+        [
+          Validators.required,
+          this.customValidators.passwordValidator.bind(this.customValidators),
+        ],
+      ],
+      confirmPassword: ['', Validators.required],
+      gender: ['', Validators.required],
+    },
+    {
+      validators: [this.customValidators.passwordMatchValidator],
+    }
+  );
   public showPassword: boolean = false;
   public showConfirmPassword: boolean = false;
 
