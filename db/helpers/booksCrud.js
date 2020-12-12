@@ -40,22 +40,24 @@ const bookOperations = {
     });
   },
   fetchBooks(response) {
-    BooksModel.find({}, (err, data) => {
-      if (err) {
-        console.log("Error in books Search", err);
-        response.status(500).json({
-          status: "E",
-          message: "Error while listing books : " + err,
-        });
-      } else {
-        console.log("books Found..");
-        response.status(200).json({
-          status: 200,
-          message: "books Found..",
-          record: data,
-        });
-      }
-    });
+    BooksModel.find({})
+      .populate("categories")
+      .exec(function (err, data) {
+        if (err) {
+          console.log("Error in books Search", err);
+          response.status(500).json({
+            status: "E",
+            message: "Error while listing books : " + err,
+          });
+        } else {
+          console.log("books Found..", data);
+          response.status(200).json({
+            status: 200,
+            message: "books Found..",
+            record: data,
+          });
+        }
+      });
   },
   fetchBookById(bookId, response) {
     BooksModel.findOne({ _id: bookId }, (err, data) => {

@@ -5,5 +5,22 @@
   width: 100%;
 }
 .login {
-  min-width: 10rem;
+  min-width: 30rem;
+  border: 1px solid #dee2e6;
+}
+.login-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #5aaaff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+.login-header .heading {
+  font-size: 28px;
+}
+.login-form {
+  padding: 10px;
 }

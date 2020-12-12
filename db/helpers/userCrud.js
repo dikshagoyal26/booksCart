@@ -1,8 +1,10 @@
 const UserModel = require("../models/user");
 const encryptOperations = require("../../utils/encrypt");
 const jwtOperations = require("../../utils/jwt");
+const { use } = require("../../routes/api/user");
 const userOperations = {
   loginUser(user, response) {
+    console.log(user);
     UserModel.find({ userName: user.userName }, (err, data) => {
       if (err) {
         console.log("Error while logging in user", err);
@@ -11,6 +13,7 @@ const userOperations = {
           message: "User Not logged in due to Error" + err,
         });
       } else {
+        console.log(data);
         if (data && data.length > 0) {
           if (
             encryptOperations.comparePassword(user.password, data[0].password)
@@ -68,10 +71,11 @@ const userOperations = {
           message: "Username Not Validated Due to Error" + err,
         });
       } else {
+        console.log(data);
         if (data) {
           response.status(400).json({
             status: 400,
-            message: "Invalid Username or password",
+            message: "Username Not Available",
           });
         } else {
           response.status(200).json({ status: "S" });

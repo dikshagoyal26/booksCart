@@ -17,6 +17,8 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { FilterPipe } from './shared/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { RegisterComponent } from './components/register/register.component';
     SnackbarComponent,
     LoginComponent,
     RegisterComponent,
+    PaginationComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,

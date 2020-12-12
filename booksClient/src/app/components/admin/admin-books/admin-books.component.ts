@@ -15,6 +15,7 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 export class AdminBooksComponent implements OnInit {
   public books: Book[];
   private categories: Categories[] = [];
+  public searchData: string = '';
   constructor(
     private booksService: BooksService,
     private router: Router,

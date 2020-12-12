@@ -16,7 +16,7 @@ const BooksSchema = new Schema({
   },
   category: {
     type: Schema.Types.ObjectId,
-    ref: "Category",
+    ref: "categories",
     required: true,
   },
   price: {

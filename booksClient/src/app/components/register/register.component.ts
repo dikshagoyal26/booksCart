@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { CustomValidationsService } from 'src/app/shared/services/custom-validations.service';
 import { Response } from '../../shared/models/response.model';
 import { UserService } from '../../shared/services/user.service';
 
@@ -9,12 +10,22 @@ import { UserService } from '../../shared/services/user.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private customValidators: CustomValidationsService
+  ) {}
 
   public registerForm = this.fb.group({
     firstName: ['', [Validators.required, Validators.minLength(5)]],
     lastName: ['', [Validators.required, Validators.minLength(4)]],
-    userName: ['', Validators.required],
+    userName: [
+      '',
+      [
+        Validators.required,
+        this.customValidators.customValidator.bind(this.customValidators),
+      ],
+    ],
     password: ['', Validators.required],
     confirmPassword: ['', Validators.required],
     gender: ['', Validators.required],
@@ -31,7 +42,6 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  validateUsername() {}
   register() {
     console.log(this.registerForm.value);
     this.userService

@@ -1,27 +1,6 @@
-// section {
-//   display: flex;
-//   justify-content: center;
-//   max-width: 380px;
-//   flex-direction: column;
-// }
-div.form {
-  display: flex;
-  justify-content: center;
-}
-div.form form {
-  max-width: 780px;
-  border: 2px solid #eee;
-  background: white;
-}
-.books {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .addbook {
   display: flex;
   justify-content: right;
-  float: right;
 }
 .invalid-feedback {
   display: inline;
@@ -31,4 +10,30 @@ button:disabled {
 }
 form label {
   text-transform: capitalize;
+}
+.d-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.register {
+  min-width: 30rem;
+  border: 1px solid #dee2e6;
+}
+.register-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #5aaaff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+.register-header .heading {
+  font-size: 28px;
+}
+.register-form {
+  padding: 10px;
 }

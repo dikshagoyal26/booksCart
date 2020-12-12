@@ -1,13 +1,14 @@
-<div class="container">
+<div class="container-fluid mt-3">
     <div class="d-flex">
         <div class="login">
             <div class="login-header">
-                <h1 class="text-center mx-5 my-5">Login</h1>
-                <div routerLink="/register">
-                    New User? <button>Register</button>
+                <span class="heading">Login</span>
+                <div>
+                    <span class="pt-3"> New User? </span> <button routerLink="/register"
+                        class="btn btn-light">Register</button>
                 </div>
             </div>
-            <div class="row">
+            <div class="login-form">
                 <div class="card p-2 my-2 ">
                     <form [formGroup]="loginForm">
                         <div class="form-group">
@@ -34,18 +35,15 @@
                                 This field is required!
                             </div>
                         </div>
-                        <button type="submit" (click)="loginUser()" class="btn btn-primary"
+                        <button type="submit" (click)="loginUser()" class="btn btn-primary d-block"
                             [disabled]="loginForm.invalid">
-                            Submit
+                            Login
                         </button>
+                        <div class="invalid-feedback text-center d-block m-auto" *ngIf="canDisplayError">
+                            {{errorMessage}}</div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="container">
-    <div class="d-flex">
-
     </div>
 </div>

@@ -1,89 +1,105 @@
-<div class="form">
-    <form [formGroup]="registerForm" class="p-4 mt-4">
-        <h1>Register User</h1>
-        <p>Already Registered? </p>
-        <button routerLink="/login">Login</button>
-        <div class="form-group mt-2">
-            <label for="firstName">First Name</label>
-            <input type="firstName" class="form-control" placeholder="Enter firstName" formControlName="firstName" />
-            <div class="invalid-feedback"
-                *ngIf="registerFormControl.firstName.touched && registerFormControl.firstName.errors?.required">
-                This field is required!
+<div class="container-fluid mt-3">
+    <div class="d-flex">
+        <div class="register">
+            <div class="register-header">
+                <span class="heading">Register User</span>
+                <div>
+                    <span class="pt-3"> Already Registered? </span> <button routerLink="/login"
+                        class="btn btn-light">Login</button>
+                </div>
             </div>
-            <div class="invalid-feedback"
-                *ngIf="registerFormControl.firstName.dirty && registerFormControl.firstName.errors?.minlength">
-                Minimum required Length is 5.
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="lastName">lastName</label>
-            <input type="text" class="form-control" placeholder="Enter lastName" formControlName="lastName" />
-            <div class="invalid-feedback"
-                *ngIf="registerFormControl.lastName.touched && registerFormControl.lastName.errors?.required">
-                This field is required!
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="userName">userName</label>
-            <input type="text" class="form-control" formControlName="userName" />
-            <div class="invalid-feedback"
-                *ngIf="registerFormControl.userName.touched && registerFormControl.userName.errors?.required">
-                This field is required!
-            </div>
-            <div class="invalid-feedback"
-                *ngIf="registerFormControl.userName.touched && registerFormControl.userName.errors?.required">
-                This field is required!
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password">password</label>
-            <div class="password-div">
-                <input [type]="showPassword?'text':'password'" class="form-control" formControlName="password"
-                    placeholder="Enter password" name="password" />
-                <i class="fa pointer" [ngClass]="{'fa-eye':showPassword,'fa-eye-slash':!showPassword}"
-                    [title]="!showPassword?'Show Password':'Hide Password'" aria-hidden="true"
-                    (click)="showPassword=!showPassword"></i>
-            </div>
-            <div class="invalid-feedback"
-                *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.required">
-                This field is required!
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">confirmPassword</label>
-            <div class="password-div">
-                <input [type]="showConfirmPassword?'text':'password'" class="form-control"
-                    formControlName="confirmPassword" placeholder="Enter confirmPassword" name="confirmPassword" />
-                <i class="fa pointer" [title]="!showConfirmPassword?'Show Password':'Hide Password'"
-                    [ngClass]="{'fa-eye':showConfirmPassword,'fa-eye-slash':!showConfirmPassword}" aria-hidden="true"
-                    (click)="showConfirmPassword=!showConfirmPassword"></i>
-            </div>
-            <div class="invalid-feedback"
-                *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.required">
-                This field is required!
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="gender">gender</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" id="male" name="gender" value="male"
-                    formControlName="gender">
-                <label class="form-check-label" for="male">Male</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" id="female" class="form-check-input" name="gender" value="female"
-                    formControlName="gender">
-                <label class="form-check-label" for="female">Female</label>
-            </div>
+            <div class="register-form">
+                <div class="card p-2 my-2 ">
+                    <form [formGroup]="registerForm">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="firstName" class="form-control" placeholder="Enter First Name"
+                                formControlName="firstName" />
+                            <div class="invalid-feedback"
+                                *ngIf="registerFormControl.firstName.touched && registerFormControl.firstName.errors?.required">
+                                This field is required!
+                            </div>
+                            <div class="invalid-feedback"
+                                *ngIf="registerFormControl.firstName.dirty && registerFormControl.firstName.errors?.minlength">
+                                Minimum required Length is 5.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Last Name"
+                                formControlName="lastName" />
+                            <div class="invalid-feedback"
+                                *ngIf="registerFormControl.lastName.touched && registerFormControl.lastName.errors?.required">
+                                This field is required!
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="userName">User Name</label>
+                            <input type="text" class="form-control" formControlName="userName"
+                                placeholder="Enter User Name" /> {{registerFormControl.userName.errors|json}}
+                            <div class="invalid-feedback"
+                                *ngIf="registerFormControl.userName.touched && registerFormControl.userName.errors?.required">
+                                This field is required!
+                            </div>
+                            <div class="invalid-feedback"
+                                *ngIf="registerFormControl.userName.touched && registerFormControl.userName.errors?.notAvailable ">
+                                User Name is not available!
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="password-div">
+                                <input [type]="showPassword?'text':'password'" class="form-control"
+                                    formControlName="password" placeholder="Enter Password" name="password" />
+                                <i class="fa pointer" [ngClass]="{'fa-eye':showPassword,'fa-eye-slash':!showPassword}"
+                                    [title]="!showPassword?'Show Password':'Hide Password'" aria-hidden="true"
+                                    (click)="showPassword=!showPassword"></i>
+                            </div>
+                            <div class="invalid-feedback"
+                                *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.required">
+                                This field is required!
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <div class="password-div">
+                                <input [type]="showConfirmPassword?'text':'password'" class="form-control"
+                                    formControlName="confirmPassword" placeholder="Enter Confirm Password"
+                                    name="confirmPassword" />
+                                <i class="fa pointer" [title]="!showConfirmPassword?'Show Password':'Hide Password'"
+                                    [ngClass]="{'fa-eye':showConfirmPassword,'fa-eye-slash':!showConfirmPassword}"
+                                    aria-hidden="true" (click)="showConfirmPassword=!showConfirmPassword"></i>
+                            </div>
+                            <div class="invalid-feedback"
+                                *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.required">
+                                This field is required!
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender" class="mr-3">Gender</label>
+                            <div class="form-check-inline">
+                                <input class="form-check-input" type="radio" id="male" name="gender" value="male"
+                                    formControlName="gender">
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input type="radio" id="female" class="form-check-input" name="gender" value="female"
+                                    formControlName="gender">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
 
-            <div class="invalid-feedback"
-                *ngIf="registerFormControl.gender.touched && registerFormControl.gender.errors?.required">
-                This field is required!
+                            <div class="invalid-feedback"
+                                *ngIf="registerFormControl.gender.touched && registerFormControl.gender.errors?.required">
+                                This field is required!
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="register()"
+                            [disabled]="registerForm.invalid">
+                            Register
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-        <button class="btn" routerLink="/admin">Back</button>
-        <button type="submit" class="btn btn-primary" (click)="register()" [disabled]="registerForm.invalid">
-            Submit
-        </button>
-    </form>
+    </div>
 </div>
