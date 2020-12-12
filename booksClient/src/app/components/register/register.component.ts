@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Response } from '../shared/models/response.model';
-import { BooksService } from '../shared/services/books.service';
-import { CategoriesService } from '../shared/services/categories.service';
-import { SnackbarService } from '../shared/services/snackbar.service';
-import { UserService } from '../shared/services/user.service';
+import { Response } from '../../shared/models/response.model';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-register',

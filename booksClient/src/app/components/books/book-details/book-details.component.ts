@@ -5,7 +5,7 @@ import { Categories } from 'src/app/shared/models/categories.model';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
-import { Response } from '../../shared/models/response.model';
+import { Response } from '../../../shared/models/response.model';
 
 @Component({
   selector: 'app-book-details',

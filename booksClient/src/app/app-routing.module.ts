@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { BooksListComponent } from './books/books-list/books-list.component';
-import { BooksFormComponent } from './books/books-form/books-form.component';
-import { AdminBooksComponent } from './admin/admin-books/admin-books.component';
-import { BookDetailsComponent } from './books/book-details/book-details.component';
-import { BookCartComponent } from './books/book-cart/book-cart.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import { BooksListComponent } from './components/books/books-list/books-list.component';
+import { BooksFormComponent } from './components/books/books-form/books-form.component';
+import { AdminBooksComponent } from './components/admin/admin-books/admin-books.component';
+import { BookDetailsComponent } from './components/books/book-details/book-details.component';
+import { BookCartComponent } from './components/books/book-cart/book-cart.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },

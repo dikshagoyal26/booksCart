@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Response } from '../shared/models/response.model';
-import { UserService } from '../shared/services/user.service';
+import { Response } from '../../shared/models/response.model';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-login',
