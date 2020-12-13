@@ -3,5 +3,5 @@ export class Response {
   message: string;
   record?: any;
   token?: string;
-  user?: string;
+  user?: any;
 }

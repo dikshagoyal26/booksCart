@@ -4,7 +4,6 @@ const jwtOperations = require("../../utils/jwt");
 const { use } = require("../../routes/api/user");
 const userOperations = {
   loginUser(user, response) {
-    console.log(user);
     UserModel.find({ userName: user.userName }, (err, data) => {
       if (err) {
         console.log("Error while logging in user", err);
@@ -13,17 +12,18 @@ const userOperations = {
           message: "User Not logged in due to Error" + err,
         });
       } else {
-        console.log(data);
         if (data && data.length > 0) {
           if (
             encryptOperations.comparePassword(user.password, data[0].password)
           ) {
-            const token = jwtOperations.generateToken(user.userName);
+            const token = jwtOperations.generateToken(
+              user.userName,
+              data[0].user_type
+            );
             response.status(200).json({
               status: 200,
               message: "User Logged in",
               token: token,
-              user: user.userName,
             });
           } else {
             response.status(400).json({
@@ -52,12 +52,9 @@ const userOperations = {
         });
       } else {
         console.log("User Added..");
-        const token = jwtOperations.generateToken(user.userName);
         response.status(200).json({
           status: 200,
           message: "User Added",
-          token: token,
-          user: user.userName,
         });
       }
     });
@@ -72,7 +69,7 @@ const userOperations = {
         });
       } else {
         console.log(data);
-        if (data) {
+        if (data && data.length > 0) {
           response.status(400).json({
             status: 400,
             message: "Username Not Available",

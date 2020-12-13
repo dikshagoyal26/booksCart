@@ -42,7 +42,7 @@
                                 User Name is required!
                             </div>
                             <div class="invalid-feedback"
-                                *ngIf="registerFormControl.userName.touched && registerFormControl.userName.errors?.notAvailable ">
+                                *ngIf="registerFormControl.userName.dirty && registerFormControl.userName.errors?.notAvailable ">
                                 User Name is not available!
                             </div>
                         </div>

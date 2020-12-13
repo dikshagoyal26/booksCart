@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CustomValidationsService } from 'src/app/shared/services/custom-validations.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Response } from '../../shared/models/response.model';
 import { UserService } from '../../shared/services/user.service';
 
@@ -13,7 +15,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private customValidators: CustomValidationsService
+    private customValidators: CustomValidationsService,
+    private snackbarService: SnackbarService,
+    private router: Router
   ) {}
 
   public registerForm = this.fb.group(
@@ -55,14 +59,15 @@ export class RegisterComponent implements OnInit {
 
   register() {
     console.log(this.registerForm.value);
-    this.userService
-      .registerUser(this.registerForm.value)
-      .subscribe((res: Response) => {
+    this.userService.registerUser(this.registerForm.value).subscribe(
+      (res: Response) => {
         console.log(res);
         if (res.status == 200) {
-          window.localStorage.setItem('token', res.token);
-          window.localStorage.setItem('user', res.user);
+          this.snackbarService.show('User Registered Successfully!');
+          this.router.navigate(['/login']);
         }
-      });
+      },
+      (err) => {}
+    );
   }
 }

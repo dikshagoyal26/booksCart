@@ -1,8 +1,11 @@
 const jwt = require("jsonwebtoken");
 const jwtOperations = {
   secret: "@My$ecretKey",
-  generateToken(userName) {
-    var token = jwt.sign({ userName }, this.secret, { expiresIn: "7d" });
+  generateToken(userName, userType = 1) {
+    //TODO:How to Refresh Token?
+    var token = jwt.sign({ userName, userType }, this.secret, {
+      expiresIn: "24h",
+    });
     return token;
   },
   verifyToken(token) {

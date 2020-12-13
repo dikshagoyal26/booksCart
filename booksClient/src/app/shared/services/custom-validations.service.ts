@@ -15,14 +15,15 @@ export class CustomValidationsService {
       this.timer = setTimeout(() => {
         this.userService.validateUsername(control.value).subscribe(
           (result) => {
-            if (result) resolve({ notAvailable: true });
+            if (result) control.setErrors({ notAvailable: false });
             resolve(null);
           },
           (err) => {
-            resolve({ notAvailable: true });
+            control.setErrors({ notAvailable: true });
+            resolve(null);
           }
         );
-      }, 1000);
+      }, 500);
     });
   }
   passwordMatchValidator(control: AbstractControl) {
