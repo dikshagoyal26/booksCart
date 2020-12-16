@@ -14,8 +14,13 @@
   justify-content: right;
   float: right;
 }
+
 .list-group-item:hover {
   cursor: pointer;
+  background: #495057b3;
+  color: white;
+}
+.active {
   background: #212529;
   color: white;
 }

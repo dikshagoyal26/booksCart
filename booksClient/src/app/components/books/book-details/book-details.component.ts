@@ -50,14 +50,4 @@ export class BookDetailsComponent implements OnInit {
   addToCart() {
     this.cartService.addToCart(this.user._id, this.book._id);
   }
-  getCategory(categoryId: string) {
-    let category: Categories[] = [];
-    if (this.categories)
-      category = this.categories.filter((category: Categories) => {
-        if (category._id === categoryId) {
-          return category;
-        }
-      });
-    return category && category.length == 1 ? category[0].category_type : {};
-  }
 }

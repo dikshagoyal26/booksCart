@@ -41,16 +41,6 @@ export class AdminBooksComponent implements OnInit {
   editBook(i: number) {
     this.router.navigate([`/admin/books/update/${this.books[i]._id}`]);
   }
-  getCategory(categoryId: string) {
-    let category: Categories[] = [];
-    if (this.categories)
-      category = this.categories.filter((category: Categories) => {
-        if (category._id === categoryId) {
-          return category;
-        }
-      });
-    return category && category.length == 1 ? category[0].category_type : {};
-  }
   deleteBook(bookId) {
     this.booksService.deleteBook(bookId).subscribe(
       () => {

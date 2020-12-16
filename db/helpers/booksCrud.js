@@ -31,7 +31,7 @@ const bookOperations = {
   },
   fetchBooks(response) {
     BooksModel.find({})
-      .populate("categories")
+      .populate("category")
       .exec(function (err, data) {
         if (err) {
           response.status(500).send("Error while listing books : " + err);
@@ -41,31 +41,37 @@ const bookOperations = {
       });
   },
   fetchBookById(bookId, response) {
-    BooksModel.findOne({ _id: bookId }, (err, data) => {
-      if (err) {
-        response.status(500).send("Error while listing book : " + err);
-      } else {
-        response.status(200).send(data);
-      }
-    });
+    BooksModel.findOne({ _id: bookId })
+      .populate("category")
+      .exec(function (err, data) {
+        if (err) {
+          response.status(500).send("Error while listing books : " + err);
+        } else {
+          response.status(200).send(data);
+        }
+      });
   },
   searchByCategory(category, response) {
-    BooksModel.find({ category }, (err, data) => {
-      if (err) {
-        response.status(500).send("Error while listing book : " + err);
-      } else {
-        response.status(200).send(data);
-      }
-    });
+    BooksModel.find({ category })
+      .populate("category")
+      .exec(function (err, data) {
+        if (err) {
+          response.status(500).send("Error while listing books : " + err);
+        } else {
+          response.status(200).send(data);
+        }
+      });
   },
   searchByTitle(title, response) {
-    BooksModel.find({ title }, (err, data) => {
-      if (err) {
-        response.status(500).send("Error while listing book : " + err);
-      } else {
-        response.status(200).send(data);
-      }
-    });
+    BooksModel.find({ title })
+      .populate("category")
+      .exec(function (err, data) {
+        if (err) {
+          response.status(500).send("Error while listing books : " + err);
+        } else {
+          response.status(200).send(data);
+        }
+      });
   },
   deleteBookById(book, response) {
     BooksModel.remove({ _id: book }, (err) => {

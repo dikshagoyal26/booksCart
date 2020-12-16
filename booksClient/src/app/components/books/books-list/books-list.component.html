@@ -3,7 +3,8 @@
     <div class="categories col-md-3">
       <ul class="category-section list-group list-group-flush">
         <li class="list-group-item" (click)="fetchBooksByCategories()">ALL</li>
-        <li *ngFor="let category of categories" class="list-group-item" (click)="fetchBooksByCategories(category._id)">
+        <li *ngFor="let category of categories" class="list-group-item" routerLink="/books"
+          [ngClass]="{'active':category._id==selectedCategory}" [queryParams]="{category:category._id}">
           {{category.category_type}}
         </li>
       </ul>

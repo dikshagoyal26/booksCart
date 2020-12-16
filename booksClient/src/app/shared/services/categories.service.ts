@@ -16,15 +16,4 @@ export class CategoriesService {
   categories$ = this.http
     .get<any>(this.backendUrl + 'category/fetch')
     .pipe(shareReplay(1));
-
-  getCategoryById(id: string) {
-    let category;
-    if (this.categories)
-      category = this.categories.filter((category: any) => {
-        if (category._id === id) {
-          return category;
-        }
-      });
-    return category && category.length == 1 ? category[0] : {};
-  }
 }

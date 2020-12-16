@@ -4,6 +4,7 @@ import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Categories } from 'src/app/shared/models/categories.model';
 import { Book } from 'src/app/shared/models/books.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-books-list',
@@ -13,18 +14,26 @@ import { Book } from 'src/app/shared/models/books.model';
 export class BooksListComponent implements OnInit {
   books: any = [];
   categories: any = [];
+  selectedCategory: string;
   constructor(
     private booksService: BooksService,
     private categoriesService: CategoriesService,
-    private snackBarService: SnackbarService
+    private snackBarService: SnackbarService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      if (params.category) {
+        this.selectedCategory = params.category;
+        this.fetchBooksByCategories(this.selectedCategory);
+      } else {
+        this.fetchBooks();
+      }
+    });
     this.categoriesService.categories$.subscribe((categories: Categories[]) => {
       this.categories = categories;
     });
-
-    this.fetchBooks();
   }
   fetchBooksByCategories(categoryId: string = null) {
     if (categoryId) {
