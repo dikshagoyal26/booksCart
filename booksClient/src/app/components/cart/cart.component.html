@@ -6,7 +6,7 @@
                 <button (click)="clearCart()" class="btn btn-light">Clear Cart</button>
             </div>
             <div class="cart-form">
-                <table class="table capitalise" *ngIf="cart && cart.items&& cart.items.length>0">
+                <table class="table capitalise text-center" *ngIf="cart && cart.items&& cart.items.length>0">
                     <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -22,8 +22,12 @@
                             <td><img [src]="item.book.cover" alt=""></td>
                             <td>{{ item.book.title }}</td>
                             <td>{{ item.book.price | currency : 'INR'}}</td>
-                            <td><button (click)=" reduceItemQty(item.book._id)">-</button> {{item.quantity }} <button
-                                    (click)="addOneItem(item.book._id)">+</button></td>
+                            <td><i class="fa fa-minus-circle pointer" aria-hidden="true"
+                                    (click)=" reduceItemQty(item.book._id)"></i>
+                                {{item.quantity }}
+                                <i class="fa fa-plus-circle pointer" aria-hidden="true"
+                                    (click)=" addOneItem(item.book._id)"></i>
+                            </td>
                             <td>{{ item.book.price | currency : 'INR' }}</td>
                             <td>
                                 <i class="fa fa-trash pointer" title="Delete Book" aria-hidden="true"
