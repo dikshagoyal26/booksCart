@@ -7,15 +7,9 @@ function checkToken(req, res, next) {
     if (isValidToken) {
       next();
     } else {
-      res.status(401).json({
-        status: "E",
-        message: "Session Expired",
-      });
+      res.status(401).send("Session Expired");
     }
   } else {
-    res.status(401).json({
-      status: "E",
-      message: "You are not authorised to access this page",
-    });
+    res.status(401).send("You are not authorised to access this page");
   }
 }

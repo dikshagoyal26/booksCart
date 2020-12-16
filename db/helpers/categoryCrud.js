@@ -3,18 +3,9 @@ const categoryOperations = {
   listCategories(response) {
     CategoryModel.find({}, (err, data) => {
       if (err) {
-        console.log("Error in Categories Search", err);
-        response.status(500).json({
-          status: "E",
-          message: "Error while listing categories : " + err,
-        });
+        response.status(500).send("Error while listing categories : " + err);
       } else {
-        console.log("Categories Found..");
-        response.status(200).json({
-          status: 200,
-          message: "Categories Found..",
-          record: data,
-        });
+        response.status(200).send(data);
       }
     });
   },
@@ -23,24 +14,13 @@ const categoryOperations = {
       category = category.toLowerCase();
       CategoryModel.create({ category_type: category }, (err) => {
         if (err) {
-          console.log("Error in Category Add", err);
-          response.status(500).json({
-            status: "E",
-            message: "Category Not Added Due to Error : " + err,
-          });
+          response.status(500).send("Category Not Added Due to Error : " + err);
         } else {
-          console.log("Category Added..");
-          response.status(200).json({
-            status: 200,
-            message: "Category Added",
-          });
+          response.status(200).send();
         }
       });
     } else {
-      response.status(400).json({
-        status: "E",
-        message: "Category Value Required",
-      });
+      response.status(400).send("Category Value Required");
     }
   },
   addMultipleCategories(categories, response) {
@@ -55,25 +35,15 @@ const categoryOperations = {
     if (insertCat.length > 0) {
       CategoryModel.insertMany(insertCat, (err, data) => {
         if (err) {
-          console.log("Error in Categories Add", err);
-          response.status(500).json({
-            status: "E",
-            message: "Categories Not Added Due to Error : " + err,
-          });
+          response
+            .status(500)
+            .send("Categories Not Added Due to Error : " + err);
         } else {
-          console.log("Categories Added..");
-          response.status(200).json({
-            status: 200,
-            message: "Categories Added",
-            record: data,
-          });
+          response.status(200).send(data);
         }
       });
     } else {
-      response.status(400).json({
-        status: "E",
-        message: "Category Value Required",
-      });
+      response.status(400).send("Category Value Required");
     }
   },
 };

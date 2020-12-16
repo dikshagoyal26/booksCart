@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Book } from 'src/app/shared/models/books.model';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
-import { Response } from 'src/app/shared/models/response.model';
 import { Categories } from 'src/app/shared/models/categories.model';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -30,15 +29,13 @@ export class AdminBooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchBooks();
-    this.categoryService.categories$.subscribe((categories: Response) => {
-      this.categories = categories.record;
+    this.categoryService.categories$.subscribe((categories: Categories[]) => {
+      this.categories = categories;
     });
   }
   fetchBooks() {
-    this.booksService.fetchBooks().subscribe((res: Response) => {
-      if (res.status == 200) {
-        this.books = res.record;
-      }
+    this.booksService.fetchBooks().subscribe((books: Book[]) => {
+      this.books = books;
     });
   }
   editBook(i: number) {
@@ -55,15 +52,16 @@ export class AdminBooksComponent implements OnInit {
     return category && category.length == 1 ? category[0].category_type : {};
   }
   deleteBook(bookId) {
-    this.booksService.deleteBook(bookId).subscribe((res: Response) => {
-      this.modalRef.hide();
-      if (res.status == 200) {
+    this.booksService.deleteBook(bookId).subscribe(
+      () => {
+        this.modalRef.hide();
         this.snackbarService.show('book deleted successfully');
         this.fetchBooks();
-      } else {
+      },
+      () => {
         this.snackbarService.show('error while deleting book', 'danger');
       }
-    });
+    );
   }
   showDeleteBookModal(template: TemplateRef<any>, book: Book) {
     this.selectedBook = book;

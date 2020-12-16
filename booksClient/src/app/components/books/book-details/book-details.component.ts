@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Book } from 'src/app/shared/models/books.model';
 import { Categories } from 'src/app/shared/models/categories.model';
+import { User } from 'src/app/shared/models/user';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
-import { Response } from '../../../shared/models/response.model';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-book-details',
@@ -15,11 +17,14 @@ import { Response } from '../../../shared/models/response.model';
 export class BookDetailsComponent implements OnInit {
   public book: Book;
   private categories: Categories[] = [];
+  public userDataSubscription: Subscription;
+  public user: User;
   constructor(
     private route: ActivatedRoute,
     private booksService: BooksService,
     private cartService: CartService,
-    private categoryService: CategoriesService
+    private categoryService: CategoriesService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -28,17 +33,22 @@ export class BookDetailsComponent implements OnInit {
         this.fetchDetails(param.id);
       }
     });
-    this.categoryService.categories$.subscribe((categories: Response) => {
-      this.categories = categories.record;
+    this.categoryService.categories$.subscribe((categories: Categories[]) => {
+      this.categories = categories;
     });
+    this.userDataSubscription = this.userService.userData
+      .asObservable()
+      .subscribe((data: User) => {
+        this.user = data;
+      });
   }
   fetchDetails(BookId) {
-    this.booksService.fetchBookById(BookId).subscribe((data: Response) => {
-      this.book = data.record[0];
+    this.booksService.fetchBookById(BookId).subscribe((data: Book) => {
+      this.book = data;
     });
   }
   addToCart() {
-    this.cartService.addToCart(this.book);
+    this.cartService.addToCart(this.user._id, this.book._id);
   }
   getCategory(categoryId: string) {
     let category: Categories[] = [];

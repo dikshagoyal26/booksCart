@@ -8,125 +8,71 @@ const bookOperations = {
     booksObject._id = id + "_book";
     BooksModel.create(booksObject, (err) => {
       if (err) {
-        console.log("Error in Book Add", err);
-        response.status(500).json({
-          status: "E",
-          message: "Book Not Added Due to Error" + err,
-        });
+        response.status(500).send("Book Not Added Due to Error");
       } else {
-        console.log("Book Added..");
-        response.status(200).json({
-          status: 200,
-          message: "Book Added",
-        });
+        response.status(200).send();
       }
     });
   },
   editBook(bookId, booksObject, response) {
-    BooksModel.updateOne({ _id: bookId }, { $set: booksObject }, (err) => {
-      if (err) {
-        console.log("Error in Book Update", err);
-        response.status(500).json({
-          status: "E",
-          message: "Book Not Updated Due to Error" + err,
-        });
-      } else {
-        console.log("Book Updated..");
-        response.status(200).json({
-          status: 200,
-          message: "Book Updated",
-        });
+    console.log({ bookId, booksObject });
+    BooksModel.updateOne(
+      { _id: bookId },
+      { $set: booksObject },
+      (err, data) => {
+        if (err) {
+          console.log(err);
+          response.status(500).send("Book Not Updated Due to Error");
+        } else {
+          response.status(200).send();
+        }
       }
-    });
+    );
   },
   fetchBooks(response) {
     BooksModel.find({})
       .populate("categories")
       .exec(function (err, data) {
         if (err) {
-          console.log("Error in books Search", err);
-          response.status(500).json({
-            status: "E",
-            message: "Error while listing books : " + err,
-          });
+          response.status(500).send("Error while listing books : " + err);
         } else {
-          console.log("books Found..", data);
-          response.status(200).json({
-            status: 200,
-            message: "books Found..",
-            record: data,
-          });
+          response.status(200).send(data);
         }
       });
   },
   fetchBookById(bookId, response) {
     BooksModel.findOne({ _id: bookId }, (err, data) => {
       if (err) {
-        console.log("Error in book Search", err);
-        response.status(500).json({
-          status: "E",
-          message: "Error while listing book : " + err,
-        });
+        response.status(500).send("Error while listing book : " + err);
       } else {
-        console.log("book Found..");
-        response.status(200).json({
-          status: 200,
-          message: "book Found..",
-          record: [data],
-        });
+        response.status(200).send(data);
       }
     });
   },
   searchByCategory(category, response) {
     BooksModel.find({ category }, (err, data) => {
       if (err) {
-        console.log("Error in books Search", err);
-        response.status(500).json({
-          status: "E",
-          message: "Error while listing book : " + err,
-        });
+        response.status(500).send("Error while listing book : " + err);
       } else {
-        console.log("books Found..");
-        response.status(200).json({
-          status: 200,
-          message: "books Found..",
-          record: data,
-        });
+        response.status(200).send(data);
       }
     });
   },
   searchByTitle(title, response) {
     BooksModel.find({ title }, (err, data) => {
       if (err) {
-        console.log("Error in books Search", err);
-        response.status(500).json({
-          status: "E",
-          message: "Error while listing book : " + err,
-        });
+        response.status(500).send("Error while listing book : " + err);
       } else {
-        console.log("book Found..");
-        response.status(200).json({
-          status: 200,
-          message: "book Found..",
-          record: [data],
-        });
+        response.status(200).send(data);
       }
     });
   },
   deleteBookById(book, response) {
     BooksModel.remove({ _id: book }, (err) => {
       if (err) {
-        console.log("Error in books Delete", err);
-        response.status(500).json({
-          status: "E",
-          message: "Error while deleting book : " + err,
-        });
+        response.status(500).send("Error while deleting book : " + err);
       } else {
-        console.log("book deleted..");
-        response.status(200).json({
-          status: 200,
-          message: "book deleted..",
-        });
+        response.status(200).send();
       }
     });
   },

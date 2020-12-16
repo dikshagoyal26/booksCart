@@ -1,0 +1,17 @@
+<h1>Cart Items</h1>
+{{cart|json}}
+<button (click)="clearCart()"></button>
+<section *ngIf="cart && cart.length>0">
+    <div *ngFor="let item of cart"> {{item|json}}
+        <img src="{{item.book.cover}}" alt="" style="width: 100px;"> {{item.book.title}}
+        {{item.book.price*item.quantity|currency:'INR'}}
+        <button (click)="deleteOneItem(item.book._id)">-</button> {{item.quantity}} <button
+            (click)="addOneItem(item.book._id)">+</button>
+
+        <button (click)="deleteBookFromCart(item.book._id)"> Delete Item</button>
+    </div>
+</section>
+<section *ngIf="!cart || cart.length==0">
+    <p>Book cart is empty!</p>
+    <button routerLink="/books">Continue Shopping</button>
+</section>

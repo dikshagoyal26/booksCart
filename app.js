@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 app.use("/user", require("./routes/api/user"));
 app.use("/books", require("./routes/api/books"));
 app.use("/category", require("./routes/api/categories"));
+app.use("/cart", require("./routes/api/cart"));
 
 app.use((req, res) => {
   res.send("OOPs!!! you have typed something wrong");

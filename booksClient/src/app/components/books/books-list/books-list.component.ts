@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
-import { Response } from 'src/app/shared/models/response.model';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { Categories } from 'src/app/shared/models/categories.model';
+import { Book } from 'src/app/shared/models/books.model';
 
 @Component({
   selector: 'app-books-list',
@@ -19,34 +20,34 @@ export class BooksListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoriesService.categories$.subscribe((categories: Response) => {
-      this.categories = categories.record;
+    this.categoriesService.categories$.subscribe((categories: Categories[]) => {
+      this.categories = categories;
     });
 
     this.fetchBooks();
   }
   fetchBooksByCategories(categoryId: string = null) {
     if (categoryId) {
-      this.booksService
-        .fetchBooksByCategoryId(categoryId)
-        .subscribe((data: any) => {
-          if (data.status == 200) {
-            this.books = data.record;
-          } else {
-            this.snackBarService.show(data.message, 'danger');
-          }
-        });
+      this.booksService.fetchBooksByCategoryId(categoryId).subscribe(
+        (books: Book[]) => {
+          this.books = books;
+        },
+        (err) => {
+          this.snackBarService.show(err, 'danger');
+        }
+      );
     } else {
       this.fetchBooks();
     }
   }
   fetchBooks() {
-    this.booksService.fetchBooks().subscribe((data: any) => {
-      if (data.status == 200) {
-        this.books = data.record;
-      } else {
-        this.snackBarService.show(data.message, 'danger');
+    this.booksService.fetchBooks().subscribe(
+      (books: Book[]) => {
+        this.books = books;
+      },
+      (err) => {
+        this.snackBarService.show(err, 'danger');
       }
-    });
+    );
   }
 }

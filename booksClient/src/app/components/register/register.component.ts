@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomValidationsService } from 'src/app/shared/services/custom-validations.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { Response } from '../../shared/models/response.model';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -58,14 +57,14 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm.value);
+    if (this.registerForm.invalid) {
+      console.log(this.registerForm, this.registerForm.value);
+      return;
+    }
     this.userService.registerUser(this.registerForm.value).subscribe(
-      (res: Response) => {
-        console.log(res);
-        if (res.status == 200) {
-          this.snackbarService.show('User Registered Successfully!');
-          this.router.navigate(['/login']);
-        }
+      () => {
+        this.snackbarService.show('User Registered Successfully!');
+        this.router.navigate(['/login']);
       },
       (err) => {}
     );

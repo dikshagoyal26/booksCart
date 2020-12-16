@@ -1,9 +1,0 @@
-<p>book-cart works!</p>
-<section *ngIf="cart && cart.length>0">
-    <div *ngFor="let item of cart">
-        {{item.book.title}} - {{item.quantity}} <button> Delete Item</button>
-    </div>
-</section>
-<section *ngIf="!cart || cart.length==0">
-    <p>No Item in cart</p>
-</section>

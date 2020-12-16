@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Response } from '../../shared/models/response.model';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -28,20 +27,10 @@ export class LoginComponent implements OnInit {
   }
   loginUser() {
     this.userService.loginUser(this.loginForm.value).subscribe(
-      (res: Response) => {
-        console.log(res);
-        if (res.status == 200) {
-          window.localStorage.setItem('token', res.token);
-          window.localStorage.setItem('user', res.user);
-          this.router.navigate(['/books']);
-        } else {
-          this.errorMessage = res.message;
-          this.loginForm.patchValue({
-            userName: '',
-            password: '',
-          });
-          this.canDisplayError = true;
-        }
+      (data: { token: string }) => {
+        window.localStorage.setItem('auth-token', data.token);
+        this.userService.setUserDetails();
+        this.router.navigate(['/books']);
       },
       (err) => {
         this.errorMessage = 'Username or Password is incorrect.';

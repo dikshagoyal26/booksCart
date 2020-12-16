@@ -3,8 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
-import { Response } from 'src/app/shared/models/response.model';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { Categories } from 'src/app/shared/models/categories.model';
+import { Book } from 'src/app/shared/models/books.model';
 @Component({
   selector: 'app-books-form',
   templateUrl: './books-form.component.html',
@@ -32,8 +33,8 @@ export class BooksFormComponent implements OnInit {
   public formTitle: string = 'Add';
   private id: string = '';
   ngOnInit(): void {
-    this.categoriesService.categories$.subscribe((categories: Response) => {
-      this.categories = categories.record;
+    this.categoriesService.categories$.subscribe((categories: Categories[]) => {
+      this.categories = categories;
     });
     this.route.params.subscribe((params: any) => {
       if (params?.id) {
@@ -51,17 +52,14 @@ export class BooksFormComponent implements OnInit {
   }
 
   initEditBook(bookId) {
-    this.booksService.fetchBookById(bookId).subscribe((data: any) => {
-      if (data.status == 200) {
-        let record = data.record[0];
-        this.bookForm.patchValue({
-          title: record.title,
-          author: record.author,
-          category: record.category,
-          price: record.price,
-          cover: record.cover,
-        });
-      }
+    this.booksService.fetchBookById(bookId).subscribe((book: Book) => {
+      this.bookForm.patchValue({
+        title: book.title,
+        author: book.author,
+        category: book.category,
+        price: book.price,
+        cover: book.cover,
+      });
     });
   }
   saveBook() {
@@ -79,25 +77,26 @@ export class BooksFormComponent implements OnInit {
     }
   }
   addBook() {
-    this.booksService.addBook(this.bookForm.value).subscribe((data: any) => {
-      if (data.status == 200) {
+    this.booksService.addBook(this.bookForm.value).subscribe(
+      () => {
         this.snackbarService.show('book added successfully');
         this.router.navigate(['/books']);
-      } else {
+      },
+      () => {
         this.snackbarService.show('issue in book add', 'danger');
       }
-    });
+    );
   }
   updateBook() {
-    this.booksService
-      .updateBook(this.id, this.bookForm.value)
-      .subscribe((data: any) => {
-        if (data.status == 200) {
-          this.snackbarService.show('book updated successfully');
-          this.router.navigate(['/books']);
-        } else {
-          this.snackbarService.show('issue in book update', 'danger');
-        }
-      });
+    this.booksService.updateBook(this.id, this.bookForm.value).subscribe(
+      () => {
+        this.snackbarService.show('book updated successfully');
+        this.router.navigate(['/books']);
+      },
+      (err) => {
+        console.log(err);
+        this.snackbarService.show('issue in book update', 'danger');
+      }
+    );
   }
 }

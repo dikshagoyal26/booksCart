@@ -5,10 +5,10 @@ import { BooksListComponent } from './components/books/books-list/books-list.com
 import { BooksFormComponent } from './components/books/books-form/books-form.component';
 import { AdminBooksComponent } from './components/admin/admin-books/admin-books.component';
 import { BookDetailsComponent } from './components/books/book-details/book-details.component';
-import { BookCartComponent } from './components/books/book-cart/book-cart.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
@@ -35,7 +35,7 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'cart', component: BookCartComponent, pathMatch: 'full' },
+  { path: 'cart', component: CartComponent, pathMatch: 'full' },
   { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

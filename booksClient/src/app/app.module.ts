@@ -11,7 +11,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BooksFormComponent } from './components/books/books-form/books-form.component';
 import { AdminBooksComponent } from './components/admin/admin-books/admin-books.component';
 import { BookDetailsComponent } from './components/books/book-details/book-details.component';
-import { BookCartComponent } from './components/books/book-cart/book-cart.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { CommonModule } from '@angular/common';
@@ -20,6 +19,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { FilterPipe } from './shared/filter.pipe';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -31,13 +31,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BooksFormComponent,
     AdminBooksComponent,
     BookDetailsComponent,
-    BookCartComponent,
     PageNotFoundComponent,
     SnackbarComponent,
     LoginComponent,
     RegisterComponent,
     PaginationComponent,
     FilterPipe,
+    CartComponent,
   ],
   imports: [
     CommonModule,
