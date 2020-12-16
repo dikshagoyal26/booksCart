@@ -1,9 +1,9 @@
 var connection = require("../connection");
 const Schema = connection.Schema;
 const cartItems = new Schema({
-  book_id: {
+  book: {
     type: String,
-    ref: "books",
+    ref: "Books",
   },
   quantity: {
     type: Number,
@@ -13,7 +13,7 @@ const CartSchema = new Schema({
   user_id: {
     type: String,
     required: true,
-    unique: true,
+    // unique: true,
     ref: "users",
   },
   created_at: {
@@ -21,7 +21,7 @@ const CartSchema = new Schema({
     default: Date.now(),
   },
   items: {
-    type: cartItems,
+    type: [cartItems],
   },
 });
 

@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/shared/models/user';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class BookCardComponent implements OnInit, OnDestroy {
   public user: User;
   constructor(
     private cartService: CartService,
-    private userService: UserService
+    private userService: UserService,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -26,13 +28,21 @@ export class BookCardComponent implements OnInit, OnDestroy {
       });
   }
   addToCart() {
-    this.cartService
-      .addToCart(this.user._id, this.book._id)
-      .subscribe(() => {});
+    this.cartService.addToCart(this.user._id, this.book._id).subscribe(
+      () => {
+        this.snackbarService.show('Book Added to Cart!');
+      },
+      () => {
+        this.snackbarService.show('Something Went Wrong!', 'danger');
+      }
+    );
   }
   ngOnDestroy() {
     if (this.userDataSubscription) {
       this.userDataSubscription.unsubscribe();
     }
+  }
+  isLoggedIn() {
+    return this.userService.isLoggedIn();
   }
 }

@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private userService: UserService
   ) {}
-  public cartItems: Number;
+  public cartItems: Number = 0;
   public userDataSubscription: Subscription;
   public user: User;
 
@@ -31,10 +31,13 @@ export class NavbarComponent implements OnInit {
     }
   }
   isAdmin() {
-    return true;
+    return this.userService.isAdmin();
   }
   isLoggedIn() {
-    return true;
+    return this.userService.isLoggedIn();
+  }
+  getFirstName() {
+    return this.userService.getFirstName();
   }
   logout() {
     this.userService.logout();

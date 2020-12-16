@@ -33,9 +33,9 @@ export class CartService {
   setCartItemCount(value: number) {
     this.cartItemcount$.next(value);
   }
-  deleteOneCartItem(userId: string, bookId: string) {
+  reduceItemQty(userId: string, bookId: string) {
     return this.http.put(
-      this.backendUrl + `cart/delete-one/${userId}/${bookId}`,
+      this.backendUrl + `cart/reduce-qty/${userId}/${bookId}`,
       {},
       {
         headers: {
@@ -44,7 +44,7 @@ export class CartService {
       }
     );
   }
-  removeItem(userId, bookId) {
+  deleteBookFromCart(userId, bookId) {
     return this.http.delete(
       this.backendUrl + `cart/delete-item/${userId}/${bookId}`,
       {

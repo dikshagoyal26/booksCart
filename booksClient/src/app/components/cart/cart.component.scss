@@ -1,0 +1,35 @@
+.cart {
+  min-width: 45rem;
+  border: 1px solid #dee2e6;
+}
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #5aaaff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+.cart-header .heading {
+  font-size: 28px;
+}
+.cart-form {
+  padding: 10px;
+}
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table {
+  background: #fff;
+}
+img {
+  height: 200px;
+  width: 175px;
+}
+.fa-trash {
+  color: #ff0000a6;
+}

@@ -1,17 +1,58 @@
-<h1>Cart Items</h1>
-{{cart|json}}
-<button (click)="clearCart()"></button>
-<section *ngIf="cart && cart.length>0">
-    <div *ngFor="let item of cart"> {{item|json}}
-        <img src="{{item.book.cover}}" alt="" style="width: 100px;"> {{item.book.title}}
-        {{item.book.price*item.quantity|currency:'INR'}}
-        <button (click)="deleteOneItem(item.book._id)">-</button> {{item.quantity}} <button
-            (click)="addOneItem(item.book._id)">+</button>
-
-        <button (click)="deleteBookFromCart(item.book._id)"> Delete Item</button>
+<div class="container-fluid mt-3">
+    <div class="d-flex">
+        <div class="cart">
+            <div class="cart-header">
+                <span class="heading">Cart Items</span>
+                <button (click)="clearCart()" class="btn btn-light">Clear Cart</button>
+            </div>
+            <div class="cart-form">
+                <table class="table capitalise" *ngIf="cart && cart.items&& cart.items.length>0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Image</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">MRP</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of cart.items">
+                            <td><img [src]="item.book.cover" alt=""></td>
+                            <td>{{ item.book.title }}</td>
+                            <td>{{ item.book.price | currency : 'INR'}}</td>
+                            <td><button (click)=" reduceItemQty(item.book._id)">-</button> {{item.quantity }} <button
+                                    (click)="addOneItem(item.book._id)">+</button></td>
+                            <td>{{ item.book.price | currency : 'INR' }}</td>
+                            <td>
+                                <i class="fa fa-trash pointer" title="Delete Book" aria-hidden="true"
+                                    (click)="deleteBookFromCart(item.book._id)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Cart Total:</td>
+                            <td><b>{{totalPrice |currency:'INR'}}</b></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <section *ngIf="!cart || !cart.items|| cart.items.length==0">
+                    <p>Book cart is empty!</p>
+                    <button routerLink="/books">Continue Shopping</button>
+                </section>
+            </div>
+        </div>
     </div>
-</section>
-<section *ngIf="!cart || cart.length==0">
-    <p>Book cart is empty!</p>
-    <button routerLink="/books">Continue Shopping</button>
-</section>
+</div>
+<!-- 
+TODO: 1.Cart FUnctionality & UI
+2. Purchase the item
+3. Filters
+4. Pagination
+5. Session Management -->

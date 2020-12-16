@@ -11,7 +11,7 @@ CartRouter.post("/add/:userId/:bookId", (req, res) => {
   const bookId = req.params.bookId;
   cartOperations.addItem(userId, bookId, res);
 });
-CartRouter.put("/delete-one/:userId/:bookId", (req, res) => {
+CartRouter.put("/reduce-qty/:userId/:bookId", (req, res) => {
   const userId = req.params.userId;
   const bookId = req.params.bookId;
   cartOperations.deleteOneItemQunatity(userId, bookId, res);

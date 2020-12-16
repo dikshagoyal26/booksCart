@@ -16,6 +16,7 @@ const userOperations = {
         ) {
           const token = jwtOperations.generateToken(
             data[0]._id,
+            data[0].firstName,
             user.userName,
             data[0].user_type
           );

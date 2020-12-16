@@ -11,7 +11,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  public cart: Cart[] = [];
+  public cart: any = [];
   public totalPrice: number = 0;
   public userDataSubscription: Subscription;
   public user: User;
@@ -23,12 +23,12 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     // this.cart = this.cartService.getCartItems();
-    this.getCartItems();
     this.userDataSubscription = this.userService.userData
       .asObservable()
       .subscribe((data: User) => {
         this.user = data;
       });
+    this.getCartItems();
   }
   ngOnDestroy() {
     if (this.userDataSubscription) {
@@ -38,8 +38,9 @@ export class CartComponent implements OnInit {
   getCartItems() {
     if (!this.user) return;
     this.cartService.getCartItems(this.user._id).subscribe(
-      (data: Cart[]) => {
+      (data: any) => {
         this.cart = data;
+        console.log(data);
         this.getTotalPrice();
       },
       (err) => {
@@ -47,8 +48,8 @@ export class CartComponent implements OnInit {
       }
     );
   }
-  deleteOneItem(bookId: string) {
-    this.cartService.deleteOneCartItem(this.user._id, bookId).subscribe(
+  reduceItemQty(bookId: string) {
+    this.cartService.reduceItemQty(this.user._id, bookId).subscribe(
       () => {
         this.getCartItems();
       },
@@ -68,7 +69,11 @@ export class CartComponent implements OnInit {
     );
   }
   deleteBookFromCart(bookId: string) {
-    this.cartService.removeItem(this.user._id, bookId).subscribe(
+    if (this.cart.items.length == 1) {
+      this.clearCart();
+      return;
+    }
+    this.cartService.deleteBookFromCart(this.user._id, bookId).subscribe(
       () => {
         this.getCartItems();
       },
@@ -89,8 +94,9 @@ export class CartComponent implements OnInit {
   }
   getTotalPrice() {
     this.totalPrice = 0;
-    this.cart.forEach((item) => {
-      this.totalPrice += item.book.price * item.quantity;
-    });
+    if (this.cart && this.cart.items && this.cart.items.length > 0)
+      this.cart.items.forEach((item) => {
+        this.totalPrice += item.book.price * item.quantity;
+      });
   }
 }
