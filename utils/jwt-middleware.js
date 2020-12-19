@@ -1,6 +1,6 @@
 const jwtOperations = require("./jwt");
 
-function checkToken(req, res, next) {
+function validateToken(req, res, next) {
   const token = req.headers["auth-token"];
   if (token) {
     const isValidToken = jwtOperations.verifyToken(token);
@@ -13,3 +13,4 @@ function checkToken(req, res, next) {
     res.status(401).send("You are not authorised to access this page");
   }
 }
+module.exports = validateToken;

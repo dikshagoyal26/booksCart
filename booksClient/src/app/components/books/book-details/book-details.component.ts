@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Book } from 'src/app/shared/models/books.model';
+import { Cart } from 'src/app/shared/models/cart.model';
 import { Categories } from 'src/app/shared/models/categories.model';
 import { User } from 'src/app/shared/models/user';
 import { BooksService } from 'src/app/shared/services/books.service';
@@ -52,8 +53,9 @@ export class BookDetailsComponent implements OnInit {
   addToCart() {
     this.cartService
       .addToCart(this.user._id, this.book._id)
-      .subscribe((data: any) => {
-        this.cartService.setCartItemCount(data.items);
+      .subscribe((items: Cart[]) => {
+        if (items) this.cartService.setCartItemCount(items);
+        else this.cartService.setCartItemCount([]);
         this.snackbarService.show('Book Added to Cart!');
       });
   }

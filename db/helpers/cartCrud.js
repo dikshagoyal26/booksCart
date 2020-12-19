@@ -1,31 +1,57 @@
 const CartsModel = require("../models/cart");
 
+const internalCartOperations = {
+  addItemLogic(data, book) {
+    let bookFound = false;
+    for (let i = 0; i < data.items.length; i++) {
+      if (data.items[i].book == book) {
+        bookFound = true;
+        data.items[i].quantity += 1;
+        break;
+      }
+    }
+    if (!bookFound) data.items.push({ book, quantity: 1 });
+    return data;
+  },
+  reduceItemQuantityLogic(data, book) {
+    for (let i = 0; i < data.items.length; i++) {
+      if (data.items[i].book == book) {
+        data.items[i].quantity -= 1;
+        if (data.items[i].quantity == 0) data.items.splice(i, 1);
+        if (data.items.length == 0) {
+          return null;
+        }
+        break;
+      }
+    }
+    return data;
+  },
+  deleteItem(data, book) {
+    for (let i = 0; i < data.items.length; i++) {
+      if (data.items[i].book == book) {
+        data.items.splice(i, 1);
+        break;
+      }
+    }
+    return data;
+  },
+};
+
 const cartOperations = {
   fetchItems(user_id, response) {
     CartsModel.findOne({ user_id })
       .populate("items.book")
       .exec(function (err, data) {
-        console.log({ err, data });
         if (err) response.status(500).send();
-        else response.status(200).send(data);
+        else response.status(200).send(data.items);
       });
   },
   addItem(user_id, book, response) {
-    console.log({ user_id, book });
     CartsModel.findOne({ user_id }, (err, data) => {
-      console.log({ err, data });
       if (err) response.status(500).send();
       else if (data && data.items && data.items.length > 0) {
-        let bookFound = false;
-        for (let i = 0; i < data.items.length; i++) {
-          if (data.items[i].book == book) {
-            bookFound = true;
-            data.items[i].quantity += 1;
-            break;
-          }
-        }
-        if (!bookFound) data.items.push({ book, quantity: 1 });
-        this.updateCart(user_id, data, response);
+        data = internalCartOperations.addItemLogic(data, book);
+        cartOperations.updateCart(user_id, data, response);
       } else {
         this.addEntryToCart(user_id, book, response);
       }
@@ -36,12 +62,7 @@ const cartOperations = {
       if (err) response.status(500).send();
       else {
         if (data && data.items && data.items.length > 0) {
-          for (let i = 0; i < data.items.length; i++) {
-            if (data.items[i].book == book) {
-              data.items.splice(i, 1);
-              break;
-            }
-          }
+          let data = internalCartOperations.deleteItem(data, book);
           this.updateCart(user_id, data, response);
         } else {
           response.status(200).send();
@@ -53,20 +74,11 @@ const cartOperations = {
     CartsModel.findOne({ user_id }, (err, data) => {
       if (err) response.status(500).send();
       else if (data && data.items && data.items.length > 0) {
-        for (let i = 0; i < data.items.length; i++) {
-          if (data.items[i].book == book) {
-            data.items[i].quantity -= 1;
-            if (data.items[i].quantity == 0) data.items.splice(i, 1);
-            if (data.items.length == 0) {
-              this.clearCart(user_id, response);
-              return;
-            }
-            break;
-          }
-        }
-        this.updateCart(user_id, data, response);
+        data = internalCartOperations.reduceItemQuantityLogic(data, book);
+        if (data) this.updateCart(user_id, data, response);
+        else this.clearCart(user_id, response);
       } else {
-        this.addEntryToCart(user_id, book, response);
+        response.status(200).send();
       }
     });
   },
@@ -80,19 +92,17 @@ const cartOperations = {
     let items = [];
     items.push({ book, quantity: 1 });
     CartsModel.create({ user_id, items: items }, (err) => {
-      console.log(err);
       if (err) response.status(500).send();
       else this.fetchItems(user_id, response);
     });
   },
   updateCart(user_id, cart_data, response) {
-    console.log({ csrt: JSON.stringify(cart_data) });
     if (cart_data._id) delete cart_data._id;
     CartsModel.updateOne({ user_id }, { $set: cart_data }, (err) => {
-      console.log(err);
       if (err) response.status(500).send();
       else this.fetchItems(user_id, response);
     });
   },
 };
+
 module.exports = cartOperations;

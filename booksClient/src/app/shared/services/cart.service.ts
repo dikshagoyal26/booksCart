@@ -13,14 +13,11 @@ export class CartService {
   public cart: Cart[] = [];
   private backendUrl: string;
   cartItemcount$: Subject<number> = new Subject<number>();
-  constructor(
-    private snackbarService: SnackbarService,
-    private http: HttpClient
-  ) {
+  constructor(private http: HttpClient) {
     this.backendUrl = Url.backendUrl;
   }
   addToCart(userId: string, bookId: string) {
-    return this.http.post(
+    return this.http.post<Cart[]>(
       this.backendUrl + `cart/add/${userId}/${bookId}`,
       {},
       {
@@ -32,13 +29,14 @@ export class CartService {
   }
   setCartItemCount(items: any[]) {
     let count = 0;
-    for (let i = 0; i < items.length; i++) {
-      count += items[i].quantity;
-    }
+    if (items)
+      for (let i = 0; i < items.length; i++) {
+        count += items[i].quantity;
+      }
     this.cartItemcount$.next(count);
   }
   reduceItemQty(userId: string, bookId: string) {
-    return this.http.put(
+    return this.http.put<Cart[]>(
       this.backendUrl + `cart/reduce-qty/${userId}/${bookId}`,
       {},
       {
@@ -49,7 +47,7 @@ export class CartService {
     );
   }
   deleteBookFromCart(userId, bookId) {
-    return this.http.delete(
+    return this.http.delete<Cart[]>(
       this.backendUrl + `cart/delete-item/${userId}/${bookId}`,
       {
         headers: {
@@ -59,14 +57,14 @@ export class CartService {
     );
   }
   getCartItems(userId: String) {
-    return this.http.get(this.backendUrl + `cart/getItems/${userId}`, {
+    return this.http.get<Cart[]>(this.backendUrl + `cart/getItems/${userId}`, {
       headers: {
         'auth-token': localStorage.getItem('auth-token'),
       },
     });
   }
   clearCart(userId: string) {
-    return this.http.delete(this.backendUrl + `cart/clear/${userId}`, {
+    return this.http.delete<string>(this.backendUrl + `cart/clear/${userId}`, {
       headers: {
         'auth-token': localStorage.getItem('auth-token'),
       },

@@ -19,7 +19,7 @@
       <!-- <li class="nav-item" *ngIf="!this.userDetails || !this.userDetails.isLoggedIn">
         <button class="btn btn-link" routerLink="/register">Register</button>
       </li> -->
-      <li class="nav-item" *ngIf="this.user && this.user.user_type == 2">
+      <li class="nav-item" *ngIf="this.user && this.user.user_type == 'admin'">
         <button class="btn btn-link" routerLink="/admin">
           Admin Panel
         </button>
@@ -28,7 +28,7 @@
         <div class="dropdown show">
           <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user-circle" aria-hidden="true"></i> {{getFirstName()|titlecase}}
+            <i class="fa fa-user-circle" aria-hidden="true"></i> {{user.userName|titlecase}}
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <!-- <a class="dropdown-item">Orders</a>

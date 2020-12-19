@@ -6,7 +6,7 @@
                 <button (click)="clearCart()" class="btn btn-light">Clear Cart</button>
             </div>
             <div class="cart-form">
-                <table class="table capitalise text-center" *ngIf="cart && cart.items&& cart.items.length>0">
+                <table class="table capitalise text-center" *ngIf="cart && cart.length>0">
                     <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of cart.items">
+                        <tr *ngFor="let item of cart">
                             <td><img [src]="item.book.cover" alt="{{item.book.title}}"></td>
                             <td>
                                 <a class="pointer" routerLink="/books/details/{{item.book._id}}">{{ item.book.title }}
@@ -49,7 +49,7 @@
                         </tr>
                     </tfoot>
                 </table>
-                <section *ngIf="!cart || !cart.items|| cart.items.length==0">
+                <section *ngIf="!cart || cart.length==0">
                     <p>Book cart is empty!</p>
                     <button routerLink="/books">Continue Shopping</button>
                 </section>

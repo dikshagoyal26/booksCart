@@ -8,8 +8,8 @@
     <p class="card-text">
       <small>{{ book.price | currency : 'INR' }} </small>
     </p>
-    <button [disabled]="!isLoggedIn()" (click)="addToCart()" class="btn btn-info"><i class="fa fa-cart-plus"
-        aria-hidden="true"></i> Add to Cart
+    <button [disabled]="!this.user || (this.user && !this.user.isLoggedIn)" (click)="addToCart()"
+      class="btn btn-info"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart
     </button>
   </div>
 </div>

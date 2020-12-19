@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/books']);
       },
       (err) => {
+        console.log(err);
         this.loginForm.reset();
         this.loginForm.setErrors({ invalidLogin: true });
       }

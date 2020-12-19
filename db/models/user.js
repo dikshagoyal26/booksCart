@@ -29,6 +29,8 @@ const UsersSchema = new Schema({
   user_type: {
     type: Number,
     required: true,
+    ref: "usertype",
+    default: 1,
   },
 });
 const UsersModel = connection.model("Users", UsersSchema);

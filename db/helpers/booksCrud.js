@@ -4,7 +4,6 @@ const BooksModel = require("../models/books"); //Schema
 const bookOperations = {
   addBook(booksObject, response) {
     let id = getRandomId(7);
-    console.log(id);
     booksObject._id = id + "_book";
     BooksModel.create(booksObject, (err) => {
       if (err) {
@@ -15,19 +14,13 @@ const bookOperations = {
     });
   },
   editBook(bookId, booksObject, response) {
-    console.log({ bookId, booksObject });
-    BooksModel.updateOne(
-      { _id: bookId },
-      { $set: booksObject },
-      (err, data) => {
-        if (err) {
-          console.log(err);
-          response.status(500).send("Book Not Updated Due to Error");
-        } else {
-          response.status(200).send();
-        }
+    BooksModel.updateOne({ _id: bookId }, { $set: booksObject }, (err) => {
+      if (err) {
+        response.status(500).send("Book Not Updated Due to Error");
+      } else {
+        response.status(200).send();
       }
-    );
+    });
   },
   fetchBooks(response) {
     BooksModel.find({})

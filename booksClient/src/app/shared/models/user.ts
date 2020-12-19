@@ -3,6 +3,6 @@ export class User {
   firstName: string;
   lastName: number;
   userName: string;
-  user_type: number;
+  user_type: string;
   isLoggedIn: boolean;
 }

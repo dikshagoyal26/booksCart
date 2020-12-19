@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Cart } from 'src/app/shared/models/cart.model';
 import { User } from 'src/app/shared/models/user';
 import { UserService } from 'src/app/shared/services/user.service';
 import { CartService } from '../../shared/services/cart.service';
@@ -26,16 +27,7 @@ export class NavbarComponent implements OnInit {
     });
     this.userService.userData.subscribe((user: User) => {
       this.user = user;
-      this.cartService.getCartItems(user._id).subscribe(
-        (data: any) => {
-          console.log(data);
-          this.cartService.setCartItemCount(data.items);
-        },
-        (err) => {
-          console.log(err);
-          this.cartService.setCartItemCount([]);
-        }
-      );
+      if (this.user && this.user.isLoggedIn) this.fetchCartItems();
     });
   }
   ngOnDestroy() {
@@ -43,14 +35,17 @@ export class NavbarComponent implements OnInit {
       this.userDataSubscription.unsubscribe();
     }
   }
-  isAdmin() {
-    return this.userService.isAdmin();
-  }
-  isLoggedIn() {
-    return this.userService.isLoggedIn();
-  }
-  getFirstName() {
-    return this.userService.getFirstName();
+  fetchCartItems() {
+    this.cartService.getCartItems(this.user._id).subscribe(
+      (items: Cart[]) => {
+        if (items && items.length > 0) this.cartService.setCartItemCount(items);
+        else this.cartService.setCartItemCount([]);
+      },
+      (err) => {
+        console.log(err);
+        this.cartService.setCartItemCount([]);
+      }
+    );
   }
   logout() {
     this.userService.logout();

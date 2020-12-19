@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { Cart } from 'src/app/shared/models/cart.model';
 import { User } from 'src/app/shared/models/user';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
@@ -29,8 +30,9 @@ export class BookCardComponent implements OnInit, OnDestroy {
   }
   addToCart() {
     this.cartService.addToCart(this.user._id, this.book._id).subscribe(
-      (data: any) => {
-        this.cartService.setCartItemCount(data.items);
+      (items: Cart[]) => {
+        if (items) this.cartService.setCartItemCount(items);
+        else this.cartService.setCartItemCount([]);
         this.snackbarService.show('Book Added to Cart!');
       },
       () => {
@@ -42,8 +44,5 @@ export class BookCardComponent implements OnInit, OnDestroy {
     if (this.userDataSubscription) {
       this.userDataSubscription.unsubscribe();
     }
-  }
-  isLoggedIn() {
-    return this.userService.isLoggedIn();
   }
 }

@@ -22,7 +22,6 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.cart = this.cartService.getCartItems();
     this.userDataSubscription = this.userService.userData
       .asObservable()
       .subscribe((data: User) => {
@@ -38,9 +37,10 @@ export class CartComponent implements OnInit {
   getCartItems() {
     if (!this.user) return;
     this.cartService.getCartItems(this.user._id).subscribe(
-      (data: any) => {
-        this.cart = data;
-        console.log(data);
+      (items: Cart[]) => {
+        this.cart = items;
+        if (items && items.length > 0) this.cartService.setCartItemCount(items);
+        else this.cartService.setCartItemCount([]);
         this.getTotalPrice();
       },
       (err) => {
@@ -69,7 +69,7 @@ export class CartComponent implements OnInit {
     );
   }
   deleteBookFromCart(bookId: string) {
-    if (this.cart.items.length == 1) {
+    if (this.cart.length == 1) {
       this.clearCart();
       return;
     }
@@ -94,8 +94,8 @@ export class CartComponent implements OnInit {
   }
   getTotalPrice() {
     this.totalPrice = 0;
-    if (this.cart && this.cart.items && this.cart.items.length > 0)
-      this.cart.items.forEach((item) => {
+    if (this.cart && this.cart && this.cart.length > 0)
+      this.cart.forEach((item) => {
         this.totalPrice += item.book.price * item.quantity;
       });
   }

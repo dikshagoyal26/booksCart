@@ -12,21 +12,16 @@ export class CustomValidationsService {
   usernameValidator(control: AbstractControl) {
     if (!control.value) return null;
     if (this.timer) clearTimeout(this.timer);
-    // return new Promise((resolve) => {
     this.timer = setTimeout(() => {
       this.userService.validateUsername(control.value).subscribe(
         (result) => {
           if (result) control.setErrors({ notAvailable: false });
-          // resolve(false);
         },
-        (err) => {
+        () => {
           control.setErrors({ notAvailable: true });
-          // return false;
-          // resolve(true);
         }
       );
     }, 500);
-    // });
   }
   passwordMatchValidator(control: AbstractControl) {
     let password: string = control.value.password;
