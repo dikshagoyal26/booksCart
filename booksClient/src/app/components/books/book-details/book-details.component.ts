@@ -7,6 +7,7 @@ import { User } from 'src/app/shared/models/user';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class BookDetailsComponent implements OnInit {
     private booksService: BooksService,
     private cartService: CartService,
     private categoryService: CategoriesService,
-    private userService: UserService
+    private userService: UserService,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +50,11 @@ export class BookDetailsComponent implements OnInit {
     });
   }
   addToCart() {
-    this.cartService.addToCart(this.user._id, this.book._id);
+    this.cartService
+      .addToCart(this.user._id, this.book._id)
+      .subscribe((data: any) => {
+        this.cartService.setCartItemCount(data.items);
+        this.snackbarService.show('Book Added to Cart!');
+      });
   }
 }

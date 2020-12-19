@@ -9,22 +9,22 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="nav navbar-nav navbar-right ml-auto">
-      <li class="nav-item mr-4" *ngIf="isLoggedIn()">
+      <li class="nav-item mr-4" *ngIf="this.user && this.user.isLoggedIn">
         <i class="fa fa-shopping-cart pointer cart mt-2" title="Cart" routerLink="/cart" aria-hidden="true"></i>
         <span class="cart-count"> {{cartItems}} </span>
       </li>
-      <li class="nav-item active" *ngIf="!isLoggedIn()">
+      <li class="nav-item active" *ngIf="!this.user || (this.user && !this.user.isLoggedIn)">
         <button class="btn btn-link" routerLink="/login">Login</button>
       </li>
-      <li class="nav-item" *ngIf="!isLoggedIn()">
+      <!-- <li class="nav-item" *ngIf="!this.userDetails || !this.userDetails.isLoggedIn">
         <button class="btn btn-link" routerLink="/register">Register</button>
-      </li>
-      <li class="nav-item" *ngIf="isAdmin()">
+      </li> -->
+      <li class="nav-item" *ngIf="this.user && this.user.user_type == 2">
         <button class="btn btn-link" routerLink="/admin">
           Admin Panel
         </button>
       </li>
-      <li class="nav-item" *ngIf="isLoggedIn()">
+      <li class="nav-item" *ngIf="this.user && this.user.isLoggedIn">
         <div class="dropdown show">
           <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">

@@ -12,7 +12,7 @@ export class UserService {
   private backendUrl: string = Url.backendUrl;
   public userData: BehaviorSubject<any> = new BehaviorSubject<User>(new User());
   private userDetails: any;
-  constructor(private http: HttpClient, private cartSercice: CartService) {}
+  constructor(private http: HttpClient, private cartService: CartService) {}
   registerUser(user) {
     user.user_type = 1;
     return this.http.post(this.backendUrl + 'user/register', { user });

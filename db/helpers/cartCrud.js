@@ -25,7 +25,7 @@ const cartOperations = {
           }
         }
         if (!bookFound) data.items.push({ book, quantity: 1 });
-        this.updateCart(data._id, data, response);
+        this.updateCart(user_id, data, response);
       } else {
         this.addEntryToCart(user_id, book, response);
       }
@@ -42,7 +42,7 @@ const cartOperations = {
               break;
             }
           }
-          this.updateCart(data._id, data, response);
+          this.updateCart(user_id, data, response);
         } else {
           response.status(200).send();
         }
@@ -64,7 +64,7 @@ const cartOperations = {
             break;
           }
         }
-        this.updateCart(data._id, data, response);
+        this.updateCart(user_id, data, response);
       } else {
         this.addEntryToCart(user_id, book, response);
       }
@@ -82,16 +82,16 @@ const cartOperations = {
     CartsModel.create({ user_id, items: items }, (err) => {
       console.log(err);
       if (err) response.status(500).send();
-      else response.status(200).send();
+      else this.fetchItems(user_id, response);
     });
   },
-  updateCart(_id, cart_data, response) {
+  updateCart(user_id, cart_data, response) {
     console.log({ csrt: JSON.stringify(cart_data) });
     if (cart_data._id) delete cart_data._id;
-    CartsModel.updateOne({ _id }, { $set: cart_data }, (err) => {
+    CartsModel.updateOne({ user_id }, { $set: cart_data }, (err) => {
       console.log(err);
       if (err) response.status(500).send();
-      else response.status(200).send();
+      else this.fetchItems(user_id, response);
     });
   },
 };

@@ -3,6 +3,7 @@ const encryptOperations = require("../../utils/encrypt");
 const jwtOperations = require("../../utils/jwt");
 const userOperations = {
   loginUser(user, response) {
+    user.userName = user.userName.toLowerCase();
     UserModel.find({ userName: user.userName }, (err, data) => {
       console.log({ err, data });
       if (err) {
@@ -28,6 +29,7 @@ const userOperations = {
     });
   },
   registerUser(user, response) {
+    user.userName = user.userName.toLowerCase();
     if (user.password)
       user.password = encryptOperations.encryptPassword(user.password);
     UserModel.create(user, (err) => {

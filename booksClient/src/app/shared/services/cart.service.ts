@@ -30,8 +30,12 @@ export class CartService {
       }
     );
   }
-  setCartItemCount(value: number) {
-    this.cartItemcount$.next(value);
+  setCartItemCount(items: any[]) {
+    let count = 0;
+    for (let i = 0; i < items.length; i++) {
+      count += items[i].quantity;
+    }
+    this.cartItemcount$.next(count);
   }
   reduceItemQty(userId: string, bookId: string) {
     return this.http.put(

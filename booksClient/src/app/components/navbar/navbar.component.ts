@@ -24,6 +24,19 @@ export class NavbarComponent implements OnInit {
     this.cartService.cartItemcount$.subscribe((length: Number) => {
       this.cartItems = length;
     });
+    this.userService.userData.subscribe((user: User) => {
+      this.user = user;
+      this.cartService.getCartItems(user._id).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.cartService.setCartItemCount(data.items);
+        },
+        (err) => {
+          console.log(err);
+          this.cartService.setCartItemCount([]);
+        }
+      );
+    });
   }
   ngOnDestroy() {
     if (this.userDataSubscription) {

@@ -19,13 +19,12 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required],
   });
   public showPassword: boolean = false;
-  public canDisplayError: boolean = false;
-  public errorMessage: string = '';
   ngOnInit(): void {}
   get LoginFormControl() {
     return this.loginForm.controls;
   }
   loginUser() {
+    if (!this.loginForm.valid) return;
     this.userService.loginUser(this.loginForm.value).subscribe(
       (data: { token: string }) => {
         window.localStorage.setItem('auth-token', data.token);
@@ -33,12 +32,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/books']);
       },
       (err) => {
-        this.errorMessage = 'Username or Password is incorrect.';
-        this.loginForm.patchValue({
-          userName: '',
-          password: '',
-        });
-        this.canDisplayError = true;
+        this.loginForm.reset();
+        this.loginForm.setErrors({ invalidLogin: true });
       }
     );
   }

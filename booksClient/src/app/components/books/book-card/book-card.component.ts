@@ -29,7 +29,8 @@ export class BookCardComponent implements OnInit, OnDestroy {
   }
   addToCart() {
     this.cartService.addToCart(this.user._id, this.book._id).subscribe(
-      () => {
+      (data: any) => {
+        this.cartService.setCartItemCount(data.items);
         this.snackbarService.show('Book Added to Cart!');
       },
       () => {
