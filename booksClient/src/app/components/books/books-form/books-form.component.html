@@ -1,7 +1,7 @@
 <div class="container-fluid mt-3">
   <div class="d-flex">
     <div class="upsert">
-      <div class="upsert-header">
+      <div class="upsert-header"> {{bookForm.errors|json}}
         <span class="heading">{{formTitle}} Book</span>
       </div>
       <div class="upsert-form ">
@@ -13,10 +13,6 @@
               <div class="invalid-feedback"
                 *ngIf="bookFormControl.title.touched && bookFormControl.title.errors?.required">
                 Title is required!
-              </div>
-              <div class="invalid-feedback"
-                *ngIf="bookFormControl.title.dirty && bookFormControl.title.errors?.minlength">
-                Minimum required Length is 5.
               </div>
             </div>
             <div class="form-group">

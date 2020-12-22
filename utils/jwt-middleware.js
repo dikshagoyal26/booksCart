@@ -1,9 +1,10 @@
 const jwtOperations = require("./jwt");
 
 function validateToken(req, res, next) {
-  const token = req.headers["auth-token"];
+  const token = req.headers["authorization"];
   if (token) {
-    const isValidToken = jwtOperations.verifyToken(token);
+    let authToken = token.split(" ")[1];
+    const isValidToken = jwtOperations.verifyToken(authToken);
     if (isValidToken) {
       next();
     } else {

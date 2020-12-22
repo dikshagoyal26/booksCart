@@ -39,11 +39,11 @@ export class NavbarComponent implements OnInit {
     this.cartService.getCartItems(this.user._id).subscribe(
       (items: Cart[]) => {
         if (items && items.length > 0) this.cartService.setCartItemCount(items);
-        else this.cartService.setCartItemCount([]);
+        else this.cartService.cartItemcount$.next(0);
       },
       (err) => {
         console.log(err);
-        this.cartService.setCartItemCount([]);
+        this.cartService.cartItemcount$.next(0);
       }
     );
   }

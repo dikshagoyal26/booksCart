@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const validateToken = require("./utils/jwt-middleware");
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -10,6 +11,7 @@ app.use(bodyParser.json());
 app.use("/user", require("./routes/api/user"));
 app.use("/books", require("./routes/api/books"));
 app.use("/category", require("./routes/api/categories"));
+app.use(validateToken);
 app.use("/cart", require("./routes/api/cart"));
 
 app.use((req, res) => {

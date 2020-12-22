@@ -6,14 +6,20 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
-import { nextTick } from 'process';
 import { Observable } from 'rxjs';
+import { User } from '../models/user';
+import { UserService } from '../services/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+export class AdminAuthGuard implements CanActivate {
+  private user: User;
+  constructor(private userService: UserService, private router: Router) {
+    this.userService.userData.subscribe((user: User) => {
+      this.user = user;
+    });
+  }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -22,11 +28,8 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (localStorage.getItem('auth-token')) {
-      //  if(isValidToken){ //check if token has expired or not
+    if (this.user && this.user.user_type == 'admin' && this.user.isLoggedIn)
       return true;
-      //  }
-    }
     this.router.navigate(['/login']);
     return false;
   }

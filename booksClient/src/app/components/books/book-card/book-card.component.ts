@@ -15,11 +15,7 @@ export class BookCardComponent implements OnInit, OnDestroy {
   @Input() book: any;
   public userDataSubscription: Subscription;
   public user: User;
-  constructor(
-    private cartService: CartService,
-    private userService: UserService,
-    private snackbarService: SnackbarService
-  ) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.userDataSubscription = this.userService.userData
@@ -27,18 +23,6 @@ export class BookCardComponent implements OnInit, OnDestroy {
       .subscribe((data: User) => {
         this.user = data;
       });
-  }
-  addToCart() {
-    this.cartService.addToCart(this.user._id, this.book._id).subscribe(
-      (items: Cart[]) => {
-        if (items) this.cartService.setCartItemCount(items);
-        else this.cartService.setCartItemCount([]);
-        this.snackbarService.show('Book Added to Cart!');
-      },
-      () => {
-        this.snackbarService.show('Something Went Wrong!', 'danger');
-      }
-    );
   }
   ngOnDestroy() {
     if (this.userDataSubscription) {

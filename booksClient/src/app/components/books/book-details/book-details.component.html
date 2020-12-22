@@ -38,10 +38,7 @@
                             </li>
 
                         </ul>
-                        <button (click)="addToCart()" class="btn btn-info mt-3"><i class="fa fa-cart-plus"
-                                aria-hidden="true"></i>
-                            Add to Cart
-                        </button>
+                        <app-add-to-cart [bookId]="book._id" [user]="user"></app-add-to-cart>
                     </div>
                 </div>
             </div>

@@ -22,16 +22,17 @@ export class BooksFormComponent implements OnInit {
   ) {}
 
   public bookForm = this.fb.group({
-    title: ['', [Validators.required, Validators.minLength(5)]],
-    author: ['', [Validators.required, Validators.minLength(4)]],
+    title: ['', Validators.required],
+    author: ['', Validators.required],
     category: ['', Validators.required],
-    price: ['', [Validators.required]],
+    price: ['', Validators.required],
     cover: [''],
     currency: ['INR', Validators.required],
   });
   public categories: any = [];
   public formTitle: string = 'Add';
   private id: string = '';
+  private file: any;
   ngOnInit(): void {
     this.categoriesService.categories$.subscribe((categories: Categories[]) => {
       this.categories = categories;
@@ -76,10 +77,12 @@ export class BooksFormComponent implements OnInit {
       this.addBook();
     }
   }
-  addBook() {
+  private addBook() {
+    console.log(this.bookForm);
     this.booksService.addBook(this.bookForm.value).subscribe(
       () => {
         this.snackbarService.show('book added successfully');
+        this.bookForm.reset();
         this.router.navigate(['/books']);
       },
       () => {
@@ -87,7 +90,7 @@ export class BooksFormComponent implements OnInit {
       }
     );
   }
-  updateBook() {
+  private updateBook() {
     this.booksService.updateBook(this.id, this.bookForm.value).subscribe(
       () => {
         this.snackbarService.show('book updated successfully');

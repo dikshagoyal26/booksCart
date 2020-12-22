@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BooksComponent } from './components/books/books.component';
 import { BooksListComponent } from './components/books/books-list/books-list.component';
@@ -20,6 +20,9 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { FilterPipe } from './shared/filter.pipe';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CartComponent } from './components/cart/cart.component';
+import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { HttpInterceptorInterceptor } from './shared/interceptors/http-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,9 +38,10 @@ import { CartComponent } from './components/cart/cart.component';
     SnackbarComponent,
     LoginComponent,
     RegisterComponent,
-    PaginationComponent,
+    // PaginationComponent,
     FilterPipe,
     CartComponent,
+    AddToCartComponent,
   ],
   imports: [
     CommonModule,
@@ -47,8 +51,15 @@ import { CartComponent } from './components/cart/cart.component';
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
+    // PaginationModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

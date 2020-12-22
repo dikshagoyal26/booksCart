@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
       (items: Cart[]) => {
         this.cart = items;
         if (items && items.length > 0) this.cartService.setCartItemCount(items);
-        else this.cartService.setCartItemCount([]);
+        else this.cartService.cartItemcount$.next(0);
         this.getTotalPrice();
       },
       (err) => {

@@ -24,10 +24,8 @@ export class BookDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private booksService: BooksService,
-    private cartService: CartService,
     private categoryService: CategoriesService,
-    private userService: UserService,
-    private snackbarService: SnackbarService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -49,14 +47,5 @@ export class BookDetailsComponent implements OnInit {
     this.booksService.fetchBookById(BookId).subscribe((data: Book) => {
       this.book = data;
     });
-  }
-  addToCart() {
-    this.cartService
-      .addToCart(this.user._id, this.book._id)
-      .subscribe((items: Cart[]) => {
-        if (items) this.cartService.setCartItemCount(items);
-        else this.cartService.setCartItemCount([]);
-        this.snackbarService.show('Book Added to Cart!');
-      });
   }
 }

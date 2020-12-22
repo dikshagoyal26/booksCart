@@ -8,3 +8,9 @@
   width: 14.2rem;
   height: 19rem;
 }
+.card-title {
+  cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

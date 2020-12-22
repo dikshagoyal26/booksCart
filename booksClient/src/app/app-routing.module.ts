@@ -9,12 +9,15 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { AdminAuthGuard } from './shared/guards/admin-auth.guard';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   {
     path: 'admin',
+    canActivate: [AdminAuthGuard],
     children: [
       { path: '', component: AdminBooksComponent, pathMatch: 'full' },
       { path: 'books/add', component: BooksFormComponent },
@@ -35,7 +38,12 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'cart', component: CartComponent, pathMatch: 'full' },
+  {
+    path: 'cart',
+    component: CartComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
   { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

@@ -6,9 +6,10 @@ const booksCrud = require("../../db/helpers/booksCrud");
 booksRouter.post("/add", (req, res) => {
   const json = req.body;
   if (!json) {
-    response.status(400).send("Invalid Data");
+    res.status(400).send("Invalid Data");
     return;
   }
+  console.log(json);
   if (json.cover && json.cover.trim().length == 0) {
     delete json[cover];
   }
@@ -18,10 +19,11 @@ booksRouter.post("/add", (req, res) => {
 booksRouter.post("/update/:bookId", (req, res) => {
   const bookId = req.query.bookId;
   const book = req.body;
-  if (!book || !bookId) {
-    response.status(400).send("Invalid Data");
-    return;
-  }
+  // if (!book || !bookId) {
+  //   res.status(400).send("Invalid Data");
+  //   return;
+  // }
+  console.log({ book, bookId });
   booksCrud.editBook(bookId, book, res);
 });
 
