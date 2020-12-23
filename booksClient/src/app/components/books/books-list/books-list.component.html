@@ -11,11 +11,15 @@
       </ul>
     </div>
     <div class="books col-md-9">
-      <div class="card-deck text-center" *ngIf="books.length>0">
-        <div *ngFor="let book of books; let i = index">
-          <app-book-card [book]="book"> </app-book-card>
+      <div *ngIf="books.length>0">
+        <div class="card-deck text-center">
+          <div *ngFor="let book of returnedArray; let i = index">
+            <app-book-card [book]="book"> </app-book-card>
+          </div>
         </div>
+        <pagination [totalItems]="books.length" (pageChanged)="pageChanged($event)"></pagination>
       </div>
+
       <div *ngIf=" books.length==0" class="card-deck text-center mt-3">
         <h1>Uh-oh! No books found.</h1>
       </div>

@@ -43,7 +43,7 @@ export class BookDetailsComponent implements OnInit {
         this.user = data;
       });
   }
-  fetchDetails(BookId) {
+  private fetchDetails(BookId) {
     this.booksService.fetchBookById(BookId).subscribe((data: Book) => {
       this.book = data;
     });

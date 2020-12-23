@@ -23,6 +23,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { HttpInterceptorInterceptor } from './shared/interceptors/http-interceptor.interceptor';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ErrorInterceptorInterceptor } from './shared/interceptors/error-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -51,12 +53,18 @@ import { HttpInterceptorInterceptor } from './shared/interceptors/http-intercept
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    // PaginationModule.forRoot(),
+    PaginationModule.forRoot(),
+    TooltipModule.forRoot(),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorInterceptor,
       multi: true,
     },
   ],

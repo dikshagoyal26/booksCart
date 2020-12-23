@@ -5,6 +5,7 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Categories } from 'src/app/shared/models/categories.model';
 import { Book } from 'src/app/shared/models/books.model';
 import { ActivatedRoute } from '@angular/router';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-books-list',
@@ -12,9 +13,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./books-list.component.scss'],
 })
 export class BooksListComponent implements OnInit {
-  books: any = [];
+  books: Book[] = [];
   categories: any = [];
   selectedCategory: string;
+  returnedArray: Book[];
   constructor(
     private booksService: BooksService,
     private categoriesService: CategoriesService,
@@ -44,6 +46,7 @@ export class BooksListComponent implements OnInit {
         this.booksService.fetchBooksByCategoryId(category[0]._id).subscribe(
           (books: Book[]) => {
             this.books = books;
+            this.returnedArray = this.books.slice(0, 10);
           },
           (err) => {
             this.snackBarService.show(err, 'danger');
@@ -63,10 +66,16 @@ export class BooksListComponent implements OnInit {
     this.booksService.fetchBooks().subscribe(
       (books: Book[]) => {
         this.books = books;
+        this.returnedArray = this.books.slice(0, 10);
       },
       (err) => {
         this.snackBarService.show(err, 'danger');
       }
     );
+  }
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.returnedArray = this.books.slice(startItem, endItem);
   }
 }

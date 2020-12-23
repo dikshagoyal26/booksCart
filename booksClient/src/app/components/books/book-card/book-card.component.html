@@ -1,7 +1,7 @@
 <div class="card">
   <div class="book-img">
     <img class="book-img-top pointer" *ngIf="book.cover" src="{{ book.cover }}" alt="Book image cap"
-      routerLink="/books/details/{{ book._id }}" />
+      routerLink="/books/details/{{ book._id }}" [tooltip]="book.title" placement="bottom" />
   </div>
   <div class="card-body">
     <h5 class="card-title pointer capitalise" routerLink="/books/details/{{ book._id }}">{{ book.title }}</h5>
