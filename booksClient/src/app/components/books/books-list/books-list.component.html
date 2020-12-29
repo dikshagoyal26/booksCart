@@ -1,28 +1,12 @@
-<section class="container-fluid mt-3">
-  <div class="row">
-    <div class="categories col-md-3">
-      <ul class="category-section list-group list-group-flush">
-        <li class="list-group-item" routerLink="/books" [ngClass]="{'active':selectedCategory=='all'}">ALL</li>
-        <li *ngFor="let category of categories" class="list-group-item" routerLink="/books"
-          [ngClass]="{'active':category.category_type==selectedCategory}"
-          [queryParams]="{category:category.category_type}">
-          {{category.category_type}}
-        </li>
-      </ul>
-    </div>
-    <div class="books col-md-9">
-      <div *ngIf="books.length>0">
-        <div class="card-deck text-center">
-          <div *ngFor="let book of returnedArray; let i = index">
-            <app-book-card [book]="book"> </app-book-card>
-          </div>
-        </div>
-        <pagination [totalItems]="books.length" (pageChanged)="pageChanged($event)"></pagination>
-      </div>
-
-      <div *ngIf=" books.length==0" class="card-deck text-center mt-3">
-        <h1>Uh-oh! No books found.</h1>
-      </div>
+<div *ngIf="books && books.length>0">
+  <div class="card-deck text-center">
+    <div *ngFor="let book of returnedArray; let i = index">
+      <app-book-card [book]="book"> </app-book-card>
     </div>
   </div>
-</section>
+  <pagination [totalItems]="books.length" (pageChanged)="pageChanged($event)"></pagination>
+</div>
+
+<div *ngIf="!books|| books.length==0" class="card-deck text-center mt-3">
+  <h1>Uh-oh! No books found.</h1>
+</div>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Url } from '../models/backendUrl.model';
 import { Cart } from '../models/cart.model';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +12,13 @@ export class CartService {
   public cart: Cart[] = [];
   private backendUrl: string;
   cartItemcount$: Subject<number> = new Subject<number>();
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private snackbarService: SnackbarService
+  ) {
     this.backendUrl = Url.backendUrl;
   }
-  addToCart(userId: string, bookId: string) {
+  private addToCart(userId: string, bookId: string) {
     return this.http.post<Cart[]>(
       this.backendUrl + `cart/add/${userId}/${bookId}`,
       {}
@@ -41,5 +45,17 @@ export class CartService {
   }
   clearCart(userId: string) {
     return this.http.delete<string>(this.backendUrl + `cart/clear/${userId}`);
+  }
+  addItemToCart(userId: string, bookId: string) {
+    this.addToCart(userId, bookId).subscribe(
+      (items: Cart[]) => {
+        if (items) this.setCartItemCount(items);
+        else this.cartItemcount$.next(0);
+        this.snackbarService.show('Book Added to Cart!');
+      },
+      () => {
+        this.snackbarService.show('Something Went Wrong!', 'danger');
+      }
+    );
   }
 }

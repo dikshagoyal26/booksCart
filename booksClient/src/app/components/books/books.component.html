@@ -1,1 +1,10 @@
-<p>books works!</p>
+<section class="container-fluid mt-3">
+    <div class="row">
+        <div class="categories col-md-3">
+            <app-book-filters [selectedCategory]="selectedCategory"></app-book-filters>
+        </div>
+        <div class="books col-md-9">
+            <app-books-list [selectedCategory]="selectedCategory"></app-books-list>
+        </div>
+    </div>
+</section>

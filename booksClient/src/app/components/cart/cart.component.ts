@@ -59,14 +59,7 @@ export class CartComponent implements OnInit {
     );
   }
   addOneItem(bookId: string) {
-    this.cartService.addToCart(this.user._id, bookId).subscribe(
-      () => {
-        this.getCartItems();
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.cartService.addItemToCart(this.user._id, bookId);
   }
   deleteBookFromCart(bookId: string) {
     if (this.cart.length == 1) {

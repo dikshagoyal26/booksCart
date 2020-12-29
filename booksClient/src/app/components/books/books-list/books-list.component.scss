@@ -1,26 +1,9 @@
-// section {
-//   display: flex;
-//   justify-content: center;
-//   max-width: 380px;
-//   flex-direction: column;
-// }
 .books {
   display: flex;
   flex-direction: column;
-  // align-items: center;
 }
 .addbook {
   display: flex;
   justify-content: right;
   float: right;
-}
-
-.list-group-item:hover {
-  cursor: pointer;
-  background: #495057b3;
-  color: white;
-}
-.active {
-  background: #212529;
-  color: white;
 }

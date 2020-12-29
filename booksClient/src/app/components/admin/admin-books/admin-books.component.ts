@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Book } from 'src/app/shared/models/books.model';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
-import { Categories } from 'src/app/shared/models/categories.model';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
@@ -18,20 +17,15 @@ export class AdminBooksComponent implements OnInit {
   public modalRef: BsModalRef;
   public selectedBook: Book;
 
-  private categories: Categories[] = [];
   constructor(
     private booksService: BooksService,
     private router: Router,
-    private categoryService: CategoriesService,
     private snackbarService: SnackbarService,
     private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
     this.fetchBooks();
-    this.categoryService.categories$.subscribe((categories: Categories[]) => {
-      this.categories = categories;
-    });
   }
   fetchBooks() {
     this.booksService.fetchBooks().subscribe((books: Book[]) => {

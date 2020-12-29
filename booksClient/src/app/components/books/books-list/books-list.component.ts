@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BooksService } from 'src/app/shared/services/books.service';
-import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Categories } from 'src/app/shared/models/categories.model';
 import { Book } from 'src/app/shared/models/books.model';
-import { ActivatedRoute } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
@@ -13,53 +11,33 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
   styleUrls: ['./books-list.component.scss'],
 })
 export class BooksListComponent implements OnInit {
-  books: Book[] = [];
-  categories: any = [];
-  selectedCategory: string;
+  @Input() selectedCategory: Categories;
+  books: Book[];
+
   returnedArray: Book[];
   constructor(
     private booksService: BooksService,
-    private categoriesService: CategoriesService,
-    private snackBarService: SnackbarService,
-    private route: ActivatedRoute
+    private snackBarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      if (params.category) {
-        this.selectedCategory = params.category;
-        this.fetchBooksByCategories(this.selectedCategory);
-      } else {
-        this.selectedCategory = 'all';
-        this.fetchBooks();
-      }
-    });
-    this.categoriesService.categories$.subscribe((categories: Categories[]) => {
-      this.categories = categories;
-    });
-  }
-  fetchBooksByCategories(categoryName: string = null) {
-    if (!categoryName) this.fetchBooks();
-    else {
-      let category: Categories[] = this.getCategoryFromName(categoryName);
-      if (category && category.length > 0) {
-        this.booksService.fetchBooksByCategoryId(category[0]._id).subscribe(
-          (books: Book[]) => {
-            this.books = books;
-            this.returnedArray = this.books.slice(0, 10);
-          },
-          (err) => {
-            this.snackBarService.show(err, 'danger');
-          }
-        );
-      } else {
-        this.books = [];
-      }
+    if (this.books) this.returnedArray = this.books.slice(0, 10);
+    if (!this.selectedCategory) {
+      this.fetchBooks();
+    } else {
+      this.fetchBooksByCategories(this.selectedCategory._id);
     }
   }
-  getCategoryFromName(categoryName: string) {
-    return this.categories.filter(
-      (category: Categories) => category.category_type == categoryName
+  fetchBooksByCategories(categoryId: string) {
+    this.booksService.fetchBooksByCategoryId(categoryId).subscribe(
+      (books: Book[]) => {
+        this.books = books;
+        this.returnedArray = this.books.slice(0, 10);
+      },
+      (err) => {
+        this.books = [];
+        this.snackBarService.show(err, 'danger');
+      }
     );
   }
   fetchBooks() {

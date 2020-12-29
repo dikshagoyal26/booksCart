@@ -22,7 +22,7 @@ export class SnackbarComponent implements OnInit {
         if (this.timer) clearTimeout(this.timer);
         this.timer = setTimeout(() => {
           this.showSnackbar = false;
-        }, 1000);
+        }, 2500);
       }
     });
   }
