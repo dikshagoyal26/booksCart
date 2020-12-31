@@ -25,6 +25,8 @@ import { HttpInterceptorInterceptor } from './shared/interceptors/http-intercept
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ErrorInterceptorInterceptor } from './shared/interceptors/error-interceptor.interceptor';
 import { BookFiltersComponent } from './components/books/book-filters/book-filters.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { BookFiltersComponent } from './components/books/book-filters/book-filte
     CartComponent,
     AddToCartComponent,
     BookFiltersComponent,
+    OrdersComponent,
+    CheckoutComponent,
   ],
   imports: [
     CommonModule,

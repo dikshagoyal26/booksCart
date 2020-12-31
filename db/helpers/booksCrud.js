@@ -1,4 +1,4 @@
-const getRandomId = require("../../utils/get-random");
+const { getRandomId } = require("../../utils/get-random");
 const BooksModel = require("../models/books"); //Schema
 
 const bookOperations = {

@@ -11,6 +11,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AdminAuthGuard } from './shared/guards/admin-auth.guard';
 import { BooksComponent } from './components/books/books.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
@@ -41,6 +43,18 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'myorders',
+    component: OrdersComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard],
   },
