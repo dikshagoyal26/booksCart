@@ -44,6 +44,7 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
   },
+  { path: 'search', component: BooksComponent, pathMatch: 'full' },
   { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
