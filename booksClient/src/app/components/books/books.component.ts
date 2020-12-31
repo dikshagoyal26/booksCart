@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Categories } from 'src/app/shared/models/categories.model';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
@@ -8,10 +8,10 @@ import { CategoriesService } from 'src/app/shared/services/categories.service';
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.scss'],
 })
-export class BooksComponent implements OnInit {
+export class BooksComponent implements OnInit, OnChanges {
   public selectedCategory: Categories;
   private categories: Categories[];
-
+  private param: string = null;
   constructor(
     private route: ActivatedRoute,
     private categoriesService: CategoriesService
@@ -20,18 +20,27 @@ export class BooksComponent implements OnInit {
   ngOnInit(): void {
     this.categoriesService.categories$.subscribe((categories: Categories[]) => {
       this.categories = categories;
+      this.getSelectedCategory();
     });
     this.route.queryParams.subscribe((params) => {
       if (params.category) {
-        let category = this.getCategoryFromName(params.category);
-        this.selectedCategory =
-          !!category && category.length > 0 ? category[0] : null;
+        this.param = params.category;
+        if (this.categories && this.categories.length > 0)
+          this.getSelectedCategory();
       } else {
         this.selectedCategory = null;
       }
     });
   }
-  getCategoryFromName(categoryName: string) {
+  ngOnChanges() {
+    this.getSelectedCategory();
+  }
+  private getSelectedCategory() {
+    let category = this.getCategoryFromName(this.param);
+    this.selectedCategory =
+      !!category && category.length > 0 ? category[0] : null;
+  }
+  private getCategoryFromName(categoryName: string) {
     return this.categories.filter(
       (category: Categories) => category.category_type == categoryName
     );

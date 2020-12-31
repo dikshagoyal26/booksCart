@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Categories } from 'src/app/shared/models/categories.model';
@@ -10,7 +10,7 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
   templateUrl: './books-list.component.html',
   styleUrls: ['./books-list.component.scss'],
 })
-export class BooksListComponent implements OnInit {
+export class BooksListComponent implements OnInit, OnChanges {
   @Input() selectedCategory: Categories;
   books: Book[];
 
@@ -22,13 +22,24 @@ export class BooksListComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.books) this.returnedArray = this.books.slice(0, 10);
+    this.fetchBooks();
+  }
+  ngOnChanges() {
+    this.fetchBooks();
+  }
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.returnedArray = this.books.slice(startItem, endItem);
+  }
+  private fetchBooks() {
     if (!this.selectedCategory) {
-      this.fetchBooks();
+      this.fetchAllBooks();
     } else {
       this.fetchBooksByCategories(this.selectedCategory._id);
     }
   }
-  fetchBooksByCategories(categoryId: string) {
+  private fetchBooksByCategories(categoryId: string) {
     this.booksService.fetchBooksByCategoryId(categoryId).subscribe(
       (books: Book[]) => {
         this.books = books;
@@ -40,7 +51,7 @@ export class BooksListComponent implements OnInit {
       }
     );
   }
-  fetchBooks() {
+  private fetchAllBooks() {
     this.booksService.fetchBooks().subscribe(
       (books: Book[]) => {
         this.books = books;
@@ -50,10 +61,5 @@ export class BooksListComponent implements OnInit {
         this.snackBarService.show(err, 'danger');
       }
     );
-  }
-  pageChanged(event: PageChangedEvent): void {
-    const startItem = (event.page - 1) * event.itemsPerPage;
-    const endItem = event.page * event.itemsPerPage;
-    this.returnedArray = this.books.slice(startItem, endItem);
   }
 }

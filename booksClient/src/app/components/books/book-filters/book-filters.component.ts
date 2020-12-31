@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Categories } from 'src/app/shared/models/categories.model';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 
