@@ -62,8 +62,8 @@ const cartOperations = {
       if (err) response.status(500).send();
       else {
         if (data && data.items && data.items.length > 0) {
-          let data = internalCartOperations.deleteItem(data, book);
-          this.updateCart(user_id, data, response);
+          let cart = internalCartOperations.deleteItem(data, book);
+          this.updateCart(user_id, cart, response);
         } else {
           response.status(200).send();
         }
