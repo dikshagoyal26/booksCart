@@ -43,7 +43,10 @@ const cartOperations = {
       .populate("items.book")
       .exec(function (err, data) {
         if (err) response.status(500).send();
-        else response.status(200).send(data.items);
+        else {
+          if (data && data.items) response.status(200).send(data.items);
+          else response.status(200).send();
+        }
       });
   },
   addItem(user_id, book, response) {

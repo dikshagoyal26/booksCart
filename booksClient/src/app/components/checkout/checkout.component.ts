@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Cart } from 'src/app/shared/models/cart.model';
 import { Order } from 'src/app/shared/models/order.model';
 import { User } from 'src/app/shared/models/user';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { OrdersService } from 'src/app/shared/services/orders.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -17,7 +19,9 @@ export class CheckoutComponent implements OnInit {
     private userService: UserService,
     private cartService: CartService,
     private orderService: OrdersService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackbarService: SnackbarService,
+    private router: Router
   ) {}
   private user: User;
   public cart: Cart[];
@@ -42,16 +46,28 @@ export class CheckoutComponent implements OnInit {
   checkout() {
     console.log('checkout');
     if (this.addressForm.invalid) return;
+    let totalPrice = 0;
+    if (this.cart && this.cart.length > 0)
+      totalPrice = this.cartService.getTotalPrice(this.cart);
     let order: Order = {
       user_id: this.user._id,
       items: this.cart,
-      total: 100,
+      total: totalPrice,
       address: this.addressForm.value,
     };
     console.log(order);
     this.placeOrder(order);
   }
   private placeOrder(order: Order) {
-    this.orderService.createOrder(this.user._id, order).subscribe(() => {});
+    this.orderService.createOrder(this.user._id, order).subscribe(
+      () => {
+        this.cartService.cartItemcount$.next(0);
+        this.snackbarService.show('Order Placed SuccessFully!!');
+        this.router.navigate(['/myorders']);
+      },
+      () => {
+        this.snackbarService.show('Oops! Something went wrong..', 'danger');
+      }
+    );
   }
 }
