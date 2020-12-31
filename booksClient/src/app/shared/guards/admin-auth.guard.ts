@@ -30,7 +30,9 @@ export class AdminAuthGuard implements CanActivate {
     | UrlTree {
     if (this.user && this.user.user_type == 'admin' && this.user.isLoggedIn)
       return true;
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'], {
+      queryParams: { returnUrl: route.routeConfig.path },
+    });
     return false;
   }
 }
