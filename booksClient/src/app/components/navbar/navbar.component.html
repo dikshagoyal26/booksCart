@@ -11,15 +11,16 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="nav navbar-nav navbar-right ml-auto">
       <li class="nav-item mr-4" *ngIf="this.user && this.user.isLoggedIn">
+        <i class="fa fa-heart pointer cart mt-2" aria-hidden="true" title="Wishlisted Items" routerLink="/wishlist"></i>
+        <span class="cart-count"> {{wishlistItems}} </span>
+      </li>
+      <li class="nav-item mr-4" *ngIf="this.user && this.user.isLoggedIn">
         <i class="fa fa-shopping-cart pointer cart mt-2" title="Cart" routerLink="/cart" aria-hidden="true"></i>
         <span class="cart-count"> {{cartItems}} </span>
       </li>
       <li class="nav-item active" *ngIf="!this.user || (this.user && !this.user.isLoggedIn)">
         <button class="btn btn-link" routerLink="/login">Login</button>
       </li>
-      <!-- <li class="nav-item" *ngIf="!this.userDetails || !this.userDetails.isLoggedIn">
-        <button class="btn btn-link" routerLink="/register">Register</button>
-      </li> -->
       <li class="nav-item" *ngIf="this.user && this.user.user_type == 'admin'">
         <button class="btn btn-link" routerLink="/admin">
           Admin Panel
@@ -32,9 +33,9 @@
             <i class="fa fa-user-circle" aria-hidden="true"></i> {{user.userName|titlecase}}
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <!-- <a class="dropdown-item">Orders</a>
-            <a class="dropdown-item">Change Password</a>
-            <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item" routerLink="/myorders">Orders</a>
+            <!-- <a class="dropdown-item">Change Password</a> -->
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="logout()">Logout</a>
           </div>
         </div>
@@ -48,3 +49,4 @@
     </ul>
   </div>
 </nav>
+<!-- <i class="fa fa-heart-o" aria-hidden="true"></i> -->

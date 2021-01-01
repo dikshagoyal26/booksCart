@@ -57,7 +57,7 @@ export class BooksFormComponent implements OnInit {
       this.bookForm.patchValue({
         title: book.title,
         author: book.author,
-        category: book.category,
+        category: book.category._id,
         price: book.price,
         cover: book.cover,
       });

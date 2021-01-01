@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -12,14 +12,20 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
   public loginForm = this.fb.group({
     userName: ['', Validators.required],
     password: ['', Validators.required],
   });
   public showPassword: boolean = false;
-  ngOnInit(): void {}
+  private returnUrl: string = null;
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params: any) => {
+      if (params && params.returnUrl) this.returnUrl = params.returnUrl;
+    });
+  }
   get LoginFormControl() {
     return this.loginForm.controls;
   }
@@ -29,7 +35,8 @@ export class LoginComponent implements OnInit {
       (data: { token: string }) => {
         window.localStorage.setItem('auth-token', data.token);
         this.userService.setUserDetails();
-        this.router.navigate(['/books']);
+        if (this.returnUrl) this.router.navigate([this.returnUrl]);
+        else this.router.navigate(['/books']);
       },
       (err) => {
         console.log(err);

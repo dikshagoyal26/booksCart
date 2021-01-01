@@ -26,6 +26,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ErrorInterceptorInterceptor } from './shared/interceptors/error-interceptor.interceptor';
 import { BookFiltersComponent } from './components/books/book-filters/book-filters.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     AddToCartComponent,
     BookFiltersComponent,
     SearchBarComponent,
+    OrdersComponent,
+    CheckoutComponent,
+    WishlistComponent,
   ],
   imports: [
     CommonModule,

@@ -28,8 +28,8 @@ userRouter.get("/validate-username", (req, res) => {
     return;
   }
   let username = req.query.username;
-  if (!userName) {
-    response.status(400).send("Invalid Data");
+  if (!username) {
+    res.status(400).send("Invalid Data");
     return;
   }
   userOperations.validateUsername(username, res);

@@ -11,6 +11,9 @@ import { CartComponent } from './components/cart/cart.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AdminAuthGuard } from './shared/guards/admin-auth.guard';
 import { BooksComponent } from './components/books/books.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
@@ -45,6 +48,24 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'search', component: BooksComponent, pathMatch: 'full' },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'myorders',
+    component: OrdersComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'wishlist',
+    component: WishlistComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
   { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

@@ -6,7 +6,6 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
-import { nextTick } from 'process';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -27,7 +26,9 @@ export class AuthGuard implements CanActivate {
       return true;
       //  }
     }
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'], {
+      queryParams: { returnUrl: state.url },
+    });
     return false;
   }
 }

@@ -1,0 +1,54 @@
+<div class="container">
+    <h1>Checkout</h1>
+    <div>
+        <h2>Shipping Address</h2>
+        <form [formGroup]="addressForm" (ngSubmit)="checkout()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" placeholder="Enter Name" formControlName="name" />
+                <div class="invalid-feedback"
+                    *ngIf="addressFormControl.name.touched && addressFormControl.name.errors?.required">
+                    Name is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="line_1">Address Line 1</label>
+                <input type="text" class="form-control" placeholder="Enter Address Line 1" formControlName="line_1" />
+                <div class="invalid-feedback"
+                    *ngIf="addressFormControl.line_1.touched && addressFormControl.line_1.errors?.required">
+                    Address Line 1 is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="line_2">Address Line 2</label>
+                <input type="text" class="form-control" placeholder="Enter Address Line 2" formControlName="line_2" />
+                <div class="invalid-feedback"
+                    *ngIf="addressFormControl.line_2.touched && addressFormControl.line_2.errors?.required">
+                    Address Line 2 is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pincode">Pincode</label>
+                <input type="number" class="form-control" placeholder="Enter Pincode" formControlName="pincode" />
+                <div class="invalid-feedback"
+                    *ngIf="addressFormControl.pincode.touched && addressFormControl.pincode.errors?.required">
+                    Pincode is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" class="form-control" placeholder="Enter State" formControlName="state" />
+                <div class="invalid-feedback"
+                    *ngIf="addressFormControl.state.touched && addressFormControl.state.errors?.required">
+                    State is required!
+                </div>
+            </div>
+            <button type="button" class="btn btn-danger" routerLink="/cart">Cancel</button>
+            <button type="submit">Checkout</button>
+        </form>
+    </div>
+    <div>
+        <h2>Order Summary</h2>
+        {{cart|json}}
+    </div>
+</div>

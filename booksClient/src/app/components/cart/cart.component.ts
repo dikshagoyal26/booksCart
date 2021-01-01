@@ -88,8 +88,6 @@ export class CartComponent implements OnInit {
   getTotalPrice() {
     this.totalPrice = 0;
     if (this.cart && this.cart && this.cart.length > 0)
-      this.cart.forEach((item) => {
-        this.totalPrice += item.book.price * item.quantity;
-      });
+      this.totalPrice = this.cartService.getTotalPrice(this.cart);
   }
 }
