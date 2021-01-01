@@ -13,6 +13,7 @@ import { AdminAuthGuard } from './shared/guards/admin-auth.guard';
 import { BooksComponent } from './components/books/books.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
@@ -55,6 +56,12 @@ const routes: Routes = [
   {
     path: 'myorders',
     component: OrdersComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'wishlist',
+    component: WishlistComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard],
   },

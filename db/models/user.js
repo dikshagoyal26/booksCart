@@ -1,6 +1,11 @@
 var connection = require("../connection");
 const Schema = connection.Schema;
 const UsersSchema = new Schema({
+  _id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   firstName: {
     type: String,
     required: true,

@@ -2,6 +2,8 @@ const UserModel = require("../models/user");
 const encryptOperations = require("../../utils/encrypt");
 const jwtOperations = require("../../utils/jwt");
 const UserTypesModel = require("../models/user_type");
+const wishlistOperations = require("./wishlistCrud");
+const { getRandomId } = require("../../utils/get-random");
 const userOperations = {
   loginUser(user, response) {
     user.userName = user.userName.toLowerCase();
@@ -31,13 +33,14 @@ const userOperations = {
   },
   registerUser(user, response) {
     user.userName = user.userName.toLowerCase();
+    user._id = getRandomId(10);
     if (user.password)
       user.password = encryptOperations.encryptPassword(user.password);
     UserModel.create(user, (err) => {
       if (err) {
         response.status(500).send("User Not Added Due to Error");
       } else {
-        response.status(200).send();
+        wishlistOperations.createWishlist(user._id, response);
       }
     });
   },

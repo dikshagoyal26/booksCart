@@ -14,6 +14,7 @@ app.use("/category", require("./routes/api/categories"));
 app.use(validateToken);
 app.use("/cart", require("./routes/api/cart"));
 app.use("/orders", require("./routes/api/orders"));
+app.use("/wishlist", require("./routes/api/wishlist"));
 
 app.use((req, res) => {
   res.send("OOPs!!! you have typed something wrong");

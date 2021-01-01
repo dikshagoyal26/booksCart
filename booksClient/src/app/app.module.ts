@@ -27,6 +27,7 @@ import { ErrorInterceptorInterceptor } from './shared/interceptors/error-interce
 import { BookFiltersComponent } from './components/books/book-filters/book-filters.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     BookFiltersComponent,
     OrdersComponent,
     CheckoutComponent,
+    WishlistComponent,
   ],
   imports: [
     CommonModule,
