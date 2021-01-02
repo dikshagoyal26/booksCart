@@ -5,6 +5,6 @@ export class Book {
   title: string;
   author: string;
   category: Categories;
-  price: number;
+  price: string;
   cover?: string;
 }

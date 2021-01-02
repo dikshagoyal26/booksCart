@@ -26,11 +26,10 @@ const BooksSchema = new Schema({
   currency: {
     type: String,
     required: true,
+    default: "INR",
   },
   cover: {
     type: String,
-    default: "https://www.forewordreviews.com/books/covers/not-for-profit.jpg",
-    required: true,
   },
   created_at: {
     type: Date,

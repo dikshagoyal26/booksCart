@@ -1,30 +1,41 @@
 const express = require("express");
 const booksRouter = express.Router();
-
 const booksCrud = require("../../db/helpers/booksCrud");
-
+const uploadCoverImage = require("../../utils/uploadCover");
 booksRouter.post("/add", (req, res) => {
   const json = req.body;
+  console.log(json);
   if (!json) {
     res.status(400).send("Invalid Data");
     return;
   }
-  console.log(json);
-  if (json.cover && json.cover.trim().length == 0) {
-    delete json[cover];
-  }
-  booksCrud.addBook(json, res);
+  uploadCoverImage(req, res, (err) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Server Error!");
+    } else {
+      if (req.file) json.cover = req.file.filename;
+      booksCrud.addBook(json, res);
+    }
+  });
 });
 
 booksRouter.post("/update/:bookId", (req, res) => {
   const bookId = req.query.bookId;
   const book = req.body;
-  // if (!book || !bookId) {
-  //   res.status(400).send("Invalid Data");
-  //   return;
-  // }
-  console.log({ book, bookId });
-  booksCrud.editBook(bookId, book, res);
+  if (!book || !bookId) {
+    res.status(400).send("Invalid Data");
+    return;
+  }
+  uploadCoverImage(req, res, (err) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Server Error!");
+    } else {
+      if (req.file) book.cover = req.file.filename;
+      booksCrud.editBook(bookId, book, res);
+    }
+  });
 });
 
 booksRouter.get("/fetch", (req, res) => {

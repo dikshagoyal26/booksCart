@@ -61,7 +61,7 @@ export class CartService {
   getTotalPrice(cart: Cart[]) {
     let totalPrice = 0;
     cart.forEach((item) => {
-      totalPrice += item.book.price * item.quantity;
+      totalPrice += +item.book.price * item.quantity;
     });
     return totalPrice;
   }
