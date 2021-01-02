@@ -30,6 +30,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { PasswordDirective } from './shared/directive/password.directive';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,8 @@ import { PasswordDirective } from './shared/directive/password.directive';
     BooksListComponent,
     BookCardComponent,
     NavbarComponent,
-    BooksFormComponent,
-    AdminBooksComponent,
+    // BooksFormComponent,
+    // AdminBooksComponent,
     BookDetailsComponent,
     PageNotFoundComponent,
     SnackbarComponent,
@@ -65,6 +66,7 @@ import { PasswordDirective } from './shared/directive/password.directive';
     ModalModule.forRoot(),
     PaginationModule.forRoot(),
     TooltipModule.forRoot(),
+    // AdminModule,
   ],
   providers: [
     {
