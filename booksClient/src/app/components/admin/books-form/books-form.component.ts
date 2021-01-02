@@ -51,7 +51,12 @@ export class BooksFormComponent implements OnInit {
   get bookFormControl() {
     return this.bookForm.controls;
   }
-
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.bookForm.patchValue({ cover: file });
+    }
+  }
   initEditBook(bookId) {
     this.booksService.fetchBookById(bookId).subscribe((book: Book) => {
       this.bookForm.patchValue({
@@ -78,8 +83,9 @@ export class BooksFormComponent implements OnInit {
     }
   }
   private addBook() {
-    console.log(this.bookForm);
-    this.booksService.addBook(this.bookForm.value).subscribe(
+    let bookObj = this.getFormData();
+    console.log(bookObj);
+    this.booksService.addBook(bookObj).subscribe(
       () => {
         this.snackbarService.show('book added successfully');
         this.bookForm.reset();
@@ -91,7 +97,8 @@ export class BooksFormComponent implements OnInit {
     );
   }
   private updateBook() {
-    this.booksService.updateBook(this.id, this.bookForm.value).subscribe(
+    let bookObj = this.getFormData();
+    this.booksService.updateBook(this.id, bookObj).subscribe(
       () => {
         this.snackbarService.show('book updated successfully');
         this.router.navigate(['/books']);
@@ -101,5 +108,14 @@ export class BooksFormComponent implements OnInit {
         this.snackbarService.show('issue in book update', 'danger');
       }
     );
+  }
+  private getFormData() {
+    var formdata = new FormData();
+    formdata.append('title', this.bookForm.controls.title.value);
+    formdata.append('author', this.bookForm.controls.author.value);
+    formdata.append('category', this.bookForm.controls.category.value);
+    formdata.append('price', this.bookForm.controls.price.value);
+    formdata.append('cover', this.bookForm.controls.cover.value);
+    return formdata;
   }
 }

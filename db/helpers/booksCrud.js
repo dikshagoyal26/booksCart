@@ -5,8 +5,10 @@ const bookOperations = {
   addBook(booksObject, response) {
     let id = getRandomId(7);
     booksObject._id = id + "_book";
+    console.log(booksObject);
     BooksModel.create(booksObject, (err) => {
       if (err) {
+        console.log(err);
         response.status(500).send("Book Not Added Due to Error");
       } else {
         response.status(200).send();
@@ -16,6 +18,7 @@ const bookOperations = {
   editBook(bookId, booksObject, response) {
     BooksModel.updateOne({ _id: bookId }, { $set: booksObject }, (err) => {
       if (err) {
+        console.log(err);
         response.status(500).send("Book Not Updated Due to Error");
       } else {
         response.status(200).send();

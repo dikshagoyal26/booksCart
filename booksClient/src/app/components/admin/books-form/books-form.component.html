@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
               <label class="capitalise" for="cover">Image</label>
-              <input type="text" class="form-control" formControlName="cover" placeholder="Enter Image URL" />
+              <input type="file" class="form-control" (change)="onFileSelect($event)" placeholder="Enter Image URL" />
             </div>
             <div class="flex-end">
               <button class="btn btn-light mr-3" routerLink="/admin">Cancel</button>
