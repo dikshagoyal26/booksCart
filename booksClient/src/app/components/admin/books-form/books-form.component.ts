@@ -83,7 +83,7 @@ export class BooksFormComponent implements OnInit {
     }
   }
   private addBook() {
-    let bookObj = this.getFormData(this.bookForm.value);
+    let bookObj = this.getFormData();
     console.log(bookObj);
     this.booksService.addBook(bookObj).subscribe(
       () => {
@@ -97,7 +97,7 @@ export class BooksFormComponent implements OnInit {
     );
   }
   private updateBook() {
-    let bookObj = this.getFormData(this.bookForm.value);
+    let bookObj = this.getFormData();
     this.booksService.updateBook(this.id, bookObj).subscribe(
       () => {
         this.snackbarService.show('book updated successfully');
@@ -109,13 +109,13 @@ export class BooksFormComponent implements OnInit {
       }
     );
   }
-  private getFormData(bookObj: any) {
+  private getFormData() {
     var formdata = new FormData();
-    formdata.append('title', bookObj.title);
-    formdata.append('author', bookObj.author);
-    formdata.append('category', bookObj.category._id);
-    formdata.append('price', bookObj.price);
-    formdata.append('cover', bookObj.cover);
+    formdata.append('title', this.bookForm.controls.title.value);
+    formdata.append('author', this.bookForm.controls.author.value);
+    formdata.append('category', this.bookForm.controls.category.value);
+    formdata.append('price', this.bookForm.controls.price.value);
+    formdata.append('cover', this.bookForm.controls.cover.value);
     return formdata;
   }
 }
