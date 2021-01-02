@@ -1,6 +1,22 @@
 const { getRandomId } = require("../../utils/get-random");
 const BooksModel = require("../models/books"); //Schema
 
+const internalBookOperations = {
+  getFinalFilter(filter) {
+    let finalFilter = {};
+    //TODO: remove It
+    // if (filter.category) finalFilter.category = filter.category;
+    if (filter.item) {
+      let regex = { $regex: filter.item, $options: "i" };
+      finalFilter["$or"] = [{ title: regex }, { author: regex }];
+    }
+    if (filter.price) {
+      finalFilter.price = { $lte: filter.price };
+    }
+    return finalFilter;
+  },
+};
+
 const bookOperations = {
   addBook(booksObject, response) {
     let id = getRandomId(7);
@@ -47,21 +63,13 @@ const bookOperations = {
         }
       });
   },
-  searchByCategory(category, response) {
-    BooksModel.find({ category })
+  searchByFilter(filter, response) {
+    const finalFilter = internalBookOperations.getFinalFilter(filter);
+    console.log(finalFilter);
+    BooksModel.find(finalFilter)
       .populate("category")
       .exec(function (err, data) {
-        if (err) {
-          response.status(500).send("Error while listing books : " + err);
-        } else {
-          response.status(200).send(data);
-        }
-      });
-  },
-  searchByTitle(title, response) {
-    BooksModel.find({ title })
-      .populate("category")
-      .exec(function (err, data) {
+        console.log({ err, data });
         if (err) {
           response.status(500).send("Error while listing books : " + err);
         } else {

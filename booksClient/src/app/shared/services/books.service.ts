@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Url } from '../models/backendUrl.model';
 import { Book } from '../models/books.model';
+import { Filter } from '../models/filter.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,9 +17,11 @@ export class BooksService {
   fetchBookById(id: string) {
     return this.http.get<Book>(this.backendUrl + 'books/fetch/' + id);
   }
-  fetchBooksByCategoryId(categoryId: string) {
+  fetchBooksByFilter(filter: Filter) {
+    const serializedFilter = this.serialize(filter);
+    console.log(serializedFilter);
     return this.http.get<Book[]>(
-      this.backendUrl + 'books/fetch?category=' + categoryId
+      this.backendUrl + 'books/fetch?' + serializedFilter
     );
   }
   addBook(bookObj) {
@@ -32,5 +35,15 @@ export class BooksService {
   }
   deleteBook(bookId) {
     return this.http.delete<string>(this.backendUrl + 'books/delete/' + bookId);
+  }
+  private serialize(obj) {
+    var str = [],
+      p;
+    for (p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+      }
+    }
+    return str.join('&');
   }
 }

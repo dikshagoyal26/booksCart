@@ -4,6 +4,7 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Categories } from 'src/app/shared/models/categories.model';
 import { Book } from 'src/app/shared/models/books.model';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { Filter } from 'src/app/shared/models/filter.model';
 
 @Component({
   selector: 'app-books-list',
@@ -11,7 +12,7 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
   styleUrls: ['./books-list.component.scss'],
 })
 export class BooksListComponent implements OnInit, OnChanges {
-  @Input() selectedCategory: Categories;
+  @Input() selectedFilter: Filter;
   books: Book[];
 
   returnedArray: Book[];
@@ -33,14 +34,14 @@ export class BooksListComponent implements OnInit, OnChanges {
     this.returnedArray = this.books.slice(startItem, endItem);
   }
   private fetchBooks() {
-    if (!this.selectedCategory) {
+    if (!this.selectedFilter) {
       this.fetchAllBooks();
     } else {
-      this.fetchBooksByCategories(this.selectedCategory._id);
+      this.fetchBooksByCategories();
     }
   }
-  private fetchBooksByCategories(categoryId: string) {
-    this.booksService.fetchBooksByCategoryId(categoryId).subscribe(
+  private fetchBooksByCategories() {
+    this.booksService.fetchBooksByFilter(this.selectedFilter).subscribe(
       (books: Book[]) => {
         this.books = books;
         this.returnedArray = this.books.slice(0, 10);

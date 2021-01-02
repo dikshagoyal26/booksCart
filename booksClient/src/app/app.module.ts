@@ -29,7 +29,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { OrdersComponent } from './components/orders/orders.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
-import { PasswordDirective } from './shared/directives/password.directive';
+import { PasswordDirective } from './shared/directive/password.directive';
 
 @NgModule({
   declarations: [

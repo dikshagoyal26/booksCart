@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Categories } from 'src/app/shared/models/categories.model';
+import { Filter } from 'src/app/shared/models/filter.model';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 
 @Component({
@@ -9,9 +10,8 @@ import { CategoriesService } from 'src/app/shared/services/categories.service';
   styleUrls: ['./books.component.scss'],
 })
 export class BooksComponent implements OnInit, OnChanges {
-  public selectedCategory: Categories;
+  public selectedFilter: Filter;
   private categories: Categories[];
-  private param: string = null;
   constructor(
     private route: ActivatedRoute,
     private categoriesService: CategoriesService
@@ -20,25 +20,27 @@ export class BooksComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.categoriesService.categories$.subscribe((categories: Categories[]) => {
       this.categories = categories;
-      this.getSelectedCategory();
+      if (this.selectedFilter && this.selectedFilter.category)
+        this.getSelectedCategoryId();
     });
     this.route.queryParams.subscribe((params) => {
-      if (params.category) {
-        this.param = params.category;
-        if (this.categories && this.categories.length > 0)
-          this.getSelectedCategory();
-      } else {
-        this.selectedCategory = null;
-      }
+      this.selectedFilter = { ...params };
+      // if (params && params.category) {
+      //   this.getSelectedCategoryId();
+      // }
     });
   }
   ngOnChanges() {
-    this.getSelectedCategory();
+    this.getSelectedCategoryId();
   }
-  private getSelectedCategory() {
-    let category = this.getCategoryFromName(this.param);
-    this.selectedCategory =
-      !!category && category.length > 0 ? category[0] : null;
+  private getSelectedCategoryId() {
+    if (this.categories) {
+      let category = this.getCategoryFromName(this.selectedFilter.category);
+      let selectCategory =
+        !!category && category.length > 0 ? category[0]._id : '';
+      this.selectedFilter.category = selectCategory;
+      console.log(this.selectedFilter);
+    }
   }
   private getCategoryFromName(categoryName: string) {
     return this.categories.filter(

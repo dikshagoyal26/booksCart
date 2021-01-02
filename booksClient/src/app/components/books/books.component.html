@@ -1,10 +1,10 @@
 <section class="container-fluid mt-3">
     <div class="row">
         <div class="categories col-md-3">
-            <app-book-filters [selectedCategory]="selectedCategory"></app-book-filters>
+            <app-book-filters [selectedFilter]="selectedFilter"></app-book-filters>
         </div>
         <div class="books col-md-9">
-            <app-books-list [selectedCategory]="selectedCategory"></app-books-list>
+            <app-books-list [selectedFilter]="selectedFilter"></app-books-list>
         </div>
     </div>
 </section>
