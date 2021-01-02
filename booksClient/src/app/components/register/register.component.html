@@ -45,11 +45,8 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <div class="password-div">
-                                <input [type]="showPassword?'text':'password'" class="form-control"
-                                    formControlName="password" placeholder="Enter Password" name="password" />
-                                <i class="fa pointer" [ngClass]="{'fa-eye':showPassword,'fa-eye-slash':!showPassword}"
-                                    [title]="!showPassword?'Show Password':'Hide Password'" aria-hidden="true"
-                                    (click)="showPassword=!showPassword"></i>
+                                <input type="password" class="form-control" formControlName="password"
+                                    placeholder="Enter Password" name="password" togglePasswordDisplay />
                             </div>
                             <div class="invalid-feedback"
                                 *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.required">
@@ -64,12 +61,8 @@
                         <div class="form-group">
                             <label for="confirmPassword">Confirm Password</label>
                             <div class="password-div">
-                                <input [type]="showConfirmPassword?'text':'password'" class="form-control"
-                                    formControlName="confirmPassword" placeholder="Enter Confirm Password"
-                                    name="confirmPassword" />
-                                <i class="fa pointer" [title]="!showConfirmPassword?'Show Password':'Hide Password'"
-                                    [ngClass]="{'fa-eye':showConfirmPassword,'fa-eye-slash':!showConfirmPassword}"
-                                    aria-hidden="true" (click)="showConfirmPassword=!showConfirmPassword"></i>
+                                <input type="password" class="form-control" formControlName="confirmPassword"
+                                    placeholder="Enter Confirm Password" name="confirmPassword" togglePasswordDisplay />
                             </div>
                             <div class="invalid-feedback"
                                 *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.required">

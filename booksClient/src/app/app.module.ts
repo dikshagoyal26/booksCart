@@ -28,6 +28,7 @@ import { BookFiltersComponent } from './components/books/book-filters/book-filte
 import { OrdersComponent } from './components/orders/orders.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { PasswordDirective } from './shared/directives/password.directive';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     OrdersComponent,
     CheckoutComponent,
     WishlistComponent,
+    PasswordDirective,
   ],
   imports: [
     CommonModule,

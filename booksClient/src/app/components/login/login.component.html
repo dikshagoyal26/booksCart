@@ -27,11 +27,8 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <div class="password-div">
-                                <input [type]="showPassword?'text':'password'" class="form-control"
-                                    formControlName="password" placeholder="Enter password" name="password" />
-                                <i class="fa pointer" [ngClass]="{'fa-eye':showPassword,'fa-eye-slash':!showPassword}"
-                                    [title]="!showPassword?'Show Password':'Hide Password'" aria-hidden="true"
-                                    (click)="showPassword=!showPassword"></i>
+                                <input class="form-control" type="password" formControlName="password"
+                                    placeholder="Enter password" name="password" togglePasswordDisplay />
                             </div>
                             <div class="invalid-feedback"
                                 *ngIf=" LoginFormControl.password.touched && LoginFormControl.password.errors?.required">
