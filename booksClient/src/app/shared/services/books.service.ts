@@ -8,8 +8,20 @@ import { Filter } from '../models/filter.model';
 })
 export class BooksService {
   private backendUrl: string;
+  private timer: any;
   constructor(private http: HttpClient) {
     this.backendUrl = Url.backendUrl;
+  }
+  showBookSuggestions(item: string) {
+    return new Promise((resolve, reject) => {
+      if (!item) return null;
+      if (this.timer) clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.fetchBooksByFilter({ item }).subscribe((book: Book[]) => {
+          resolve(book);
+        });
+      }, 500);
+    });
   }
   fetchBooks() {
     return this.http.get<Book[]>(this.backendUrl + 'books/fetch');
@@ -19,7 +31,6 @@ export class BooksService {
   }
   fetchBooksByFilter(filter: Filter) {
     const serializedFilter = this.serialize(filter);
-    console.log(serializedFilter);
     return this.http.get<Book[]>(
       this.backendUrl + 'books/fetch?' + serializedFilter
     );

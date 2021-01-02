@@ -6,3 +6,5 @@
         {{category.category_type}}
     </li>
 </ul>
+<input type="range" name="" id="" [(ngModel)]="priceRange" min="100" max="10000" (change)="selectPrice()"
+    [tooltip]="priceRange">

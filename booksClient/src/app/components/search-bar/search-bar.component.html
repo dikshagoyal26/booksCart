@@ -1,4 +1,14 @@
-<form>
-    <input type="text" (keydown)="searchBooks($event)" class="form-control" placeholder="Search books or Authors"
-        [formControl]="searchControl">
+<form autocomplete="off">
+    <div class="autocomplete embed-i" style="width:300px;">
+        <input type="text" id="myInput" (keydown)="searchBooks($event)" class="form-control"
+            placeholder="Search books or Authors" [formControl]="searchControl">
+        <i class="fa fa-times" *ngIf="searchControl.value" aria-hidden="true" (click)="closeSuggestions()"></i>
+    </div>
+
 </form>
+<div id="autocomplete-list" *ngIf="books && books.length>0" class="autocomplete-items">
+    <div *ngFor="let book of books;let i=index" (keydown)="activeSuggestion($event)"
+        [ngClass]="{'autocomplete-active':i==currentFocus}">
+        {{book.title}}
+    </div>
+</div>

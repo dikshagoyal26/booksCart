@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BooksService } from 'src/app/shared/services/books.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -9,21 +10,33 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SearchBarComponent implements OnInit {
   public searchControl: FormControl;
-  constructor(private router: Router, private route: ActivatedRoute) {
+  public books: any;
+  public currentFocus: number = -1;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private booksService: BooksService
+  ) {
     this.searchControl = new FormControl();
   }
 
   ngOnInit(): void {}
   searchBooks(event) {
     if (event.keyCode == 13) {
-      this.showBooks();
+      this.showBooks(this.searchControl.value);
     } else {
-      this.showSuggestions();
+      this.activeSuggestion(event);
+      this.showSuggestions(this.searchControl.value);
     }
   }
-  private showBooks() {
-    let item = this.searchControl.value.trim();
+  private showBooks(item) {
+    if (!item) {
+      return;
+    }
+    item = item.trim();
     if (!item) return;
+    this.books = [];
+    this.searchControl.setValue(item);
     if (!this.router.url.startsWith('/books'))
       this.router.navigate(['/search'], {
         queryParams: { item: item.toLowerCase() },
@@ -37,5 +50,31 @@ export class SearchBarComponent implements OnInit {
         queryParamsHandling: 'merge',
       });
   }
-  private showSuggestions() {}
+  private async showSuggestions(item: string) {
+    if (!item) {
+      this.books = [];
+      return;
+    }
+    item = item.trim();
+    if (!item) {
+      this.books = [];
+      return;
+    }
+    this.books = await this.booksService.showBookSuggestions(item);
+  }
+  closeSuggestions() {
+    this.books = [];
+    this.searchControl.setValue('');
+  }
+  activeSuggestion(event) {
+    if (event.keyCode == 40) {
+      this.currentFocus++;
+      if (this.currentFocus >= this.books.length) this.currentFocus = 0;
+    } else if (event.keyCode == 38) {
+      if (this.currentFocus < 0) this.currentFocus = this.books.length - 1;
+      this.currentFocus--;
+    } else if (event.keyCode == 13) {
+      this.showBooks(this.searchControl.value);
+    }
+  }
 }
