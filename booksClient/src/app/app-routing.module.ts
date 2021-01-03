@@ -21,8 +21,7 @@ const routes: Routes = [
   {
     path: 'admin',
     canActivate: [AdminAuthGuard],
-    redirectTo: '/books',
-    // loadChildren: './admin/admin.module#AdminModule',
+    loadChildren: './admin/admin.module#AdminModule',
   },
   {
     path: 'books',
