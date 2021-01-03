@@ -7,7 +7,12 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/uploads"));
+const swaggerSpec = require("./utils/swagger");
 
+app.get("/swagger.json", function (req, res) {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
+});
 //TODO: add logger
 //TODO: learn how to set environments in node
 app.use("/user", require("./routes/api/user"));
