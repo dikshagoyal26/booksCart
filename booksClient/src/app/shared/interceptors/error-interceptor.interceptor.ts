@@ -8,20 +8,29 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptorInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private userService: UserService, private router: Router) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      retry(2),
       catchError((err: HttpErrorResponse) => {
-        console.log(err);
-        return throwError(err);
+        if (err.status === 500 || err.status == 401) {
+          this.userService.logout();
+          if (!request.url.includes('login')) {
+            location.reload();
+          }
+        } else {
+          this.router.navigate(['not-found']);
+          const error = err.message || err.statusText;
+          return throwError(error);
+        }
       })
     );
   }

@@ -70,7 +70,7 @@ import { PasswordDirective } from './shared/directive/password.directive';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorInterceptor,
-      multi: true,
+      multi: true, //?
     },
     {
       provide: HTTP_INTERCEPTORS,
