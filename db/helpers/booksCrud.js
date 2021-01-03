@@ -4,8 +4,7 @@ const BooksModel = require("../models/books"); //Schema
 const internalBookOperations = {
   getFinalFilter(filter) {
     let finalFilter = {};
-    //TODO: remove It
-    // if (filter.category) finalFilter.category = filter.category;
+    if (filter.category) finalFilter.category = filter.category;
     if (filter.item) {
       let regex = { $regex: filter.item, $options: "i" };
       finalFilter["$or"] = [{ title: regex }, { author: regex }];

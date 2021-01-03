@@ -2,7 +2,7 @@
 <ul class="category-section list-group list-group-flush" *ngIf="categories && categories.length>0">
     <li class="list-group-item" (click)="selectCategory()" [ngClass]="{'active':!selectedCategory}">ALL</li>
     <li *ngFor="let category of categories" class="list-group-item" (click)="selectCategory(category.category_type)"
-        [ngClass]="{'active':category._id==selectedCategory}">
+        [ngClass]="{'active':category.category_type==selectedCategory}">
         {{category.category_type}}
     </li>
 </ul>

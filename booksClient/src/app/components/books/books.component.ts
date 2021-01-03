@@ -37,7 +37,7 @@ export class BooksComponent implements OnInit, OnChanges {
     if (this.categories) {
       let category = this.getCategoryFromName(this.selectedFilter.category);
       let selectCategory =
-        !!category && category.length > 0 ? category[0]._id : '';
+        !!category && category.length > 0 ? category[0].category_type : '';
       this.selectedFilter.category = selectCategory;
       console.log(this.selectedFilter);
     }
