@@ -7,9 +7,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
-const swaggerSpec = require("./utils/swagger");
 
 app.get("/swagger.json", function (req, res) {
+  const swaggerSpec = require("./utils/swagger");
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerSpec);
 });
@@ -25,7 +25,7 @@ app.use(validateToken);
 app.use("/cart", require("./routes/api/cart"));
 app.use("/orders", require("./routes/api/orders"));
 app.use("/wishlist", require("./routes/api/wishlist"));
-
+app.use("/admin", require("./routes/api/admin"));
 app.use((req, res) => {
   res.send("OOPs!!! you have typed something wrong");
 });

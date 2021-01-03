@@ -36,16 +36,16 @@ export class BooksService {
     );
   }
   addBook(bookObj) {
-    return this.http.post<string>(this.backendUrl + 'books/add', bookObj);
+    return this.http.post<string>(this.backendUrl + 'admin/add', bookObj);
   }
   updateBook(bookId, bookObj) {
     return this.http.post<string>(
-      this.backendUrl + `books/update/${bookId}`,
+      this.backendUrl + `admin/update/${bookId}`,
       bookObj
     );
   }
   deleteBook(bookId) {
-    return this.http.delete<string>(this.backendUrl + 'books/delete/' + bookId);
+    return this.http.delete<string>(this.backendUrl + 'admin/delete/' + bookId);
   }
   private serialize(obj) {
     var str = [],

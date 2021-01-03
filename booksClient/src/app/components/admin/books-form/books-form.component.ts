@@ -6,6 +6,7 @@ import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Categories } from 'src/app/shared/models/categories.model';
 import { Book } from 'src/app/shared/models/books.model';
+import { Url } from 'src/app/shared/models/backendUrl.model';
 @Component({
   selector: 'app-books-form',
   templateUrl: './books-form.component.html',
@@ -31,6 +32,7 @@ export class BooksFormComponent implements OnInit {
   });
   public categories: any = [];
   public formTitle: string = 'Add';
+  public coverImagePath: any;
   private id: string = '';
   private file: any;
   ngOnInit(): void {
@@ -55,6 +57,11 @@ export class BooksFormComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.bookForm.patchValue({ cover: file });
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (myevent: ProgressEvent) => {
+        this.coverImagePath = (myevent.target as FileReader).result;
+      };
     }
   }
   initEditBook(bookId) {
@@ -66,7 +73,22 @@ export class BooksFormComponent implements OnInit {
         price: book.price,
         cover: book.cover,
       });
+      this.coverImagePath = this.getCover(book);
     });
+  }
+  getCover(book: Book) {
+    if (book && book.cover) {
+      if (
+        book.cover.startsWith('https://') ||
+        book.cover.startsWith('http://')
+      ) {
+        return book.cover;
+      } else {
+        return Url.backendUrl + 'uploads/' + book.cover;
+      }
+    } else {
+      return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxa-H7vHgjDI9F3X1dNDtq_u5B6fGCluebxA&usqp=CAU';
+    }
   }
   saveBook() {
     if (!this.bookForm.value.cover) {
