@@ -21,14 +21,7 @@ const routes: Routes = [
   {
     path: 'admin',
     canActivate: [AdminAuthGuard],
-    children: [
-      { path: '', component: AdminBooksComponent, pathMatch: 'full' },
-      { path: 'books/add', component: BooksFormComponent },
-      {
-        path: 'books/update/:id',
-        component: BooksFormComponent,
-      },
-    ],
+    loadChildren: './admin/admin.module#AdminModule',
   },
   {
     path: 'books',
