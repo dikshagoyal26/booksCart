@@ -6,7 +6,7 @@ const validateToken = require("./utils/jwt-middleware");
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(__dirname + "/uploads"));
+app.use(express.static("public"));
 const swaggerSpec = require("./utils/swagger");
 
 app.get("/swagger.json", function (req, res) {
