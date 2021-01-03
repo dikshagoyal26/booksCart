@@ -1,18 +1,25 @@
 const { getRandomId } = require("../../utils/get-random");
 const BooksModel = require("../models/books"); //Schema
-
+const categoryOperations = require("./categoryCrud");
 const internalBookOperations = {
   getFinalFilter(filter) {
-    let finalFilter = {};
-    if (filter.category) finalFilter.category = filter.category;
-    if (filter.item) {
-      let regex = { $regex: filter.item, $options: "i" };
-      finalFilter["$or"] = [{ title: regex }, { author: regex }];
-    }
-    if (filter.price) {
-      finalFilter.price = { $lte: filter.price };
-    }
-    return finalFilter;
+    return new Promise(async (resolve, reject) => {
+      let finalFilter = {};
+      if (filter.category) {
+        let category = await categoryOperations.getCategoryIdFromName(
+          filter.category
+        );
+        finalFilter.category = category;
+      }
+      if (filter.item) {
+        let regex = { $regex: filter.item, $options: "i" };
+        finalFilter["$or"] = [{ title: regex }, { author: regex }];
+      }
+      if (filter.price) {
+        finalFilter.price = { $lte: filter.price };
+      }
+      resolve(finalFilter);
+    });
   },
 };
 
@@ -62,9 +69,8 @@ const bookOperations = {
         }
       });
   },
-  searchByFilter(filter, response) {
-    const finalFilter = internalBookOperations.getFinalFilter(filter);
-    console.log(finalFilter);
+  async searchByFilter(filter, response) {
+    const finalFilter = await internalBookOperations.getFinalFilter(filter);
     BooksModel.find(finalFilter)
       .populate("category")
       .exec(function (err, data) {

@@ -15,6 +15,11 @@ app.get("/swagger.json", function (req, res) {
 });
 //TODO: add logger
 //TODO: learn how to set environments in node
+
+app.get("/api-docs/*", function (req, res) {
+  res.sendFile("index.html", { root: "./api-docs/" });
+});
+
 app.use("/user", require("./routes/api/user"));
 app.use("/books", require("./routes/api/books"));
 app.use("/category", require("./routes/api/categories"));

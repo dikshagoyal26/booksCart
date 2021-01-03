@@ -36,21 +36,22 @@ export class BookFiltersComponent implements OnInit, OnChanges {
     this.priceRange = +this.selectedFilter.price || 10000;
   }
   selectCategory(category: string) {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        category: category,
-      },
-      queryParamsHandling: 'merge',
-    });
+    this.navigate({ category });
   }
   selectPrice() {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        price: this.priceRange,
-      },
-      queryParamsHandling: 'merge',
-    });
+    this.navigate({ price: this.priceRange });
+  }
+  private navigate(param) {
+    if (this.router.url.startsWith('/search')) {
+      this.router.navigate(['/books'], {
+        queryParams: param,
+      });
+    } else {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: param,
+        queryParamsHandling: 'merge',
+      });
+    }
   }
 }

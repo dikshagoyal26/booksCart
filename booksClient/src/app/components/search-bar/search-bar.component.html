@@ -7,7 +7,7 @@
 
 </form>
 <div id="autocomplete-list" *ngIf="books && books.length>0" class="autocomplete-items">
-    <div *ngFor="let book of books;let i=index" (keydown)="activeSuggestion($event)"
+    <div *ngFor="let book of books;let i=index" (keydown)="activeSuggestion($event)" (click)="showBooks(book.title)"
         [ngClass]="{'autocomplete-active':i==currentFocus}">
         {{book.title}}
     </div>

@@ -12,11 +12,7 @@ export class SearchBarComponent implements OnInit {
   public searchControl: FormControl;
   public books: any;
   public currentFocus: number = -1;
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private booksService: BooksService
-  ) {
+  constructor(private router: Router, private booksService: BooksService) {
     this.searchControl = new FormControl();
   }
 
@@ -25,32 +21,24 @@ export class SearchBarComponent implements OnInit {
     if (event.keyCode == 13) {
       this.showBooks(this.searchControl.value);
     } else {
-      this.activeSuggestion(event);
-      this.showSuggestions(this.searchControl.value);
+      this.showSuggestions();
     }
   }
-  private showBooks(item) {
+  showBooks(item: string) {
     if (!item) {
       return;
     }
     item = item.trim();
     if (!item) return;
+    item = item.toLowerCase();
     this.books = [];
     this.searchControl.setValue(item);
-    if (!this.router.url.startsWith('/books'))
-      this.router.navigate(['/search'], {
-        queryParams: { item: item.toLowerCase() },
-      });
-    else
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: {
-          item: item,
-        },
-        queryParamsHandling: 'merge',
-      });
+    this.router.navigate(['/search'], {
+      queryParams: { item: item },
+    });
   }
-  private async showSuggestions(item: string) {
+  private async showSuggestions() {
+    let item = this.searchControl.value;
     if (!item) {
       this.books = [];
       return;
@@ -60,7 +48,9 @@ export class SearchBarComponent implements OnInit {
       this.books = [];
       return;
     }
-    this.books = await this.booksService.showBookSuggestions(item);
+    this.books = await this.booksService.showBookSuggestions(
+      item.toLowerCase()
+    );
   }
   closeSuggestions() {
     this.books = [];

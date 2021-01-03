@@ -25,5 +25,17 @@ const categoryOperations = {
       else response.status(200).send(data);
     });
   },
+  getCategoryIdFromName(categoryType) {
+    return new Promise((resolve) => {
+      CategoryModel.find({}, (err, categories) => {
+        if (categories && categories.length > 0) {
+          let category = categories.filter(
+            (cat) => cat.category_type == categoryType
+          );
+          resolve(!!category && category.length > 0 ? category[0]._id : "");
+        } else resolve(null);
+      });
+    });
+  },
 };
 module.exports = categoryOperations;

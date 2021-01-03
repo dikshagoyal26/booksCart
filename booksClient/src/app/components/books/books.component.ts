@@ -9,42 +9,14 @@ import { CategoriesService } from 'src/app/shared/services/categories.service';
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.scss'],
 })
-export class BooksComponent implements OnInit, OnChanges {
+export class BooksComponent implements OnInit {
   public selectedFilter: Filter;
-  private categories: Categories[];
-  constructor(
-    private route: ActivatedRoute,
-    private categoriesService: CategoriesService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.categoriesService.categories$.subscribe((categories: Categories[]) => {
-      this.categories = categories;
-      if (this.selectedFilter && this.selectedFilter.category)
-        this.getSelectedCategoryId();
-    });
     this.route.queryParams.subscribe((params) => {
       this.selectedFilter = { ...params };
-      // if (params && params.category) {
-      //   this.getSelectedCategoryId();
-      // }
+      console.log(params);
     });
-  }
-  ngOnChanges() {
-    this.getSelectedCategoryId();
-  }
-  private getSelectedCategoryId() {
-    if (this.categories) {
-      let category = this.getCategoryFromName(this.selectedFilter.category);
-      let selectCategory =
-        !!category && category.length > 0 ? category[0].category_type : '';
-      this.selectedFilter.category = selectCategory;
-      console.log(this.selectedFilter);
-    }
-  }
-  private getCategoryFromName(categoryName: string) {
-    return this.categories.filter(
-      (category: Categories) => category.category_type == categoryName
-    );
   }
 }
