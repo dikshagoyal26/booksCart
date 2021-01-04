@@ -5,7 +5,7 @@ import { Categories } from 'src/app/shared/models/categories.model';
 import { Book } from 'src/app/shared/models/books.model';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { Filter } from 'src/app/shared/models/filter.model';
-import { CategoriesService } from 'src/app/shared/services/categories.service';
+import { Url } from 'src/app/shared/models/backendUrl.model';
 
 @Component({
   selector: 'app-books-list',
@@ -16,12 +16,15 @@ export class BooksListComponent implements OnInit, OnChanges {
   @Input() selectedFilter: Filter;
   books: Book[];
   returnedArray: Book[];
+  public imageUrl: string;
+
   constructor(
     private booksService: BooksService,
     private snackBarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
+    this.imageUrl = Url.backendUrl + 'uploads/no-results.png';
     if (this.books) this.returnedArray = this.books.slice(0, 10);
     this.fetchBooks();
   }

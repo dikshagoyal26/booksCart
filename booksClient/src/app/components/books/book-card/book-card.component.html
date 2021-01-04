@@ -8,7 +8,7 @@
     <p class="card-text">
       <small>{{ book.price | currency : 'INR' }} </small>
     </p>
-    <app-add-to-cart [bookId]="book._id" [user]="user"></app-add-to-cart>
+    <app-add-to-cart [bookId]="book._id"></app-add-to-cart>
     <button (click)="toggleWishlist(book._id)">Wishlist</button>
   </div>
 </div>

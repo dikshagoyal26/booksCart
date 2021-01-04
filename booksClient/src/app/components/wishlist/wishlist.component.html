@@ -1,1 +1,49 @@
-{{books|json}}
+<div class="d-flex center w-100">
+    <div class="panel cart">
+        <div class="panel-header">
+            <span class="heading">My Wishlist</span>
+            <button (click)="clearWishlist()" class="btn btn-light" *ngIf="books && books.length>0">Clear
+                Wishlist</button>
+        </div>
+        <div>
+            <div class="panel-card">
+                <table class="table capitalise text-center" *ngIf="books && books.length>0;else emptyCart">
+                    <thead>
+                        <tr>
+                            <th scope="col">Image</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">MRP</th>
+                            <th scope="col">Add To Cart</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let book of books">
+                            <td><img [src]="book.cover" alt="{{book.title}}"></td>
+                            <td>
+                                <a class="pointer" routerLink="/books/details/{{book._id}}">{{ book.title }}
+                                </a>
+                            </td>
+                            <td>{{ book.price | currency : 'INR'}}</td>
+
+                            <td>
+                                <app-add-to-cart [bookId]="book._id"></app-add-to-cart>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)="removeItem(book._id)"><i
+                                        class="fa fa-trash pointer" aria-hidden="true"></i> Remove From
+                                    Wishlist</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <ng-template #emptyCart>
+            <div class="d-flex column emptyCart">
+                <h2>Wishlist is empty!</h2>
+                <button routerLink="/books" class="btn btn-primary shop mt-3">Continue Shopping</button>
+            </div>
+        </ng-template>
+    </div>
+</div>

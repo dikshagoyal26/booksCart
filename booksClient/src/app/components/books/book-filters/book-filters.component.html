@@ -1,7 +1,7 @@
 <div class="filters-section">
     <div class="filter-container filters-heading">
         <span>Filters</span>
-        <span class="clear" *ngIf="canClear()" (click)="clearFilters('')">Clear All</span>
+        <span class="clear" *ngIf="canClear()" (click)="clearFilters()">Clear All</span>
     </div>
     <div class="main-filters">
         <div class="filter-container category">
@@ -10,7 +10,7 @@
                 <span class="clear" *ngIf="selectedCategory" (click)="clearFilters('category')">Clear</span>
             </div>
             <div class="categories">
-                <a (click)="selectCategory('')" [ngClass]="{'active':!selectedCategory}">ALL</a>
+                <a (click)="selectCategory()" [ngClass]="{'active':!selectedCategory}">ALL</a>
                 <a *ngFor="let category of categories" (click)="selectCategory(category.category_type)"
                     [ngClass]="{'active':category.category_type==selectedCategory}">
                     {{category.category_type}}

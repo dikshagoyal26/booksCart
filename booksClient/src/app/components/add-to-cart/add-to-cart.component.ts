@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-add-to-cart',
@@ -9,11 +10,18 @@ import { CartService } from 'src/app/shared/services/cart.service';
 })
 export class AddToCartComponent implements OnInit {
   @Input() bookId: string;
-  @Input() user: User;
+  public user: User;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private userService: UserService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.userData.subscribe((user: User) => {
+      this.user = user;
+    });
+  }
   addToCart() {
     if (this.user._id && this.bookId) {
       this.cartService.addItemToCart(this.user._id, this.bookId);

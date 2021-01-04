@@ -39,7 +39,7 @@ export class BookFiltersComponent implements OnInit, OnChanges {
       : null;
     this.selectedPrice = +this.selectedFilter.price || 10000;
   }
-  selectCategory(category: string) {
+  selectCategory(category: string = null) {
     this.navigate({ category }, true);
   }
   selectPrice() {
@@ -48,7 +48,7 @@ export class BookFiltersComponent implements OnInit, OnChanges {
   canClear() {
     return Object.keys(this.selectedFilter).length > 0;
   }
-  clearFilters(key: string) {
+  clearFilters(key: string = null) {
     if (key) this.selectedFilter[key] = null;
     else {
       this.selectedFilter = {};

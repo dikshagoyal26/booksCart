@@ -25,6 +25,7 @@ export class CheckoutComponent implements OnInit {
   ) {}
   private user: User;
   public cart: Cart[];
+  public totalPrice: number = 0;
   public addressForm = this.fb.group({
     name: ['', Validators.required],
     line_1: ['', Validators.required],
@@ -38,13 +39,13 @@ export class CheckoutComponent implements OnInit {
     });
     this.cartService.getCartItems(this.user._id).subscribe((cart: Cart[]) => {
       this.cart = cart;
+      this.getTotalPrice();
     });
   }
   get addressFormControl() {
     return this.addressForm.controls;
   }
   checkout() {
-    console.log('checkout');
     if (this.addressForm.invalid) return;
     let totalPrice = 0;
     if (this.cart && this.cart.length > 0)
@@ -55,7 +56,6 @@ export class CheckoutComponent implements OnInit {
       total: totalPrice,
       address: this.addressForm.value,
     };
-    console.log(order);
     this.placeOrder(order);
   }
   private placeOrder(order: Order) {
@@ -69,5 +69,10 @@ export class CheckoutComponent implements OnInit {
         this.snackbarService.show('Oops! Something went wrong..', 'danger');
       }
     );
+  }
+  getTotalPrice() {
+    this.totalPrice = 0;
+    if (this.cart && this.cart && this.cart.length > 0)
+      this.totalPrice = this.cartService.getTotalPrice(this.cart);
   }
 }

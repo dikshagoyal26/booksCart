@@ -3,7 +3,7 @@
         <div class="panel-header">
             <span class="heading">My Orders</span>
         </div>
-        <div class="panel-form">
+        <div class="panel-form" *ngIf="orders && orders.length>0;else noOrder;">
             <div class="mb-2">
                 <input type="text" class="form-control" [(ngModel)]="searchData" placeholder="Filter">
             </div>
@@ -26,3 +26,9 @@
         </div>
     </div>
 </div>
+<ng-template #noOrder>
+    <div class="d-flex column emptyCart">
+        <h2>No orders placed!</h2>
+        <button routerLink="/books" class="btn btn-primary shop mt-3">Shop Now</button>
+    </div>
+</ng-template>

@@ -18,11 +18,7 @@
 .admin-form {
   padding: 10px;
 }
-.d-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .table {
   table-layout: auto;
   width: 100%;
@@ -57,4 +53,14 @@
 table td {
   max-width: 15rem;
   text-overflow: ellipsis;
+}
+.shop {
+  width: max-content;
+}
+.emptyCart {
+  padding: 10px;
+  background: white;
+}
+.emptyCart h2 {
+  text-transform: none;
 }

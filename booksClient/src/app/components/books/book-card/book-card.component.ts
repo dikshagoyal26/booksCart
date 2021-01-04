@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Url } from 'src/app/shared/models/backendUrl.model';
 import { Book } from 'src/app/shared/models/books.model';
 import { User } from 'src/app/shared/models/user';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { WishlistService } from 'src/app/shared/services/wishlist.service';
 
@@ -17,7 +18,8 @@ export class BookCardComponent implements OnInit, OnDestroy {
   public user: User;
   constructor(
     private userService: UserService,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class BookCardComponent implements OnInit, OnDestroy {
     this.wishlistService
       .addItemToWishlist(this.user._id, bookId)
       .subscribe((books: Book[]) => {
+        this.snackbarService.show('book added to wishlist');
         if (books) this.wishlistService.setWishlistCount(books.length);
       });
   }

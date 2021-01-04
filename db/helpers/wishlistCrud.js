@@ -7,7 +7,7 @@ const wishlistOperations = {
       .exec(function (err, data) {
         if (err) response.status(500).send();
         else {
-          console.log(data);
+          console.log({ data });
           if (data) response.status(200).send(data.books);
           else response.status(200).send([]);
         }

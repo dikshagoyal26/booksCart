@@ -1,0 +1,35 @@
+.checkout {
+  width: 55rem;
+}
+.panel-card {
+  flex: 1;
+  width: 27rem;
+}
+.preview-image {
+  flex: 1;
+  width: 25rem;
+  margin: 1rem;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+}
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.preview-img,
+img {
+  max-width: 200px;
+  max-height: 250px;
+}
+.sub-heading {
+  padding: 10px;
+}
+.shipping {
+  border-bottom: 1px solid #dee2e6;
+}
