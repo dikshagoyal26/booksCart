@@ -13,12 +13,16 @@ export class BookFiltersComponent implements OnInit, OnChanges {
   @Input() selectedFilter: Filter;
   public categories: any = [];
   public selectedCategory: string = null;
-  public priceRange: number = 10000;
+  public selectedPrice: number;
+  public minPrice: number = 100;
+  public maxPrice: number = 10000;
   constructor(
     private categoriesService: CategoriesService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.selectedPrice = this.maxPrice;
+  }
 
   ngOnInit(): void {
     this.categoriesService.categories$.subscribe((categories: Categories[]) => {
@@ -33,15 +37,25 @@ export class BookFiltersComponent implements OnInit, OnChanges {
     this.selectedCategory = this.selectedFilter
       ? this.selectedFilter.category
       : null;
-    this.priceRange = +this.selectedFilter.price || 10000;
+    this.selectedPrice = +this.selectedFilter.price || 10000;
   }
   selectCategory(category: string) {
-    this.navigate({ category });
+    this.navigate({ category }, true);
   }
   selectPrice() {
-    this.navigate({ price: this.priceRange });
+    this.navigate({ price: this.selectedPrice }, true);
   }
-  private navigate(param) {
+  canClear() {
+    return Object.keys(this.selectedFilter).length > 0;
+  }
+  clearFilters(key: string) {
+    if (key) this.selectedFilter[key] = null;
+    else {
+      this.selectedFilter = {};
+    }
+    this.navigate(this.selectedFilter, false);
+  }
+  private navigate(param: Filter, handleQueryparam: boolean) {
     if (this.router.url.startsWith('/search')) {
       this.router.navigate(['/books'], {
         queryParams: param,
@@ -50,7 +64,7 @@ export class BookFiltersComponent implements OnInit, OnChanges {
       this.router.navigate([], {
         relativeTo: this.route,
         queryParams: param,
-        queryParamsHandling: 'merge',
+        queryParamsHandling: handleQueryparam ? 'merge' : '',
       });
     }
   }

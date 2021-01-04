@@ -1,10 +1,8 @@
-<section class="container-fluid mt-3">
-    <div class="row">
-        <div class="categories col-md-3">
-            <app-book-filters [selectedFilter]="selectedFilter"></app-book-filters>
-        </div>
-        <div class="books col-md-9">
-            <app-books-list [selectedFilter]="selectedFilter"></app-books-list>
-        </div>
+<section class="d-flex">
+    <div class="categories">
+        <app-book-filters [selectedFilter]="selectedFilter"></app-book-filters>
+    </div>
+    <div class="books">
+        <app-books-list [selectedFilter]="selectedFilter"></app-books-list>
     </div>
 </section>

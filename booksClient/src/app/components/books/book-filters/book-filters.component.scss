@@ -1,9 +1,80 @@
-.list-group-item:hover {
-  cursor: pointer;
-  background: #495057b3;
-  color: white;
+$white: #fff;
+$black: #000;
+$border: #f0f0f0;
+$background: #e9ecef;
+$color: #212121;
+$clear: #2874f0;
+.filters-section {
+  background: $white;
+  color: $black;
+}
+.filter-container {
+  padding: 1rem;
+  border-bottom: 0.063rem solid $border;
 }
 .active {
-  background: #212529;
-  color: white;
+  background: $background;
+  color: $white;
+  font-weight: 700;
+}
+.filters-heading {
+  font-size: 1.125rem;
+  text-transform: capitalize;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filters-subheading {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: $color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.categories a {
+  padding: 0.313rem 1rem 0.313rem 1.875rem;
+  color: $color;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  cursor: pointer;
+}
+.categories a:hover {
+  cursor: pointer;
+  background: $background;
+}
+.price {
+  position: relative;
+}
+.pricerange {
+  width: 100%;
+  position: absolute;
+  top: 1rem;
+}
+.price-bg {
+  background: #eee;
+  width: 100%;
+  height: 1.25rem;
+  display: block;
+  margin-top: 8px;
+}
+.display-price {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  text-transform: none;
+}
+.clear {
+  cursor: pointer;
+  color: $clear;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 500;
 }
