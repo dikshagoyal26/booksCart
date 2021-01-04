@@ -1,12 +1,12 @@
-<div class="container-fluid mt-3">
-  <div class="d-flex">
-    <div class="upsert">
-      <div class="upsert-header">
-        <span class="heading">{{formTitle}} Book</span>
-      </div>
-      <div class="upsert-form ">
-        <div class="card p-2 my-2 ">
-          <form [formGroup]="bookForm">
+<div class="d-flex center w-100">
+  <div class="panel book-form">
+    <div class="panel-header">
+      <span class="heading">{{formTitle}} Book</span>
+    </div>
+    <div class="panel-form">
+      <form [formGroup]="bookForm" class="d-flex">
+        <div class="panel-card p-2 my-2 ">
+          <div class="form-contents">
             <div class="form-group mt-2">
               <label class="capitalise" for="title">Title</label>
               <input type="title" class="form-control" placeholder="Enter Title" formControlName="title" />
@@ -50,20 +50,31 @@
                 Category is required!
               </div>
             </div>
-            <div class="form-group">
-              <label class="capitalise" for="cover">Image</label>
-              <input type="file" class="form-control" (change)="onFileSelect($event)" placeholder="Enter Image URL" />
-            </div>
-            <div class="flex-end">
+            <div class="panel-footer flex-end">
               <button class="btn btn-light mr-3" routerLink="/admin">Cancel</button>
               <button type="submit" class="btn btn-primary" (click)="saveBook()" [disabled]="bookForm.invalid">
                 Save Book
               </button>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
+        <div class="d-flex center">
+          <div class="preview-image">
+            <div class="panel-header">
+              <span class="heading text-center m-auto">Image Preview</span>
+            </div>
+            <div class="panel-form text-center">
+              <div class="preview-img">
+                <img src="{{coverImagePath}}" alt="No Image Available">
+              </div>
+              <label for="file-upload" class="custom-file-upload">
+                <i class="fa fa-cloud-upload"></i> Upload Image
+              </label>
+              <input id="file-upload" type="file" (change)="onFileSelect($event)" />
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-<img src="{{coverImagePath}}" alt="">

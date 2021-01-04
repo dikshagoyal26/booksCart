@@ -111,7 +111,7 @@ export class BooksFormComponent implements OnInit {
       () => {
         this.snackbarService.show('book added successfully');
         this.bookForm.reset();
-        this.router.navigate(['/books']);
+        this.router.navigate(['/admin']);
       },
       () => {
         this.snackbarService.show('issue in book add', 'danger');
@@ -123,7 +123,7 @@ export class BooksFormComponent implements OnInit {
     this.booksService.updateBook(this.id, bookObj).subscribe(
       () => {
         this.snackbarService.show('book updated successfully');
-        this.router.navigate(['/books']);
+        this.router.navigate(['/admin']);
       },
       (err) => {
         console.log(err);

@@ -1,12 +1,12 @@
-<div class="container-fluid mt-3">
-    <div class="d-flex">
-        <div class="cart">
-            <div class="cart-header">
-                <span class="heading">Cart Items</span>
-                <button (click)="clearCart()" class="btn btn-light">Clear Cart</button>
-            </div>
-            <div class="cart-form">
-                <table class="table capitalise text-center" *ngIf="cart && cart.length>0">
+<div class="d-flex center w-100">
+    <div class="panel cart">
+        <div class="panel-header">
+            <span class="heading">Cart Items</span>
+            <button (click)="clearCart()" class="btn btn-light" *ngIf="cart && cart.length>0">Clear Cart</button>
+        </div>
+        <div>
+            <div class="panel-card">
+                <table class="table capitalise text-center" *ngIf="cart && cart.length>0;else emptyCart">
                     <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -26,7 +26,7 @@
                             </td>
                             <td>{{ item.book.price | currency : 'INR'}}</td>
                             <td><i class="fa fa-minus-circle pointer" aria-hidden="true"
-                                    (click)=" reduceItemQty(item.book._id)"></i>
+                                    [ngClass]="{'disabled':item.quantity==1}" (click)="reduceItemQty(item)"></i>
                                 {{item.quantity }}
                                 <i class="fa fa-plus-circle pointer" aria-hidden="true"
                                     (click)=" addOneItem(item.book._id)"></i>
@@ -49,11 +49,13 @@
                         </tr>
                     </tfoot>
                 </table>
-                <section *ngIf="!cart || cart.length==0">
-                    <p>Book cart is empty!</p>
-                    <button routerLink="/books">Continue Shopping</button>
-                </section>
             </div>
         </div>
+        <ng-template #emptyCart>
+            <div class="d-flex column emptyCart">
+                <h2>Shopping Cart is empty!</h2>
+                <button routerLink="/books" class="btn btn-primary shop mt-3">Continue Shopping</button>
+            </div>
+        </ng-template>
     </div>
 </div>

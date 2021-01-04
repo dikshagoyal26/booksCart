@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Cart } from 'src/app/shared/models/cart.model';
 import { User } from 'src/app/shared/models/user';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private userService: UserService
+    private userService: UserService,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -45,16 +47,20 @@ export class CartComponent implements OnInit {
       },
       (err) => {
         console.log(err);
+        this.snackbarService.show('Something Went Wrong!', 'danger');
       }
     );
   }
-  reduceItemQty(bookId: string) {
-    this.cartService.reduceItemQty(this.user._id, bookId).subscribe(
+  reduceItemQty(item: Cart) {
+    if (item.quantity <= 1) return;
+    this.cartService.reduceItemQty(this.user._id, item.book._id).subscribe(
       () => {
         this.getCartItems();
+        this.snackbarService.show('One Item removed from Cart!');
       },
       (err) => {
         console.log(err);
+        this.snackbarService.show('Something Went Wrong!', 'danger');
       }
     );
   }
@@ -69,9 +75,11 @@ export class CartComponent implements OnInit {
     this.cartService.deleteBookFromCart(this.user._id, bookId).subscribe(
       () => {
         this.getCartItems();
+        this.snackbarService.show('Book Deleted from Cart.!');
       },
       (err) => {
         console.log(err);
+        this.snackbarService.show('Something Went Wrong!', 'danger');
       }
     );
   }
@@ -79,9 +87,11 @@ export class CartComponent implements OnInit {
     this.cartService.clearCart(this.user._id).subscribe(
       () => {
         this.getCartItems();
+        this.snackbarService.show('Cart Cleared.!');
       },
       (err) => {
         console.log(err);
+        this.snackbarService.show('Something Went Wrong!', 'danger');
       }
     );
   }

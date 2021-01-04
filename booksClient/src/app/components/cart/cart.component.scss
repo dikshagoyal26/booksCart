@@ -1,28 +1,7 @@
 .cart {
-  min-width: 45rem;
-  border: 1px solid #dee2e6;
+  width: 45rem;
 }
-.cart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #5aaaff;
-  color: #fff;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 10px 20px;
-}
-.cart-header .heading {
-  font-size: 28px;
-}
-.cart-form {
-  padding: 10px;
-}
-.d-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .table {
   background: #fff;
 }
@@ -38,4 +17,13 @@ img {
 }
 .fa-minus-circle {
   color: #ced4da;
+}
+.shop {
+  width: max-content;
+}
+.emptyCart {
+  padding: 10px;
+}
+.emptyCart h2 {
+  text-transform: none;
 }

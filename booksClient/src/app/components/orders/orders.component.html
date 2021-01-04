@@ -1,2 +1,28 @@
-<p>orders works!</p>
-{{orders|json}}
+<div class="d-flex center w-100">
+    <div class="panel order">
+        <div class="panel-header">
+            <span class="heading">My Orders</span>
+        </div>
+        <div class="panel-form">
+            <div class="mb-2">
+                <input type="text" class="form-control" [(ngModel)]="searchData" placeholder="Filter">
+            </div>
+            <table class="table capitalise">
+                <thead>
+                    <tr>
+                        <th scope="col">Order Id</th>
+                        <th scope="col">Ordered On</th>
+                        <th scope="col">Order Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders|orderFilter:searchData; let i = index">
+                        <td>{{order._id}}</td>
+                        <td>{{ order.created_at|date:'mediumDate' }}</td>
+                        <td>{{ order.total|currency:"INR" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

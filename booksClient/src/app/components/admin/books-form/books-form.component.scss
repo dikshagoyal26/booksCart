@@ -1,35 +1,26 @@
-.invalid-feedback {
-  display: inline;
+.book-form {
+  width: 55rem;
 }
-button:disabled {
-  cursor: not-allowed;
+.panel-card {
+  flex: 2;
 }
-.upsert {
-  min-width: 40rem;
+.preview-image {
+  flex: 1;
+  margin: 1rem;
   border: 1px solid #dee2e6;
 }
-.upsert-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #5aaaff;
-  color: #fff;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 10px 20px;
+input[type="file"] {
+  display: none;
 }
-.upsert-header .heading {
-  font-size: 28px;
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-top: 10px;
 }
-.upsert-form {
-  padding: 10px;
-}
-.d-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.flex-end {
-  display: flex;
-  justify-content: flex-end;
+.preview-img,
+img {
+  max-width: 200px;
+  max-height: 250px;
 }

@@ -8,10 +8,13 @@ export class FilterPipe implements PipeTransform {
     if (!value) return null;
     if (!filter) return value;
     return value.filter((val) => {
+      console.log(val);
       let rval =
         val.title.toLocaleLowerCase().includes(filter.toLocaleLowerCase()) ||
         val.author.toLocaleLowerCase().includes(filter.toLocaleLowerCase()) ||
-        val.category.toLocaleLowerCase().includes(filter.toLocaleLowerCase()) ||
+        val.category.category_type
+          .toLocaleLowerCase()
+          .includes(filter.toLocaleLowerCase()) ||
         ('' + val.price)
           .toLocaleLowerCase()
           .includes(filter.toLocaleLowerCase());

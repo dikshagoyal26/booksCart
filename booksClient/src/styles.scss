@@ -2,6 +2,9 @@ $nav-color: #246758;
 $count-background: #e52626;
 $border-dark: rgba($nav-color, 0.88);
 $nav-hover-color: #23534a;
+
+$panel-color: #008891; //#cd8a56 //af804f
+$btn-color: #246758;
 body {
   margin: 0;
   padding: 0;
@@ -68,7 +71,8 @@ div.form form {
   display: inline;
   font-size: 0.7rem;
 }
-button:disabled {
+button:disabled,
+.disabled {
   cursor: not-allowed;
 }
 form label {
@@ -109,4 +113,56 @@ form label {
 }
 .d-flex.center {
   justify-content: center;
+  align-items: center;
+}
+.panel {
+  min-width: 30rem;
+  border: 1px solid #dee2e6;
+}
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #5aaaff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+.panel-form {
+  padding: 10px;
+}
+.panel-header .heading {
+  font-size: 28px;
+}
+
+.errorMessage {
+  font-size: 1rem;
+}
+.panel-card {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.panel-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 0;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+.column {
+  flex-direction: column;
 }

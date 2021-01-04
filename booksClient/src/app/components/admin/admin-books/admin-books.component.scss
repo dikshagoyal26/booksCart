@@ -1,5 +1,5 @@
 .admin {
-  min-width: 55rem;
+  width: 55rem;
   border: 1px solid #dee2e6;
 }
 .admin-header {
@@ -24,7 +24,10 @@
   justify-content: center;
 }
 .table {
+  table-layout: auto;
+  width: 100%;
   background: #fff;
+  max-width: 55rem;
 }
 .operations {
   display: flex;
@@ -50,4 +53,8 @@
 }
 .title {
   font-weight: 600;
+}
+table td {
+  max-width: 15rem;
+  text-overflow: ellipsis;
 }

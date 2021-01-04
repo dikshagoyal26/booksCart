@@ -1,45 +1,45 @@
-<div class="container-fluid mt-3">
-    <div class="d-flex">
-        <div class="login">
-            <div class="login-header">
-                <span class="heading">Login</span>
-                <div>
-                    <span class="pt-3"> New User? </span> <button routerLink="/register"
-                        class="btn btn-light">Register</button>
-                </div>
+<div class="d-flex center w-100">
+    <div class="panel">
+        <div class="panel-header">
+            <span class="heading">Login</span>
+            <div>
+                <span class="pt-3"> New User? </span> <button routerLink="/register"
+                    class="btn btn-light">Register</button>
             </div>
-            <div class="login-form">
-                <div class="card p-2 my-2 ">
-                    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
-                        <div class="invalid-feedback errorMessage text-center d-block m-auto"
-                            *ngIf="loginForm.errors?.invalidLogin">
-                            Username or Password is incorrect.</div>
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" formControlName="userName"
-                                placeholder="Enter username" name="username" />
-                            <div class="invalid-feedback"
-                                *ngIf="LoginFormControl.userName.touched && LoginFormControl.userName.errors?.required">
-                                Username is required!
-                            </div>
+        </div>
+        <div class="panel-form">
+            <div class="panel-card p-2 my-2 ">
+                <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+                    <div class="invalid-feedback errorMessage text-center d-block m-auto"
+                        *ngIf="loginForm.errors?.invalidLogin">
+                        Username or Password is incorrect.</div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" formControlName="userName" placeholder="Enter username"
+                            name="username" />
+                        <div class="invalid-feedback"
+                            *ngIf="LoginFormControl.userName.touched && LoginFormControl.userName.errors?.required">
+                            Username is required!
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <div class="password-div embed-i">
-                                <input class="form-control" type="password" formControlName="password"
-                                    placeholder="Enter password" name="password" togglePasswordDisplay />
-                            </div>
-                            <div class="invalid-feedback"
-                                *ngIf=" LoginFormControl.password.touched && LoginFormControl.password.errors?.required">
-                                Password is required!
-                            </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-div embed-i">
+                            <input class="form-control" type="password" formControlName="password"
+                                placeholder="Enter password" name="password" togglePasswordDisplay />
                         </div>
+                        <div class="invalid-feedback"
+                            *ngIf=" LoginFormControl.password.touched && LoginFormControl.password.errors?.required">
+                            Password is required!
+                        </div>
+                    </div>
+                    <div class="panel-footer">
                         <button type="submit" class="btn btn-primary d-block" [disabled]="loginForm.invalid">
                             Login
                         </button>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class OrdersComponent implements OnInit {
   public orders: Order[];
   private user: User;
+  public searchData: string = '';
   constructor(
     private orderService: OrdersService,
     private userService: UserService
