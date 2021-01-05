@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Url } from '../models/backendUrl.model';
 import { User } from '../models/user';
+import { WishlistService } from './wishlist.service';
 
 @Injectable({
   providedIn: 'root',

@@ -13,6 +13,10 @@ body {
   width: 100%;
   height: 100vh;
   text-transform: capitalize;
+  font-size: 16px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  font-kerning: normal;
 }
 img {
   width: 100%;
@@ -60,7 +64,6 @@ div.form form {
 .books {
   display: flex;
   flex-direction: column;
-  // align-items: center;
 }
 .addbook {
   display: flex;

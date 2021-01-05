@@ -1,0 +1,11 @@
+<div class="d-flex center" *ngIf="!showBtn;else loadBtn">
+    <div class="spinner-border text-secondary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<ng-template #loadBtn>
+    <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        {{btnText}}...
+    </button>
+</ng-template>

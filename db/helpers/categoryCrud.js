@@ -29,10 +29,10 @@ const categoryOperations = {
     return new Promise((resolve) => {
       CategoryModel.find({}, (err, categories) => {
         if (categories && categories.length > 0) {
-          let category = categories.filter(
+          let category = categories.find(
             (cat) => cat.category_type == categoryType
           );
-          resolve(!!category && category.length > 0 ? category[0]._id : "");
+          resolve(!!category ? category._id : "");
         } else resolve(null);
       });
     });

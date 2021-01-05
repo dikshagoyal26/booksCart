@@ -1,4 +1,5 @@
-<button [disabled]="!user || (user && !user.isLoggedIn)" (click)="addToCart()" class="btn btn-info "><i
-        class="fa fa-cart-plus" aria-hidden="true"></i>
+<button *ngIf="!isAdding" [disabled]="!user || (user && !user.isLoggedIn)" (click)="addToCart()"
+    class="btn btn-info "><i class="fa fa-cart-plus" aria-hidden="true"></i>
     Add to Cart
 </button>
+<app-loader *ngIf="isAdding" [showBtn]=true [btnText]="Adding"></app-loader>

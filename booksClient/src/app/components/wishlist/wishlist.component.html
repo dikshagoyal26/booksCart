@@ -30,9 +30,7 @@
                                 <app-add-to-cart [bookId]="book._id"></app-add-to-cart>
                             </td>
                             <td>
-                                <button class="btn btn-danger" (click)="removeItem(book._id)"><i
-                                        class="fa fa-trash pointer" aria-hidden="true"></i> Remove From
-                                    Wishlist</button>
+                                <app-toggle-wishlist [bookId]="book._id" [showButton]=true></app-toggle-wishlist>
                             </td>
                         </tr>
                     </tbody>

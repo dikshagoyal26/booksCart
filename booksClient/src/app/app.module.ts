@@ -29,6 +29,8 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { PasswordDirective } from './shared/directive/password.directive';
 import { AdminModule } from './admin/admin.module';
 import { OrderFilterPipe } from './shared/filters/order-filter.pipe';
+import { LoaderComponent } from './components/loader/loader.component';
+import { ToggleWishlistComponent } from './components/toggle-wishlist/toggle-wishlist.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { OrderFilterPipe } from './shared/filters/order-filter.pipe';
     WishlistComponent,
     PasswordDirective,
     OrderFilterPipe,
+    LoaderComponent,
+    ToggleWishlistComponent,
   ],
   imports: [
     CommonModule,
@@ -68,7 +72,7 @@ import { OrderFilterPipe } from './shared/filters/order-filter.pipe';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorInterceptor,
-      multi: true, //?
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,

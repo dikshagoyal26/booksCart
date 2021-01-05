@@ -1,35 +1,15 @@
-.heading {
-  text-align: center;
-  margin: 13px auto;
-}
-.d-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.d-flex p,
-.d-flex h4 {
-  margin-bottom: 0;
-}
 .list-group-item .d-flex {
   justify-content: space-between;
+  align-items: center;
 }
-.details {
-  min-width: 40rem;
+
+.book-details {
+  width: 55rem;
   border: 1px solid #dee2e6;
 }
-.details-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #5aaaff;
-  color: #fff;
+.list-group-item {
+  background: transparent;
+}
+.bold {
   font-weight: 600;
-  font-size: 18px;
-}
-.details-header .heading {
-  font-size: 28px;
-}
-.details-form {
-  padding: 10px;
 }

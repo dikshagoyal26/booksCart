@@ -21,18 +21,14 @@ export class WishlistComponent implements OnInit {
     this.userService.userData.subscribe((user: User) => {
       this.user = user;
     });
-    this.getWishlistItems();
+    this.wishlistService.wishlist$.subscribe((books: Book[]) => {
+      this.books = books;
+    });
   }
-  getWishlistItems() {
-    this.wishlistService
-      .fetchWishlistedItems(this.user._id)
-      .subscribe((books: Book[]) => {
-        this.books = books;
-      });
-  }
+
   clearWishlist() {
     this.wishlistService.clearWishlist(this.user._id).subscribe(() => {
-      this.wishlistService.setWishlistCount(0);
+      this.wishlistService.setWishlist([]);
     });
   }
   removeItem(bookId: string) {
@@ -40,7 +36,7 @@ export class WishlistComponent implements OnInit {
       .removeItemFromWishlist(this.user._id, bookId)
       .subscribe((books: Book[]) => {
         this.books = books;
-        this.wishlistService.setWishlistCount(books.length);
+        this.wishlistService.setWishlist(books);
       });
   }
 }

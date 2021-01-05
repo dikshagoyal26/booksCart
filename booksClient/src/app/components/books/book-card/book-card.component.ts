@@ -12,35 +12,12 @@ import { WishlistService } from 'src/app/shared/services/wishlist.service';
   templateUrl: './book-card.component.html',
   styleUrls: ['./book-card.component.scss'],
 })
-export class BookCardComponent implements OnInit, OnDestroy {
+export class BookCardComponent implements OnInit {
   @Input() book: Book;
-  public userDataSubscription: Subscription;
-  public user: User;
-  constructor(
-    private userService: UserService,
-    private wishlistService: WishlistService,
-    private snackbarService: SnackbarService
-  ) {}
-
-  ngOnInit(): void {
-    this.userDataSubscription = this.userService.userData
-      .asObservable()
-      .subscribe((data: User) => {
-        this.user = data;
-      });
-  }
-  ngOnDestroy() {
-    if (this.userDataSubscription) {
-      this.userDataSubscription.unsubscribe();
-    }
-  }
-  toggleWishlist(bookId) {
-    this.wishlistService
-      .addItemToWishlist(this.user._id, bookId)
-      .subscribe((books: Book[]) => {
-        this.snackbarService.show('book added to wishlist');
-        if (books) this.wishlistService.setWishlistCount(books.length);
-      });
+  public coverImage: string;
+  constructor() {}
+  ngOnInit() {
+    this.coverImage = this.getCover();
   }
   getCover() {
     if (this.book && this.book.cover) {

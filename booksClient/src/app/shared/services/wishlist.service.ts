@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Url } from '../models/backendUrl.model';
 import { Book } from '../models/books.model';
 import { Order } from '../models/order.model';
@@ -13,6 +13,8 @@ export class WishlistService {
   constructor(private http: HttpClient) {
     this.backendUrl = Url.backendUrl;
   }
+  public wishlist$: BehaviorSubject<any> = new BehaviorSubject<Book[]>([]);
+
   public wishlistCount$: Subject<number> = new Subject<number>();
   fetchWishlistedItems(userId: string) {
     return this.http.get<Book[]>(this.backendUrl + `wishlist/fetch/${userId}`);
@@ -35,7 +37,8 @@ export class WishlistService {
       {}
     );
   }
-  setWishlistCount(val: number) {
-    this.wishlistCount$.next(val);
+  setWishlist(books: Book[]) {
+    this.wishlist$.next(books);
+    this.wishlistCount$.next(books.length);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BooksService } from 'src/app/shared/services/books.service';
 
 @Component({
@@ -19,38 +19,33 @@ export class SearchBarComponent implements OnInit {
   ngOnInit(): void {}
   searchBooks(event) {
     if (event.keyCode == 13) {
-      this.showBooks(this.searchControl.value);
-    } else {
-      this.showSuggestions();
-    }
-  }
-  showBooks(item: string) {
-    if (!item) {
+      this.handleEnterKey();
       return;
     }
-    item = item.trim();
-    if (!item) return;
-    item = item.toLowerCase();
-    this.books = [];
+    this.showSuggestions();
+    this.activeSuggestion(event);
+  }
+  showBooks(item: string) {
+    item = this.getItem(item);
+    if (!item) {
+      this.closeSuggestions();
+      return;
+    }
     this.searchControl.setValue(item);
     this.router.navigate(['/search'], {
       queryParams: { item: item },
     });
   }
   private async showSuggestions() {
-    let item = this.searchControl.value;
+    let item = this.getItem(this.searchControl.value);
     if (!item) {
-      this.books = [];
+      this.closeSuggestions();
       return;
     }
-    item = item.trim();
-    if (!item) {
-      this.books = [];
-      return;
-    }
-    this.books = await this.booksService.showBookSuggestions(
-      item.toLowerCase()
-    );
+    this.books = await this.booksService.showBookSuggestions(item);
+  }
+  private getItem(item: string) {
+    return item && item.toLowerCase().trim() ? item.toLowerCase().trim() : null;
   }
   closeSuggestions() {
     this.books = [];
@@ -58,13 +53,30 @@ export class SearchBarComponent implements OnInit {
   }
   activeSuggestion(event) {
     if (event.keyCode == 40) {
-      this.currentFocus++;
-      if (this.currentFocus >= this.books.length) this.currentFocus = 0;
+      this.handleDownKey();
     } else if (event.keyCode == 38) {
-      if (this.currentFocus < 0) this.currentFocus = this.books.length - 1;
-      this.currentFocus--;
+      this.handleUpKey();
     } else if (event.keyCode == 13) {
-      this.showBooks(this.searchControl.value);
+      this.handleEnterKey();
     }
+  }
+  private handleDownKey() {
+    if (this.currentFocus < this.books.length - 1) {
+      this.currentFocus++;
+    }
+    document
+      .querySelector('#autocomplete-list')
+      .scrollBy({ top: 10 * this.currentFocus });
+  }
+  private handleUpKey() {
+    if (this.currentFocus > 0) {
+      this.currentFocus--;
+    }
+    document
+      .querySelector('#autocomplete-list')
+      .scrollBy({ top: -10 * (this.books.length - this.currentFocus) });
+  }
+  private handleEnterKey() {
+    this.showBooks(this.searchControl.value);
   }
 }

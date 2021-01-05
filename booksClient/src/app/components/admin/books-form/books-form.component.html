@@ -51,10 +51,12 @@
               </div>
             </div>
             <div class="panel-footer flex-end">
-              <button class="btn btn-light mr-3" routerLink="/admin">Cancel</button>
-              <button type="submit" class="btn btn-primary" (click)="saveBook()" [disabled]="bookForm.invalid">
+              <button *ngIf="!isSavingBook" class="btn btn-light mr-3" routerLink="/admin">Cancel</button>
+              <button *ngIf="!isSavingBook" type="submit" class="btn btn-primary" (click)="saveBook()"
+                [disabled]="bookForm.invalid">
                 Save Book
               </button>
+              <app-loader *ngIf="isSavingBook" [showBtn]=true [btnText]="Adding"></app-loader>
             </div>
           </div>
         </div>

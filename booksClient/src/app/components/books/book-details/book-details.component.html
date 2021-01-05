@@ -1,47 +1,44 @@
-<!-- <button routerLink="/books">Back</button> -->
-<div class="container-fluid mt-3 book">
-    <div class="d-flex">
-        <div class="details">
-            <div class="details-header">
-                <span class="heading">Book Details</span>
-            </div>
-            <div class="details-form" *ngIf="book">
-                <div class="row">
-                    <div class="col-md-4 book-img">
-                        <img [src]="book.cover" alt="book cover" [title]="book.title">
-                    </div>
-                    <div class="col-md-8">
-                        <ul class=" list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="d-flex">
-                                    <h4>Title</h4>
-                                    <p class="uppercase">{{book.title}}</p>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex">
-                                    <h4>Author</h4>
-                                    <p class="capitalise"> {{book.author}}</p>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex capitalise">
-                                    <h4>Category</h4>
-                                    <p>{{book.category.category_type}}</p>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex">
-                                    <h4>Price</h4>
-                                    <p> {{book.price | currency : 'INR'}}</p>
-                                </div>
-                            </li>
+<div class="d-flex center w-100" *ngIf="book;else loading">
+    <div class="panel book-details">
+        <div class="panel-header">
+            <span class="heading">Book Details</span>
+        </div>
+        <div class="panel-form">
+            <div class="row">
+                <div class="col-md-4 book-img">
+                    <img [src]="book.cover" alt="book cover" [title]="book.title">
+                </div>
+                <div class="col-md-8 d-flex center column w-100">
+                    <table class="table w-100">
+                        <tbody>
+                            <tr>
+                                <td><span class="bold">Title</span></td>
+                                <td> <span>{{book.title}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="bold">Author</span></td>
+                                <td> <span>{{book.author}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="bold">Category</span></td>
+                                <td> <span>{{book.category.category_type}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="bold">Price</span></td>
+                                <td> <span>{{book.price | currency : 'INR'}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex w-100 ">
+                        <app-add-to-cart [bookId]="book._id" class="mr-2"></app-add-to-cart>
+                        <app-toggle-wishlist [bookId]="book._id" [showButton]=true></app-toggle-wishlist>
 
-                        </ul>
-                        <app-add-to-cart [bookId]="book._id"></app-add-to-cart>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<ng-template #loading>
+    <app-loader></app-loader>
+</ng-template>

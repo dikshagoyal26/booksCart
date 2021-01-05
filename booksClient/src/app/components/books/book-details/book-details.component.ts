@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Book } from 'src/app/shared/models/books.model';
 import { User } from 'src/app/shared/models/user';
@@ -17,7 +17,8 @@ export class BookDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private booksService: BooksService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +35,8 @@ export class BookDetailsComponent implements OnInit {
   }
   private fetchDetails(BookId) {
     this.booksService.fetchBookById(BookId).subscribe((data: Book) => {
-      this.book = data;
+      if (data) this.book = data;
+      else this.router.navigate(['not-found']);
     });
   }
 }

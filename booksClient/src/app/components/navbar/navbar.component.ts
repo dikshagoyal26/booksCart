@@ -62,8 +62,8 @@ export class NavbarComponent implements OnInit {
     this.wishlistService
       .fetchWishlistedItems(this.user._id)
       .subscribe((books: Book[]) => {
-        if (books) this.wishlistService.setWishlistCount(books.length);
-        else this.wishlistService.setWishlistCount(0);
+        if (books) this.wishlistService.setWishlist(books);
+        else this.wishlistService.setWishlist([]);
       });
   }
   logout() {

@@ -34,7 +34,7 @@ export class BooksFormComponent implements OnInit {
   public formTitle: string = 'Add';
   public coverImagePath: any;
   private id: string = '';
-  private file: any;
+  public isSavingBook: boolean = false;
   ngOnInit(): void {
     this.categoriesService.categories$.subscribe((categories: Categories[]) => {
       this.categories = categories;
@@ -105,27 +105,32 @@ export class BooksFormComponent implements OnInit {
     }
   }
   private addBook() {
+    this.isSavingBook = true;
     let bookObj = this.getFormData();
-    console.log(bookObj);
     this.booksService.addBook(bookObj).subscribe(
       () => {
+        this.isSavingBook = false;
         this.snackbarService.show('book added successfully');
         this.bookForm.reset();
         this.router.navigate(['/admin']);
       },
       () => {
+        this.isSavingBook = false;
         this.snackbarService.show('issue in book add', 'danger');
       }
     );
   }
   private updateBook() {
+    this.isSavingBook = true;
     let bookObj = this.getFormData();
     this.booksService.updateBook(this.id, bookObj).subscribe(
       () => {
+        this.isSavingBook = false;
         this.snackbarService.show('book updated successfully');
         this.router.navigate(['/admin']);
       },
       (err) => {
+        this.isSavingBook = false;
         console.log(err);
         this.snackbarService.show('issue in book update', 'danger');
       }

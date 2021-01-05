@@ -47,16 +47,20 @@ export class CartService {
     return this.http.delete<string>(this.backendUrl + `cart/clear/${userId}`);
   }
   addItemToCart(userId: string, bookId: string) {
-    this.addToCart(userId, bookId).subscribe(
-      (items: Cart[]) => {
-        if (items) this.setCartItemCount(items);
-        else this.cartItemcount$.next(0);
-        this.snackbarService.show('Book Added to Cart!');
-      },
-      () => {
-        this.snackbarService.show('Something Went Wrong!', 'danger');
-      }
-    );
+    return new Promise((resolve) => {
+      this.addToCart(userId, bookId).subscribe(
+        (items: Cart[]) => {
+          if (items) this.setCartItemCount(items);
+          else this.cartItemcount$.next(0);
+          this.snackbarService.show('Book Added to Cart!');
+          resolve(null);
+        },
+        () => {
+          this.snackbarService.show('Something Went Wrong!', 'danger');
+          resolve(null);
+        }
+      );
+    });
   }
   getTotalPrice(cart: Cart[]) {
     let totalPrice = 0;
