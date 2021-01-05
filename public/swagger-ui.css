@@ -7155,7 +7155,7 @@
   width: 100%;
   max-width: 1460px;
   margin: 0 auto;
-  padding: 0 1.25rem;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 .swagger-ui .opblock-tag-section {
@@ -7165,7 +7165,7 @@
 .swagger-ui .opblock-tag {
   display: flex;
   align-items: center;
-  padding: 10px 20px 10px 0.625rem;
+  padding: 10px 20px 10px 10px;
   cursor: pointer;
   transition: all 0.2s;
   border-bottom: 1px solid rgba(59, 65, 81, 0.3);
@@ -7175,7 +7175,7 @@
 }
 .swagger-ui .opblock-tag {
   font-size: 24px;
-  margin: 0 0 2.188rem;
+  margin: 0 0 5px;
   font-family: sans-serif;
   color: #3b4151;
 }
@@ -7189,12 +7189,12 @@
   font-size: 14px;
   font-weight: 400;
   flex: 1;
-  padding: 0 0.625rem;
+  padding: 0 10px;
   font-family: sans-serif;
   color: #3b4151;
 }
 .swagger-ui .parameter__type {
-  font-size: 0.75rem;
+  font-size: 12px;
   padding: 5px 0;
   font-family: monospace;
   font-weight: 600;
@@ -7236,13 +7236,13 @@
 .swagger-ui .view-line-link {
   position: relative;
   top: 3px;
-  width: 1.25rem;
-  margin: 0 2.188rem;
+  width: 20px;
+  margin: 0 5px;
   cursor: pointer;
   transition: all 0.5s;
 }
 .swagger-ui .opblock {
-  margin: 0 0 12.188rem;
+  margin: 0 0 15px;
   border: 1px solid #000;
   border-radius: 4px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.19);
@@ -7263,7 +7263,7 @@
 }
 .swagger-ui .opblock .tab-header .tab-item.active h4 span:after {
   position: absolute;
-  bottom: -12.188rem;
+  bottom: -15px;
   left: 50%;
   width: 120%;
   height: 4px;
@@ -7278,13 +7278,13 @@
 .swagger-ui .opblock .opblock-section-header {
   display: flex;
   align-items: center;
-  padding: 8px 1.25rem;
+  padding: 8px 20px;
   min-height: 50px;
   background: hsla(0, 0%, 100%, 0.8);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .swagger-ui .opblock .opblock-section-header > label {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -7306,7 +7306,7 @@
   font-size: 14px;
   font-weight: 700;
   min-width: 80px;
-  padding: 6px 12.188rem;
+  padding: 6px 15px;
   text-align: center;
   border-radius: 3px;
   background: #000;
@@ -7317,11 +7317,11 @@
 .swagger-ui .opblock .opblock-summary-operation-id,
 .swagger-ui .opblock .opblock-summary-path,
 .swagger-ui .opblock .opblock-summary-path__deprecated {
-  font-size: 1rem;
+  font-size: 16px;
   display: flex;
   align-items: center;
   word-break: break-word;
-  padding: 0 0.625rem;
+  padding: 0 10px;
   font-family: monospace;
   font-weight: 600;
   color: #3b4151;
@@ -7330,7 +7330,7 @@
   .swagger-ui .opblock .opblock-summary-operation-id,
   .swagger-ui .opblock .opblock-summary-path,
   .swagger-ui .opblock .opblock-summary-path__deprecated {
-    font-size: 0.75rem;
+    font-size: 12px;
   }
 }
 .swagger-ui .opblock .opblock-summary-path__deprecated {
@@ -7349,7 +7349,7 @@
 .swagger-ui .opblock .opblock-summary {
   display: flex;
   align-items: center;
-  padding: 2.188rem;
+  padding: 5px;
   cursor: pointer;
 }
 .swagger-ui .opblock .opblock-summary .view-line-link {
@@ -7361,8 +7361,8 @@
   transition: all 0.5s;
 }
 .swagger-ui .opblock .opblock-summary:hover .view-line-link {
-  width: 1.125rem;
-  margin: 0 2.188rem;
+  width: 18px;
+  margin: 0 5px;
 }
 .swagger-ui .opblock.opblock-post {
   border-color: #49cc90;
@@ -7480,7 +7480,7 @@
   background: #ebebeb;
 }
 .swagger-ui .opblock .opblock-schemes {
-  padding: 8px 1.25rem;
+  padding: 8px 20px;
 }
 .swagger-ui .opblock .opblock-schemes .schemes-title {
   padding: 0 10px 0 0;
@@ -7488,7 +7488,7 @@
 .swagger-ui .filter .operation-filter-input {
   width: 100%;
   margin: 20px 0;
-  padding: 0.625rem;
+  padding: 10px;
   border: 2px solid #d8dde7;
 }
 .swagger-ui .model-example {
@@ -7500,7 +7500,7 @@
   list-style: none;
 }
 .swagger-ui .tab li {
-  font-size: 0.75rem;
+  font-size: 12px;
   min-width: 60px;
   padding: 0;
   cursor: pointer;
@@ -7510,7 +7510,7 @@
 .swagger-ui .tab li:first-of-type {
   position: relative;
   padding-left: 0;
-  padding-right: 0.75rem;
+  padding-right: 12px;
 }
 .swagger-ui .tab li:first-of-type:after {
   position: absolute;
@@ -7527,17 +7527,17 @@
 .swagger-ui .opblock-description-wrapper,
 .swagger-ui .opblock-external-docs-wrapper,
 .swagger-ui .opblock-title_normal {
-  font-size: 0.75rem;
-  margin: 0 0 2.188rem;
-  padding: 15px 1.25rem;
+  font-size: 12px;
+  margin: 0 0 5px;
+  padding: 15px 20px;
   font-family: sans-serif;
   color: #3b4151;
 }
 .swagger-ui .opblock-description-wrapper h4,
 .swagger-ui .opblock-external-docs-wrapper h4,
 .swagger-ui .opblock-title_normal h4 {
-  font-size: 0.75rem;
-  margin: 0 0 2.188rem;
+  font-size: 12px;
+  margin: 0 0 5px;
   font-family: sans-serif;
   color: #3b4151;
 }
@@ -7553,7 +7553,7 @@
   padding-left: 0;
 }
 .swagger-ui .execute-wrapper {
-  padding: 1.25rem;
+  padding: 20px;
   text-align: right;
 }
 .swagger-ui .execute-wrapper .btn {
@@ -7574,12 +7574,12 @@
   margin: 3px 0 0;
 }
 .swagger-ui .responses-inner {
-  padding: 1.25rem;
+  padding: 20px;
 }
 .swagger-ui .responses-inner h4,
 .swagger-ui .responses-inner h5 {
-  font-size: 0.75rem;
-  margin: 10px 0 2.188rem;
+  font-size: 12px;
+  margin: 10px 0 5px;
   font-family: sans-serif;
   color: #3b4151;
 }
@@ -7612,9 +7612,9 @@
   margin: 3em auto;
 }
 .swagger-ui .opblock-body pre {
-  font-size: 0.75rem;
+  font-size: 12px;
   margin: 0;
-  padding: 0.625rem;
+  padding: 10px;
   white-space: pre-wrap;
   word-wrap: break-word;
   word-break: break-all;
@@ -7645,22 +7645,22 @@
 }
 .swagger-ui .download-contents {
   position: absolute;
-  bottom: 0.625rem;
-  right: 0.625rem;
+  bottom: 10px;
+  right: 10px;
   cursor: pointer;
   background: #7d8293;
   text-align: center;
-  padding: 2.188rem;
+  padding: 5px;
   border-radius: 4px;
   font-family: sans-serif;
   font-weight: 600;
   color: #fff;
   font-size: 14px;
   height: 30px;
-  width: 72.188rem;
+  width: 75px;
 }
 .swagger-ui .scheme-container {
-  margin: 0 0 1.25rem;
+  margin: 0 0 20px;
   padding: 30px 0;
   background: #fff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
@@ -7670,7 +7670,7 @@
   align-items: flex-end;
 }
 .swagger-ui .scheme-container .schemes > label {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 700;
   display: flex;
   flex-direction: column;
@@ -7695,7 +7695,7 @@
   position: relative;
 }
 .swagger-ui .loading-container .loading:after {
-  font-size: 0.625rem;
+  font-size: 10px;
   font-weight: 700;
   position: absolute;
   top: 50%;
@@ -7815,7 +7815,7 @@
   color: #3b4151;
 }
 .swagger-ui .btn.btn-sm {
-  font-size: 0.75rem;
+  font-size: 12px;
   padding: 4px 23px;
 }
 .swagger-ui .btn[disabled] {
@@ -7864,7 +7864,7 @@
   border-radius: 0 4px 4px 0;
 }
 .swagger-ui .authorization__btn {
-  padding: 0 0.625rem;
+  padding: 0 10px;
   border: none;
   background: none;
 }
@@ -7881,11 +7881,11 @@
 }
 .swagger-ui .expand-methods svg,
 .swagger-ui .expand-operation svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 20px;
+  height: 20px;
 }
 .swagger-ui .expand-methods {
-  padding: 0 0.625rem;
+  padding: 0 10px;
 }
 .swagger-ui .expand-methods:hover svg {
   fill: #404040;
@@ -7907,13 +7907,13 @@
 .swagger-ui select {
   font-size: 14px;
   font-weight: 700;
-  padding: 5px 40px 5px 0.625rem;
+  padding: 5px 40px 5px 10px;
   border: 2px solid #41444e;
   border-radius: 4px;
   background: #f7f7f7
     url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZD0iTTEzLjQxOCA3Ljg1OWEuNjk1LjY5NSAwIDAgMSAuOTc4IDAgLjY4LjY4IDAgMCAxIDAgLjk2OWwtMy45MDggMy44M2EuNjk3LjY5NyAwIDAgMS0uOTc5IDBsLTMuOTA4LTMuODNhLjY4LjY4IDAgMCAxIDAtLjk2OS42OTUuNjk1IDAgMCAxIC45NzggMEwxMCAxMWwzLjQxOC0zLjE0MXoiLz48L3N2Zz4=)
     right 10px center no-repeat;
-  background-size: 1.25rem;
+  background-size: 20px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
   font-family: sans-serif;
   color: #3b4151;
@@ -7923,7 +7923,7 @@
 }
 .swagger-ui select[multiple] {
   margin: 5px 0;
-  padding: 2.188rem;
+  padding: 5px;
   background: #f7f7f7;
 }
 .swagger-ui select.invalid {
@@ -7941,9 +7941,9 @@
   }
 }
 .swagger-ui label {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 700;
-  margin: 0 0 2.188rem;
+  margin: 0 0 5px;
   font-family: sans-serif;
   color: #3b4151;
 }
@@ -7955,7 +7955,7 @@
 .swagger-ui textarea {
   min-width: 100px;
   margin: 5px 0;
-  padding: 8px 0.625rem;
+  padding: 8px 10px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
   background: #fff;
@@ -7967,7 +7967,7 @@
   .swagger-ui input[type="search"],
   .swagger-ui input[type="text"],
   .swagger-ui textarea {
-    max-width: 172.188rem;
+    max-width: 175px;
   }
 }
 .swagger-ui input[type="email"].invalid,
@@ -8042,10 +8042,10 @@
   }
 }
 .swagger-ui textarea {
-  font-size: 0.75rem;
+  font-size: 12px;
   width: 100%;
   min-height: 280px;
-  padding: 0.625rem;
+  padding: 10px;
   border: none;
   border-radius: 4px;
   outline: none;
@@ -8058,10 +8058,10 @@
   border: 2px solid #61affe;
 }
 .swagger-ui textarea.curl {
-  font-size: 0.75rem;
+  font-size: 12px;
   min-height: 100px;
   margin: 0;
-  padding: 0.625rem;
+  padding: 10px;
   resize: none;
   border-radius: 4px;
   background: #41444e;
@@ -8070,7 +8070,7 @@
   color: #fff;
 }
 .swagger-ui .checkbox {
-  padding: 5px 0 0.625rem;
+  padding: 5px 0 10px;
   transition: opacity 0.5s;
   color: #303030;
 }
@@ -8092,10 +8092,10 @@
   position: relative;
   top: 3px;
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
+  width: 16px;
+  height: 16px;
   margin: 0 8px 0 0;
-  padding: 2.188rem;
+  padding: 5px;
   cursor: pointer;
   border-radius: 1px;
   background: #e8e8e8;
@@ -8145,17 +8145,17 @@
 .swagger-ui .dialog-ux .modal-ux-content {
   overflow-y: auto;
   max-height: 540px;
-  padding: 1.25rem;
+  padding: 20px;
 }
 .swagger-ui .dialog-ux .modal-ux-content p {
-  font-size: 0.75rem;
-  margin: 0 0 2.188rem;
+  font-size: 12px;
+  margin: 0 0 5px;
   color: #41444e;
   font-family: sans-serif;
   color: #3b4151;
 }
 .swagger-ui .dialog-ux .modal-ux-content h4 {
-  font-size: 1.125rem;
+  font-size: 18px;
   font-weight: 600;
   margin: 15px 0 0;
   font-family: sans-serif;
@@ -8168,7 +8168,7 @@
   align-items: center;
 }
 .swagger-ui .dialog-ux .modal-ux-header .close-modal {
-  padding: 0 0.625rem;
+  padding: 0 10px;
   border: none;
   background: none;
   -webkit-appearance: none;
@@ -8176,16 +8176,16 @@
   appearance: none;
 }
 .swagger-ui .dialog-ux .modal-ux-header h3 {
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 600;
   margin: 0;
-  padding: 0 1.25rem;
+  padding: 0 20px;
   flex: 1;
   font-family: sans-serif;
   color: #3b4151;
 }
 .swagger-ui .model {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 300;
   font-family: monospace;
   font-weight: 600;
@@ -8199,7 +8199,7 @@
   text-decoration: line-through;
 }
 .swagger-ui .model-toggle {
-  font-size: 0.625rem;
+  font-size: 10px;
   position: relative;
   top: 6px;
   display: inline-block;
@@ -8219,8 +8219,8 @@
 }
 .swagger-ui .model-toggle:after {
   display: block;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 20px;
+  height: 20px;
   content: "";
   background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z'/%3E%3C/svg%3E")
     50% no-repeat;
@@ -8260,18 +8260,18 @@
   border-radius: 4px;
 }
 .swagger-ui section.models.is-open {
-  padding: 0 0 1.25rem;
+  padding: 0 0 20px;
 }
 .swagger-ui section.models.is-open h4 {
-  margin: 0 0 2.188rem;
+  margin: 0 0 5px;
   border-bottom: 1px solid rgba(59, 65, 81, 0.3);
 }
 .swagger-ui section.models h4 {
-  font-size: 1rem;
+  font-size: 16px;
   display: flex;
   align-items: center;
   margin: 0;
-  padding: 10px 20px 10px 0.625rem;
+  padding: 10px 20px 10px 10px;
   cursor: pointer;
   transition: all 0.2s;
   font-family: sans-serif;
@@ -8287,17 +8287,17 @@
   background: rgba(0, 0, 0, 0.02);
 }
 .swagger-ui section.models h5 {
-  font-size: 1rem;
-  margin: 0 0 0.625rem;
+  font-size: 16px;
+  margin: 0 0 10px;
   font-family: sans-serif;
   color: #707070;
 }
 .swagger-ui section.models .model-jump-to-path {
   position: relative;
-  top: 2.188rem;
+  top: 5px;
 }
 .swagger-ui section.models .model-container {
-  margin: 0 20px 12.188rem;
+  margin: 0 20px 15px;
   position: relative;
   transition: all 0.5s;
   border-radius: 4px;
@@ -8307,22 +8307,22 @@
   background: rgba(0, 0, 0, 0.07);
 }
 .swagger-ui section.models .model-container:first-of-type {
-  margin: 1.25rem;
+  margin: 20px;
 }
 .swagger-ui section.models .model-container:last-of-type {
-  margin: 0 1.25rem;
+  margin: 0 20px;
 }
 .swagger-ui section.models .model-container .models-jump-to-path {
   position: absolute;
   top: 8px;
-  right: 2.188rem;
+  right: 5px;
   opacity: 0.65;
 }
 .swagger-ui section.models .model-box {
   background: none;
 }
 .swagger-ui .model-box {
-  padding: 0.625rem;
+  padding: 10px;
   display: inline-block;
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.1);
@@ -8335,19 +8335,19 @@
   opacity: 0.5;
 }
 .swagger-ui .model-title {
-  font-size: 1rem;
+  font-size: 16px;
   font-family: sans-serif;
   color: #505050;
 }
 .swagger-ui .model-deprecated-warning {
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 600;
   margin-right: 1em;
   font-family: sans-serif;
   color: #f93e3e;
 }
 .swagger-ui span > span.model .brace-close {
-  padding: 0 0 0 0.625rem;
+  padding: 0 0 0 10px;
 }
 .swagger-ui .prop-name {
   display: inline-block;
@@ -8363,7 +8363,7 @@
   color: #606060;
 }
 .swagger-ui .servers > label {
-  font-size: 0.75rem;
+  font-size: 12px;
   margin: -20px 15px 0 0;
   font-family: sans-serif;
   color: #3b4151;
@@ -8382,8 +8382,8 @@
   display: inline-block;
   max-width: 15em;
   vertical-align: middle;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .swagger-ui .servers table td:first-of-type {
   padding-right: 2em;
@@ -8398,11 +8398,11 @@
 .swagger-ui .servers .computed-url code {
   display: inline-block;
   padding: 4px;
-  font-size: 1rem;
+  font-size: 16px;
   margin: 0 1em;
 }
 .swagger-ui .servers-title {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 700;
 }
 .swagger-ui .operation-servers h4.message {
@@ -8410,7 +8410,7 @@
 }
 .swagger-ui table {
   width: 100%;
-  padding: 0 0.625rem;
+  padding: 0 10px;
   border-collapse: collapse;
 }
 .swagger-ui table.model tbody tr td {
@@ -8422,7 +8422,7 @@
   padding: 0 0 0 2em;
 }
 .swagger-ui table.headers td {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 300;
   vertical-align: middle;
   font-family: monospace;
@@ -8440,7 +8440,7 @@
 }
 .swagger-ui table thead tr td,
 .swagger-ui table thead tr th {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 700;
   padding: 12px 0;
   text-align: left;
@@ -8460,7 +8460,7 @@
   border-width: 1px;
 }
 .swagger-ui .parameter__name {
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 400;
   margin-right: 0.75em;
   font-family: sans-serif;
@@ -8470,23 +8470,23 @@
   font-weight: 700;
 }
 .swagger-ui .parameter__name.required:after {
-  font-size: 0.625rem;
+  font-size: 10px;
   position: relative;
   top: -6px;
-  padding: 2.188rem;
+  padding: 5px;
   content: "required";
   color: rgba(255, 0, 0, 0.6);
 }
 .swagger-ui .parameter__extension,
 .swagger-ui .parameter__in {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-style: italic;
   font-family: monospace;
   font-weight: 600;
   color: grey;
 }
 .swagger-ui .parameter__deprecated {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-style: italic;
   font-family: monospace;
   font-weight: 600;
@@ -8494,8 +8494,8 @@
 }
 .swagger-ui .parameter__empty_value_toggle {
   font-size: 13px;
-  padding-top: 2.188rem;
-  padding-bottom: 0.75rem;
+  padding-top: 5px;
+  padding-bottom: 12px;
 }
 .swagger-ui .parameter__empty_value_toggle input {
   margin-right: 7px;
@@ -8504,7 +8504,7 @@
   opacity: 0.7;
 }
 .swagger-ui .table-container {
-  padding: 1.25rem;
+  padding: 20px;
 }
 .swagger-ui .response-col_description {
   width: 99%;
@@ -8532,7 +8532,7 @@
 }
 .swagger-ui .topbar a span {
   margin: 0;
-  padding: 0 0.625rem;
+  padding: 0 10px;
 }
 .swagger-ui .topbar .download-url-wrapper {
   display: flex;
@@ -8555,7 +8555,7 @@
   color: #f0f0f0;
 }
 .swagger-ui .topbar .download-url-wrapper .select-label span {
-  font-size: 1rem;
+  font-size: 16px;
   flex: 1;
   padding: 0 10px 0 0;
   text-align: right;
@@ -8568,7 +8568,7 @@
   box-shadow: none;
 }
 .swagger-ui .topbar .download-url-wrapper .download-url-button {
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 700;
   padding: 4px 30px;
   border: none;
@@ -8581,10 +8581,10 @@
   margin: 50px 0;
 }
 .swagger-ui .info hgroup.main {
-  margin: 0 0 1.25rem;
+  margin: 0 0 20px;
 }
 .swagger-ui .info hgroup.main a {
-  font-size: 0.75rem;
+  font-size: 12px;
 }
 .swagger-ui .info pre {
   font-size: 14px;
@@ -8614,10 +8614,10 @@
   color: #1f69c0;
 }
 .swagger-ui .info > div {
-  margin: 0 0 2.188rem;
+  margin: 0 0 5px;
 }
 .swagger-ui .info .base-url {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 300 !important;
   margin: 0;
   font-family: monospace;
@@ -8631,11 +8631,11 @@
   color: #3b4151;
 }
 .swagger-ui .info .title small {
-  font-size: 0.625rem;
+  font-size: 10px;
   position: relative;
-  top: -2.188rem;
+  top: -5px;
   display: inline-block;
-  margin: 0 0 0 2.188rem;
+  margin: 0 0 0 5px;
   padding: 2px 4px;
   vertical-align: super;
   border-radius: 57px;
@@ -8661,17 +8661,17 @@
   justify-content: flex-end;
 }
 .swagger-ui .auth-wrapper .authorize {
-  padding-right: 1.25rem;
-  margin-right: 0.625rem;
+  padding-right: 20px;
+  margin-right: 10px;
 }
 .swagger-ui .auth-container {
-  margin: 0 0 0.625rem;
-  padding: 10px 1.25rem;
+  margin: 0 0 10px;
+  padding: 10px 20px;
   border-bottom: 1px solid #ebebeb;
 }
 .swagger-ui .auth-container:last-of-type {
   margin: 0;
-  padding: 10px 1.25rem;
+  padding: 10px 20px;
   border: 0;
 }
 .swagger-ui .auth-container h4 {
@@ -8686,8 +8686,8 @@
   min-width: 230px;
 }
 .swagger-ui .auth-container .errors {
-  font-size: 0.75rem;
-  padding: 0.625rem;
+  font-size: 12px;
+  padding: 10px;
   border-radius: 4px;
   font-family: monospace;
   font-weight: 600;
@@ -8699,11 +8699,11 @@
   color: #3b4151;
 }
 .swagger-ui .scope-def {
-  padding: 0 0 1.25rem;
+  padding: 0 0 20px;
 }
 .swagger-ui .errors-wrapper {
-  margin: 1.25rem;
-  padding: 10px 1.25rem;
+  margin: 20px;
+  padding: 10px 20px;
   -webkit-animation: scaleUp 0.5s;
   animation: scaleUp 0.5s;
   border: 2px solid #f93e3e;
@@ -8711,7 +8711,7 @@
   background: rgba(249, 62, 62, 0.1);
 }
 .swagger-ui .errors-wrapper .error-wrapper {
-  margin: 0 0 0.625rem;
+  margin: 0 0 10px;
 }
 .swagger-ui .errors-wrapper .errors h4 {
   font-size: 14px;
@@ -8728,7 +8728,7 @@
   align-items: center;
 }
 .swagger-ui .errors-wrapper hgroup h4 {
-  font-size: 1.25rem;
+  font-size: 20px;
   margin: 0;
   flex: 1;
   font-family: sans-serif;
