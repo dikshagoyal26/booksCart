@@ -34,6 +34,7 @@ export class CheckoutComponent implements OnInit {
     state: ['', Validators.required],
   });
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
     this.userService.userData.subscribe((user: User) => {
       this.user = user;
     });

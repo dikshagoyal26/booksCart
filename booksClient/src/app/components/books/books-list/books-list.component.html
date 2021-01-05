@@ -1,19 +1,22 @@
-<div *ngIf="books && books.length>0 else nobooks;" class="w-100">
-  <div class="card-deck text-center">
-    <app-book-card [book]="book" *ngFor="let book of returnedArray; let i = index"> </app-book-card>
+<div class="w-100" *ngIf="!isLoading; else loader;">
+  <div *ngIf="books && books.length>0 else nobooks;">
+    <div class="card-deck text-center">
+      <app-book-card [book]="book" *ngFor="let book of returnedArray; let i = index"> </app-book-card>
+    </div>
+    <div class="d-flex center" *ngIf="books.length>10">
+      <pagination [totalItems]="books.length" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
   </div>
-  <div class="d-flex center" *ngIf="books.length>10">
-    <pagination [totalItems]="books.length" (pageChanged)="pageChanged($event)"></pagination>
-  </div>
+  <ng-template #nobooks>
+    <div class="d-flex center column mt-3">
+      <img class="not-found" src="{{imageUrl}}" alt="no search results">
+      <h3>Sorry, no books found!
+      </h3>
+      <h5>Please try searching for something else..
+      </h5>
+    </div>
+  </ng-template>
 </div>
-
-<ng-template #nobooks>
-  <div class="d-flex center column mt-3">
-    <img class="not-found" src="{{imageUrl}}" alt="no search results">
-    <h3>Sorry, no results found!
-    </h3>
-    <h5>Please try searching for something else
-    </h5>
-  </div>
-
+<ng-template #loader>
+  <app-loader></app-loader>
 </ng-template>

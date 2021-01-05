@@ -50,7 +50,9 @@ export class RegisterComponent implements OnInit {
   categories: any = [];
 
   private id: string = '';
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    window.scrollTo({ top: 0 });
+  }
 
   get registerFormControl() {
     return this.registerForm.controls;

@@ -7,11 +7,11 @@ $clear: #2874f0;
 .filters-section {
   background: $white;
   color: $black;
-  box-shadow: 1px 2px 10px #888888;
+  box-shadow: 1px 5px 10px #888888;
 }
 .filter-container {
   padding: 1rem;
-  border-bottom: 0.063rem solid $border;
+  border-bottom: 0.13rem solid $border;
 }
 .active {
   background: $background;

@@ -1,4 +1,4 @@
-<div class="d-flex center w-100">
+<div class="d-flex center w-100" *ngIf="!isLoading;else loader">
   <div class="panel admin">
     <div class="panel-header">
       <span class="heading">All Books</span>
@@ -76,4 +76,7 @@
     <button class="btn btn-light mr-2" (click)="modalRef.hide()">Cancel</button>
     <button class="btn btn-danger" (click)="deleteBook(selectedBook._id)">Delete</button>
   </div>
+</ng-template>
+<ng-template #loader>
+  <app-loader></app-loader>
 </ng-template>

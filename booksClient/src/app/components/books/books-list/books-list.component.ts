@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { Categories } from 'src/app/shared/models/categories.model';
 import { Book } from 'src/app/shared/models/books.model';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { Filter } from 'src/app/shared/models/filter.model';
@@ -17,13 +16,14 @@ export class BooksListComponent implements OnInit, OnChanges {
   books: Book[];
   returnedArray: Book[];
   public imageUrl: string;
-
+  public isLoading: boolean;
   constructor(
     private booksService: BooksService,
     private snackBarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
     this.imageUrl = Url.backendUrl + 'uploads/no-results.png';
     if (this.books) this.returnedArray = this.books.slice(0, 10);
     this.fetchBooks();
@@ -37,6 +37,7 @@ export class BooksListComponent implements OnInit, OnChanges {
     this.returnedArray = this.books.slice(startItem, endItem);
   }
   private fetchBooks() {
+    this.isLoading = true;
     if (!this.selectedFilter) {
       this.fetchAllBooks();
     } else {
@@ -48,10 +49,12 @@ export class BooksListComponent implements OnInit, OnChanges {
       (books: Book[]) => {
         this.books = books;
         this.returnedArray = this.books.slice(0, 10);
+        this.isLoading = false;
       },
       (err) => {
         this.books = [];
         this.snackBarService.show(err, 'danger');
+        this.isLoading = false;
       }
     );
   }
@@ -60,9 +63,11 @@ export class BooksListComponent implements OnInit, OnChanges {
       (books: Book[]) => {
         this.books = books;
         this.returnedArray = this.books.slice(0, 10);
+        this.isLoading = false;
       },
       (err) => {
         this.snackBarService.show(err, 'danger');
+        this.isLoading = false;
       }
     );
   }

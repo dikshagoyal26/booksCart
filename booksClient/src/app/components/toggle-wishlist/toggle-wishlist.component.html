@@ -5,6 +5,7 @@
         {{btnText}}</button>
 </div>
 <ng-template #showIcon>
-    <i class="fa pointer" [ngClass]="{'fa-heart':isWishlisted,' fa-heart-o':!isWishlisted}" aria-hidden="true"
-        (click)="toggleWishlist()"></i>
+    <div class="wishlist-icon pointer" (click)="toggleWishlist()">
+        <i class="fa  fa-heart" [ngClass]="{'red':isWishlisted,' grey':!isWishlisted}" aria-hidden="true"></i>
+    </div>
 </ng-template>

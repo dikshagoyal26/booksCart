@@ -57,4 +57,18 @@ export class BooksService {
     }
     return str.join('&');
   }
+  getCoverImage(book: Book) {
+    if (book && book.cover) {
+      if (
+        book.cover.startsWith('https://') ||
+        book.cover.startsWith('http://')
+      ) {
+        return book.cover;
+      } else {
+        return Url.backendUrl + 'uploads/' + book.cover;
+      }
+    } else {
+      return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxa-H7vHgjDI9F3X1dNDtq_u5B6fGCluebxA&usqp=CAU';
+    }
+  }
 }

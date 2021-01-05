@@ -1,7 +1,8 @@
 <div class="card">
-  <div class="book-img">
-    <img class="book-img-top pointer" [src]="coverImage" alt="Book image cap" routerLink="/books/details/{{ book._id }}"
+  <div class="bookImg">
+    <img class=" pointer" [src]="coverImage" alt="Book image cap" routerLink="/books/details/{{ book._id }}"
       [tooltip]="book.title" placement="bottom" />
+    <app-toggle-wishlist [bookId]="book._id" class="wishlist"></app-toggle-wishlist>
   </div>
   <div class="card-body">
     <h5 class="card-title pointer capitalise" routerLink="/books/details/{{ book._id }}">{{ book.title }}</h5>
@@ -9,6 +10,5 @@
       <small>{{ book.price | currency : 'INR' }} </small>
     </p>
     <app-add-to-cart [bookId]="book._id"></app-add-to-cart>
-    <app-toggle-wishlist [bookId]="book._id"></app-toggle-wishlist>
   </div>
 </div>

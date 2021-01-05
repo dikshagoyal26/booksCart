@@ -30,7 +30,7 @@ nav {
   color: #fff;
   border-radius: 8px;
   padding: 1px 6px;
-  font-size: 12px;
+  font-size: 0.75rem;
   text-align: center;
   position: absolute;
 }
@@ -41,4 +41,7 @@ nav {
   background: #23534a;
   color: #fff !important;
   cursor: pointer;
+}
+.swagger {
+  width: 22.188rem;
 }

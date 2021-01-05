@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
   public user: User;
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
     this.cartService.cartItemcount$.subscribe((length: Number) => {
       this.cartItems = length;
     });

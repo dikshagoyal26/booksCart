@@ -1,4 +1,4 @@
-<div class="d-flex center w-100">
+<div class="d-flex center w-100" *ngIf="!isLoading; else loader">
   <div class="panel book-form">
     <div class="panel-header">
       <span class="heading">{{formTitle}} Book</span>
@@ -80,3 +80,6 @@
     </div>
   </div>
 </div>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

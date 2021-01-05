@@ -4,10 +4,10 @@
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  bottom: 20px;
+  bottom: 1.25rem;
   left: 50%;
   padding: 0.75rem;
-  border-radius: 5px;
+  border-radius: 2.188rem;
   min-width: 350px;
   transform-origin: center;
   transform: translate(-50%, 0%);
@@ -21,4 +21,7 @@
 }
 .danger {
   background: #ff0000cc;
+}
+.toast {
+  opacity: 1;
 }

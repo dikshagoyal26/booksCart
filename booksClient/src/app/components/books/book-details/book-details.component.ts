@@ -22,6 +22,7 @@ export class BookDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
     this.route.params.subscribe((param) => {
       if (param && param.id) {
         this.fetchDetails(param.id);
@@ -38,5 +39,8 @@ export class BookDetailsComponent implements OnInit {
       if (data) this.book = data;
       else this.router.navigate(['not-found']);
     });
+  }
+  getCover() {
+    return this.booksService.getCoverImage(this.book);
   }
 }

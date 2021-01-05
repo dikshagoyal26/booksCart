@@ -16,6 +16,7 @@ export class CartComponent implements OnInit {
   public totalPrice: number = 0;
   public userDataSubscription: Subscription;
   public user: User;
+  public isLoading: boolean = true;
 
   constructor(
     private cartService: CartService,
@@ -24,6 +25,7 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
     this.userDataSubscription = this.userService.userData
       .asObservable()
       .subscribe((data: User) => {
@@ -40,6 +42,7 @@ export class CartComponent implements OnInit {
     if (!this.user) return;
     this.cartService.getCartItems(this.user._id).subscribe(
       (items: Cart[]) => {
+        this.isLoading = false;
         this.cart = items;
         if (items && items.length > 0) this.cartService.setCartItemCount(items);
         else this.cartService.cartItemcount$.next(0);

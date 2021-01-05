@@ -25,6 +25,7 @@ export class BookFiltersComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
     this.categoriesService.categories$.subscribe((categories: Categories[]) => {
       this.categories = categories;
     });

@@ -12,5 +12,7 @@ export class PageNotFoundComponent implements OnInit {
     this.imageUrl = Url.backendUrl + 'uploads/not-found.png';
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    window.scrollTo({ top: 0 });
+  }
 }

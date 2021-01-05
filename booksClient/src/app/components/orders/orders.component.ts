@@ -13,16 +13,20 @@ export class OrdersComponent implements OnInit {
   public orders: Order[];
   private user: User;
   public searchData: string = '';
+  public isloading: boolean;
   constructor(
     private orderService: OrdersService,
     private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
+    this.isloading = true;
     this.userService.userData.subscribe((user: User) => {
       this.user = user;
     });
     this.orderService.getOrders(this.user._id).subscribe((orders: Order[]) => {
+      this.isloading = false;
       this.orders = orders;
     });
   }

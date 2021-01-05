@@ -35,7 +35,9 @@ export class BooksFormComponent implements OnInit {
   public coverImagePath: any;
   private id: string = '';
   public isSavingBook: boolean = false;
+  public isLoading: boolean = true;
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
     this.categoriesService.categories$.subscribe((categories: Categories[]) => {
       this.categories = categories;
     });
@@ -45,6 +47,7 @@ export class BooksFormComponent implements OnInit {
         this.id = params.id;
         this.initEditBook(params.id);
       } else {
+        this.isLoading = false;
         this.formTitle = 'Add';
       }
     });
@@ -73,31 +76,11 @@ export class BooksFormComponent implements OnInit {
         price: book.price,
         cover: book.cover,
       });
-      this.coverImagePath = this.getCover(book);
+      this.coverImagePath = this.booksService.getCoverImage(book);
+      this.isLoading = false;
     });
   }
-  getCover(book: Book) {
-    if (book && book.cover) {
-      if (
-        book.cover.startsWith('https://') ||
-        book.cover.startsWith('http://')
-      ) {
-        return book.cover;
-      } else {
-        return Url.backendUrl + 'uploads/' + book.cover;
-      }
-    } else {
-      return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxa-H7vHgjDI9F3X1dNDtq_u5B6fGCluebxA&usqp=CAU';
-    }
-  }
   saveBook() {
-    if (!this.bookForm.value.cover) {
-      this.bookForm.patchValue({
-        cover:
-          'https://www.forewordreviews.com/books/covers/not-for-profit.jpg',
-      });
-    }
-
     if (this.id) {
       this.updateBook();
     } else {

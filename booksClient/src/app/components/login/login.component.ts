@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   public showPassword: boolean = false;
   private returnUrl: string = null;
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
     this.route.queryParams.subscribe((params: any) => {
       if (params && params.returnUrl) this.returnUrl = params.returnUrl;
     });

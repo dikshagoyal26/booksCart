@@ -8,13 +8,14 @@ import { SnackbarService } from '../../shared/services/snackbar.service';
 })
 export class SnackbarComponent implements OnInit {
   public showSnackbar: boolean = false;
-  public message: string = 'this is a test snackbar';
+  public message: string = '';
   public type: string = 'success';
   public timer: any;
   constructor(private snackbarService: SnackbarService) {}
 
   ngOnInit(): void {
     this.snackbarService.snackbar$.subscribe((state) => {
+      console.log({ state });
       if (state) {
         this.type = state.type || 'success';
         this.message = state.message;

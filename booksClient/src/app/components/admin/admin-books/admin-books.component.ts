@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from 'src/app/shared/models/books.model';
 import { BooksService } from 'src/app/shared/services/books.service';
-import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
@@ -16,7 +15,7 @@ export class AdminBooksComponent implements OnInit {
   public searchData: string = '';
   public modalRef: BsModalRef;
   public selectedBook: Book;
-
+  public isLoading: boolean = true;
   constructor(
     private booksService: BooksService,
     private router: Router,
@@ -25,11 +24,13 @@ export class AdminBooksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
     this.fetchBooks();
   }
   fetchBooks() {
     this.booksService.fetchBooks().subscribe((books: Book[]) => {
       this.books = books;
+      this.isLoading = false;
     });
   }
   editBook(i: number) {

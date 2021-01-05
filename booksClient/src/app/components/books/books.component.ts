@@ -14,6 +14,7 @@ export class BooksComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
     this.route.queryParams.subscribe((params) => {
       this.selectedFilter = { ...params };
       console.log(params);
