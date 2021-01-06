@@ -22,6 +22,7 @@ export class ErrorInterceptorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 500 || err.status == 401) {
+          console.log(err);
           this.userService.logout();
           if (!request.url.includes('login')) {
             location.reload();

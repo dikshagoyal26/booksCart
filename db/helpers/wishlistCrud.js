@@ -27,6 +27,7 @@ const wishlistOperations = {
       { user_id },
       { $push: { books: bookId } },
       (err) => {
+        console.log(err);
         if (err) {
           response.status(500).send("book Not Added Due to Error");
         } else {
