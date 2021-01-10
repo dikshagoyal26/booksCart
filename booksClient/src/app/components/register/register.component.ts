@@ -60,7 +60,6 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.invalid) {
-      console.log(this.registerForm, this.registerForm.value);
       return;
     }
     this.userService.registerUser(this.registerForm.value).subscribe(

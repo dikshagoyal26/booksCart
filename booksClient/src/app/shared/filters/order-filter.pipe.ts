@@ -8,7 +8,6 @@ export class OrderFilterPipe implements PipeTransform {
     if (!value) return null;
     if (!filter) return value;
     return value.filter((val) => {
-      console.log(val);
       let rval =
         val._id.toLocaleLowerCase().includes(filter.toLocaleLowerCase()) ||
         val.created_at

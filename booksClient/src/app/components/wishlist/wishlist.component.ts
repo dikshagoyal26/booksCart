@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/shared/models/books.model';
 import { User } from 'src/app/shared/models/user';
+import { BooksService } from 'src/app/shared/services/books.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { WishlistService } from 'src/app/shared/services/wishlist.service';
 
@@ -14,7 +15,8 @@ export class WishlistComponent implements OnInit {
   private user: User;
   constructor(
     private userService: UserService,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private booksService: BooksService
   ) {}
 
   ngOnInit() {
@@ -38,5 +40,8 @@ export class WishlistComponent implements OnInit {
         this.books = books;
         this.wishlistService.setWishlist(books);
       });
+  }
+  getCover(book) {
+    return this.booksService.getCoverImage(book);
   }
 }

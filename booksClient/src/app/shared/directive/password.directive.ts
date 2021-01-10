@@ -6,7 +6,6 @@ import { Directive, ElementRef } from '@angular/core';
 export class PasswordDirective {
   private _shown = false;
   constructor(private el: ElementRef) {
-    console.log(el);
     this.setup();
   }
   setup() {

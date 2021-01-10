@@ -1,36 +1,38 @@
-<div class="filters-section">
-    <div class="filter-container filters-heading">
-        <span>Filters</span>
-        <span class="clear" *ngIf="canClear()" (click)="clearFilters()">Clear All</span>
-    </div>
-    <div class="main-filters">
-        <div class="filter-container category">
-            <div class="filters-subheading">
-                <span>Categories</span>
-                <span class="clear" *ngIf="selectedCategory" (click)="clearFilters('category')">Clear</span>
-            </div>
-            <div class="categories">
-                <a (click)="selectCategory()" [ngClass]="{'active':!selectedCategory}">ALL</a>
-                <a *ngFor="let category of categories" (click)="selectCategory(category.category_type)"
-                    [ngClass]="{'active':category.category_type==selectedCategory}">
-                    {{category.category_type}}
-                </a>
+<div *ngIf="!isLoading">
+    <div class="filters-section">
+        <div class="filter-container filters-heading">
+            <span>Filters</span>
+            <span class="clear" *ngIf="canClear()" (click)="clearFilters()">Clear All</span>
+        </div>
+        <div class="main-filters">
+            <div class="filter-container category">
+                <div class="filters-subheading">
+                    <span>Categories</span>
+                    <span class="clear" *ngIf="selectedCategory" (click)="clearFilters('category')">Clear</span>
+                </div>
+                <div class="categories">
+                    <a (click)="selectCategory()" [ngClass]="{'active':!selectedCategory}">ALL</a>
+                    <a *ngFor="let category of categories" (click)="selectCategory(category.category_type)"
+                        [ngClass]="{'active':category.category_type==selectedCategory}">
+                        {{category.category_type}}
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="filter-container">
-            <div class="filters-subheading">
-                <span>Price</span>
-                <span class="clear" *ngIf="selectedPrice!=maxPrice" (click)="clearFilters('price')">Clear</span>
-            </div>
-            <div class="price">
-                <span class="price-bg"></span>
-                <input class="pricerange" type="range" name="" id="" [(ngModel)]="selectedPrice" [min]="minPrice"
-                    [max]="maxPrice" (change)="selectPrice()">
-                <div class="display-price">
-                    <span class="bold">{{minPrice|currency:"INR":'symbol':'1.0-0'}}</span>
-                    <span>to</span>
-                    <span class="bold">{{selectedPrice|currency:"INR":'symbol':'1.0-0'}}</span>
-                </div>
+    </div>
+    <div class="filter-container filters-section mt-1">
+        <div class="filters-subheading">
+            <span>Price</span>
+            <span class="clear" *ngIf="selectedPrice!=maxPrice" (click)="clearFilters('price')">Clear</span>
+        </div>
+        <div class="price">
+            <span class="price-bg"></span>
+            <input class="pricerange" type="range" name="" id="" [(ngModel)]="selectedPrice" [min]="minPrice"
+                [max]="maxPrice" (change)="selectPrice()">
+            <div class="display-price">
+                <span class="bold">{{minPrice|currency:"INR":'symbol':'1.0-0'}}</span>
+                <span>to</span>
+                <span class="bold">{{selectedPrice|currency:"INR":'symbol':'1.0-0'}}</span>
             </div>
         </div>
     </div>

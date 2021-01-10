@@ -1,7 +1,9 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Book } from 'src/app/shared/models/books.model';
 import { Categories } from 'src/app/shared/models/categories.model';
 import { Filter } from 'src/app/shared/models/filter.model';
+import { BooksService } from 'src/app/shared/services/books.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 
 @Component({
@@ -16,10 +18,12 @@ export class BookFiltersComponent implements OnInit, OnChanges {
   public selectedPrice: number;
   public minPrice: number = 100;
   public maxPrice: number = 10000;
+  public isLoading: boolean = true;
   constructor(
     private categoriesService: CategoriesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private booksService: BooksService
   ) {
     this.selectedPrice = this.maxPrice;
   }
@@ -29,7 +33,7 @@ export class BookFiltersComponent implements OnInit, OnChanges {
     this.categoriesService.categories$.subscribe((categories: Categories[]) => {
       this.categories = categories;
     });
-    this.initFilters();
+    this.fetchAllBooks();
   }
   ngOnChanges() {
     this.initFilters();
@@ -38,7 +42,7 @@ export class BookFiltersComponent implements OnInit, OnChanges {
     this.selectedCategory = this.selectedFilter
       ? this.selectedFilter.category
       : null;
-    this.selectedPrice = +this.selectedFilter.price || 10000;
+    this.selectedPrice = +this.selectedFilter.price || this.maxPrice;
   }
   selectCategory(category: string = null) {
     this.navigate({ category }, true);
@@ -68,5 +72,28 @@ export class BookFiltersComponent implements OnInit, OnChanges {
         queryParamsHandling: handleQueryparam ? 'merge' : '',
       });
     }
+  }
+  private fetchAllBooks() {
+    this.booksService.fetchBooks().subscribe(
+      (books: Book[]) => {
+        this.setMinPrice(books);
+        this.setMaxPrice(books);
+        this.isLoading = false;
+        this.initFilters();
+      },
+      (err) => {
+        this.isLoading = false;
+      }
+    );
+  }
+  private setMinPrice(books: Book[]) {
+    this.minPrice = +books.reduce((prev, curr) =>
+      prev.price < curr.price ? prev : curr
+    ).price;
+  }
+  private setMaxPrice(books: Book[]) {
+    this.maxPrice = +books.reduce((prev, curr) =>
+      prev.price > curr.price ? prev : curr
+    ).price;
   }
 }

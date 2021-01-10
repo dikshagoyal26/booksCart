@@ -4,18 +4,13 @@ nav {
   top: 0;
   z-index: 100;
 }
-@media screen and (min-width: 900px) {
-  nav {
-    padding: 8px 7.625rem;
-  }
-}
 .nav-item .btn-link,
 .nav-item .dropdown {
   color: #fff;
   text-decoration: none;
 }
 .bg-dark {
-  background-color: #246758 !important;
+  background-color: #3298dc !important;
 }
 .nav-item i {
   color: #fff;
@@ -35,13 +30,17 @@ nav {
   position: absolute;
 }
 .nav-item .btn-link:hover {
-  background: #23534a; // #212529;
+  background: #238cd1; // #212529;
 }
 .dropdown-item:hover {
-  background: #23534a;
+  background: #238cd1;
   color: #fff !important;
   cursor: pointer;
 }
 .swagger {
   width: 22px;
+}
+.navbar {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }

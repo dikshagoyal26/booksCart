@@ -1,10 +1,10 @@
-$nav-color: #246758;
+$nav-color: #3298dc;
 $count-background: #e52626;
 $border-dark: rgba($nav-color, 0.88);
-$nav-hover-color: #23534a;
+$nav-hover-color: #238cd1;
 
-$panel-color: #50c5bd; // #008891; //#cd8a56 //af804f //#50C5BD
-$btn-color: #246758;
+$panel-color: #00d1b2; //#50c5bd; // #008891; //#cd8a56 //af804f //#50C5BD
+$btn-color: #3298dc;
 body {
   margin: 0;
   padding: 0;
@@ -60,10 +60,7 @@ div.form form {
   border: 2px solid #eee;
   background: white;
 }
-.books {
-  display: flex;
-  flex-direction: column;
-}
+
 .addbook {
   display: flex;
   justify-content: right;
@@ -107,9 +104,7 @@ form label {
   box-shadow: inset 0 0 5px grey;
   border-radius: 0.625rem;
 }
-.d-flex {
-  display: flex;
-}
+
 .space-between {
   justify-content: space-between;
 }
@@ -146,9 +141,6 @@ form label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
@@ -157,24 +149,7 @@ form label {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
-.panel-footer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 5px 0;
-}
+
 button:disabled {
   cursor: not-allowed;
-}
-.column {
-  flex-direction: column;
-}
-
-.btn-primary,
-.btn-primary:hover,
-.btn-primary:not(:disabled):not(.disabled).active,
-.btn-primary:not(:disabled):not(.disabled):active,
-.show > .btn-primary.dropdown-toggle {
-  color: #fff;
-  background-color: $panel-color;
-  border-color: $panel-color;
 }

@@ -21,7 +21,8 @@ const routes: Routes = [
   {
     path: 'admin',
     canActivate: [AdminAuthGuard],
-    loadChildren: './admin/admin.module#AdminModule',
+    loadChildren: () =>
+      import('./admin/admin.module').then((admin) => admin.AdminModule),
   },
   {
     path: 'books',

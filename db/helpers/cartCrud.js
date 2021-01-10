@@ -42,6 +42,7 @@ const cartOperations = {
     CartsModel.findOne({ user_id })
       .populate("items.book")
       .exec(function (err, data) {
+        console.log({ err, data });
         if (err) response.status(500).send();
         else {
           if (data && data.items) response.status(200).send(data.items);
@@ -51,9 +52,11 @@ const cartOperations = {
   },
   addItem(user_id, book, response) {
     CartsModel.findOne({ user_id }, (err, data) => {
+      console.log({ err, data });
       if (err) response.status(500).send();
       else if (data && data.items && data.items.length > 0) {
         data = internalCartOperations.addItemLogic(data, book);
+        console.log({ data });
         cartOperations.updateCart(user_id, data, response);
       } else {
         this.addEntryToCart(user_id, book, response);
@@ -95,6 +98,7 @@ const cartOperations = {
     let items = [];
     items.push({ book, quantity: 1 });
     CartsModel.create({ user_id, items: items }, (err) => {
+      console.log(err);
       if (err) response.status(500).send();
       else this.fetchItems(user_id, response);
     });

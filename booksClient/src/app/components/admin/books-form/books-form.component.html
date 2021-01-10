@@ -50,9 +50,9 @@
                 Category is required!
               </div>
             </div>
-            <div class="panel-footer flex-end">
+            <div class="d-flex justify-content-end">
               <button *ngIf="!isSavingBook" class="btn btn-light mr-3" routerLink="/admin">Cancel</button>
-              <button *ngIf="!isSavingBook" type="submit" class="btn btn-primary" (click)="saveBook()"
+              <button *ngIf="!isSavingBook" type="submit" class="btn btn-info" (click)="saveBook()"
                 [disabled]="bookForm.invalid">
                 Save Book
               </button>

@@ -1,7 +1,6 @@
 <div *ngIf="showButton;else showIcon">
-    <button (click)="toggleWishlist()" class="btn"
-        [ngClass]="{'btn-primary':!isWishlisted,'btn-danger':isWishlisted}"><i class="fa pointer"
-            [ngClass]="{'fa-plus':!isWishlisted,'fa-trash':isWishlisted}" aria-hidden="true"></i>
+    <button (click)="toggleWishlist()" class="btn" [ngClass]="{'btn-info':!isWishlisted,'btn-danger':isWishlisted}"><i
+            class="fa pointer" [ngClass]="{'fa-plus':!isWishlisted,'fa-trash':isWishlisted}" aria-hidden="true"></i>
         {{btnText}}</button>
 </div>
 <ng-template #showIcon>

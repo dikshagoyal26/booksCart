@@ -66,7 +66,6 @@ import { ToggleWishlistComponent } from './components/toggle-wishlist/toggle-wis
     ModalModule.forRoot(),
     PaginationModule.forRoot(),
     TooltipModule.forRoot(),
-    AdminModule,
   ],
   providers: [
     {

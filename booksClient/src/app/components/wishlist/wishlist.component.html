@@ -19,7 +19,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let book of books">
-                            <td><img [src]="book.cover" alt="{{book.title}}"></td>
+                            <td><img [src]="getCover(book)" alt="{{book.title}}"></td>
                             <td>
                                 <a class="pointer" routerLink="/books/details/{{book._id}}">{{ book.title }}
                                 </a>
@@ -38,9 +38,9 @@
             </div>
         </div>
         <ng-template #emptyCart>
-            <div class="d-flex column emptyCart">
+            <div class="d-flex flex-column emptyCart">
                 <h2>Wishlist is empty!</h2>
-                <button routerLink="/books" class="btn btn-primary shop mt-3">Continue Shopping</button>
+                <button routerLink="/books" class="btn btn-info shop mt-3">Continue Shopping</button>
             </div>
         </ng-template>
     </div>

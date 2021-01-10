@@ -50,10 +50,14 @@ export class ToggleWishlistComponent implements OnInit {
     }
   }
   toggleWishlist() {
-    if (this.isWishlisted) {
-      this.removeFromWhitelist();
+    if (this.user && this.user.isLoggedIn) {
+      if (this.isWishlisted) {
+        this.removeFromWhitelist();
+      } else {
+        this.addToWhitelist();
+      }
     } else {
-      this.addToWhitelist();
+      this.snackbarService.show('Login to add book to wishlist', 'danger');
     }
   }
   private addToWhitelist() {

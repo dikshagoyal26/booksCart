@@ -19,7 +19,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of cart">
-                            <td><img [src]="item.book.cover" alt="{{item.book.title}}"></td>
+                            <td><img [src]="getCover(item.book)" alt="{{item.book.title}}"></td>
                             <td>
                                 <a class="pointer" routerLink="/books/details/{{item.book._id}}">{{ item.book.title }}
                                 </a>
@@ -43,18 +43,18 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>Cart Total:</td>
+                            <td>Total:</td>
                             <td><b>{{totalPrice |currency:'INR'}}</b></td>
-                            <td><button class="btn btn-primary" routerLink="/checkout">Checkout</button></td>
+                            <td><button class="btn btn-info" routerLink="/checkout">Checkout</button></td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
         <ng-template #emptyCart>
-            <div class="d-flex column emptyCart">
+            <div class="d-flex flex-column emptyCart">
                 <h2>Shopping Cart is empty!</h2>
-                <button routerLink="/books" class="btn btn-primary shop mt-3">Continue Shopping</button>
+                <button routerLink="/books" class="btn btn-info shop mt-3">Continue Shopping</button>
             </div>
         </ng-template>
     </div>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Book } from 'src/app/shared/models/books.model';
 import { Cart } from 'src/app/shared/models/cart.model';
 import { User } from 'src/app/shared/models/user';
+import { BooksService } from 'src/app/shared/services/books.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -21,7 +23,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private userService: UserService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private booksService: BooksService
   ) {}
 
   ngOnInit(): void {
@@ -102,5 +105,8 @@ export class CartComponent implements OnInit {
     this.totalPrice = 0;
     if (this.cart && this.cart && this.cart.length > 0)
       this.totalPrice = this.cartService.getTotalPrice(this.cart);
+  }
+  getCover(book: Book) {
+    return this.booksService.getCoverImage(book);
   }
 }
