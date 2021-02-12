@@ -53,11 +53,12 @@
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-danger" routerLink="/cart">Cancel</button>
-                            <button type="submit" [disabled]="addressForm.invalid">Place Order</button>
+                            <button type="submit" class="ml-2 btn btn-info" [disabled]="addressForm.invalid">Place
+                                Order</button>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex center">
+                <div class="d-flex center" style="flex: 1!important;">
                     <div class="preview-image">
                         <div>
                             <h3 class="sub-heading m-auto">Order Summary</h3>
