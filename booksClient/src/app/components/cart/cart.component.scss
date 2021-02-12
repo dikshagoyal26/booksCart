@@ -1,5 +1,5 @@
 .cart {
-  width: 45rem;
+  // width: 45rem;
 }
 
 .table {
@@ -13,10 +13,13 @@ img {
   color: #ff0000a6;
 }
 .fa-plus-circle {
-  color: #0062cc;
+  color: #328edc;
+}
+.fa-minus-circle.disabled {
+  color: #ced4da;
 }
 .fa-minus-circle {
-  color: #ced4da;
+  color: #6c757d;
 }
 .shop {
   width: max-content;

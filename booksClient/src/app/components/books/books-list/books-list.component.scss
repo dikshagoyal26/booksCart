@@ -7,3 +7,11 @@
   width: 364px;
   height: 248px;
 }
+.align-bottom {
+  position: absolute;
+  text-align: center;
+  bottom: 0%;
+  margin: auto;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}

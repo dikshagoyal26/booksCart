@@ -1,4 +1,4 @@
-<div class="d-flex center w-100">
+<div class="d-flex center w-100" *ngIf="cart && cart.length>0;else loader">
     <div class="panel checkout">
         <div class="panel-header">
             <span class="heading">Checkout</span>
@@ -63,8 +63,8 @@
                         <div>
                             <h3 class="sub-heading m-auto">Order Summary</h3>
                         </div>
-                        <div class="panel-form text-center">
-                            <table class="table capitalise text-center" *ngIf="cart && cart.length>0">
+                        <div class="panel-form">
+                            <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">Title</th>
@@ -104,3 +104,6 @@
         </div>
     </div>
 </div>
+<ng-template #loader>
+    <app-loader></app-loader>
+</ng-template>

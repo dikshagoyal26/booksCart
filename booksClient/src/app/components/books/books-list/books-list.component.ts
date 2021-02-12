@@ -17,6 +17,7 @@ export class BooksListComponent implements OnInit, OnChanges {
   returnedArray: Book[];
   public imageUrl: string;
   public isLoading: boolean;
+  public itemsPerPage: number = 8;
   constructor(
     private booksService: BooksService,
     private snackBarService: SnackbarService
@@ -25,7 +26,7 @@ export class BooksListComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     window.scrollTo({ top: 0 });
     this.imageUrl = Url.backendUrl + 'uploads/no-results.png';
-    if (this.books) this.returnedArray = this.books.slice(0, 10);
+    if (this.books) this.returnedArray = this.books.slice(0, this.itemsPerPage);
     this.fetchBooks();
   }
   ngOnChanges() {
@@ -34,6 +35,7 @@ export class BooksListComponent implements OnInit, OnChanges {
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
+    window.scrollTo({ top: 0 });
     this.returnedArray = this.books.slice(startItem, endItem);
   }
   private fetchBooks() {
@@ -48,7 +50,7 @@ export class BooksListComponent implements OnInit, OnChanges {
     this.booksService.fetchBooksByFilter(this.selectedFilter).subscribe(
       (books: Book[]) => {
         this.books = books;
-        this.returnedArray = this.books.slice(0, 10);
+        this.returnedArray = this.books.slice(0, this.itemsPerPage);
         this.isLoading = false;
       },
       (err) => {
@@ -62,7 +64,7 @@ export class BooksListComponent implements OnInit, OnChanges {
     this.booksService.fetchBooks().subscribe(
       (books: Book[]) => {
         this.books = books;
-        this.returnedArray = this.books.slice(0, 10);
+        this.returnedArray = this.books.slice(0, this.itemsPerPage);
         this.isLoading = false;
       },
       (err) => {
