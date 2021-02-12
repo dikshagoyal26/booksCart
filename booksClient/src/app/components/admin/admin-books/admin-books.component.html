@@ -27,8 +27,7 @@
             <td>{{ book.category.category_type }}</td>
             <td>{{ book.price | currency : 'INR' }}</td>
             <td class="operations">
-              <i class="fa fa-pencil pointer" title="Edit Book" aria-hidden="true" (click)="editBook(i)"></i>
-
+              <i class="fa fa-pencil pointer" title="Edit Book" aria-hidden="true" (click)="editBook(book._id)"></i>
               <i class="fa fa-trash pointer" title="Delete Book" aria-hidden="true"
                 (click)="showDeleteBookModal(deleteBookTemplate,book)"></i>
             </td>

@@ -33,8 +33,8 @@ export class AdminBooksComponent implements OnInit {
       this.isLoading = false;
     });
   }
-  editBook(i: number) {
-    this.router.navigate([`/admin/books/update/${this.books[i]._id}`]);
+  editBook(id: string) {
+    this.router.navigate([`/admin/books/update/${id}`]);
   }
   deleteBook(bookId) {
     this.booksService.deleteBook(bookId).subscribe(
