@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BooksService } from 'src/app/shared/services/books.service';
@@ -9,6 +9,7 @@ import { BooksService } from 'src/app/shared/services/books.service';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
+  @ViewChild('searchInput') searchInput: ElementRef;
   public searchControl: FormControl;
   public books: any;
   public currentFocus: number = -1;
@@ -35,17 +36,8 @@ export class SearchBarComponent implements OnInit {
     this.router.navigate(['/search'], {
       queryParams: { item: item },
     });
-  }
-  private async showSuggestions() {
-    let item = this.getItem(this.searchControl.value);
-    if (!item) {
-      this.closeSuggestions();
-      return;
-    }
-    this.books = await this.booksService.showBookSuggestions(item);
-  }
-  private getItem(item: string) {
-    return item && item.toLowerCase().trim() ? item.toLowerCase().trim() : null;
+    this.closeSuggestions();
+    this.searchInput.nativeElement.blur();
   }
   closeSuggestions() {
     this.books = [];
@@ -78,5 +70,16 @@ export class SearchBarComponent implements OnInit {
   }
   private handleEnterKey() {
     this.showBooks(this.searchControl.value);
+  }
+  private async showSuggestions() {
+    let item = this.getItem(this.searchControl.value);
+    if (!item) {
+      this.closeSuggestions();
+      return;
+    }
+    this.books = await this.booksService.showBookSuggestions(item);
+  }
+  private getItem(item: string) {
+    return item && item.toLowerCase().trim() ? item.toLowerCase().trim() : null;
   }
 }

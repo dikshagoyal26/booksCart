@@ -1,13 +1,13 @@
 <form autocomplete="off" class="ml-lg-5">
     <div class="autocomplete embed-i" style="width:300px;">
-        <input type="text" id="myInput" (keydown)="searchBooks($event)" class="form-control"
-            placeholder="Search Books or Authors" [formControl]="searchControl">
+        <input type="text" id="myInput" (keyup)="searchBooks($event);" class="form-control"
+            placeholder="Search Books or Authors" [formControl]="searchControl" #searchInput>
         <i class="fa fa-times pointer" *ngIf="searchControl.value" aria-hidden="true" (click)="closeSuggestions()"></i>
     </div>
 
 </form>
 <div id="autocomplete-list" *ngIf="books && books.length>0" class="autocomplete-items ml-lg-5">
-    <div *ngFor="let book of books;let i=index" (keydown)="activeSuggestion($event)" (click)="showBooks(book.title)"
+    <div *ngFor="let book of books;let i=index" (keyup)="activeSuggestion($event)" (click)="showBooks(book.title);"
         [ngClass]="{'autocomplete-active':i==currentFocus}">
         {{book.title}}
     </div>

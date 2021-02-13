@@ -20,7 +20,7 @@ export class BooksService {
         this.fetchBooksByFilter({ item }).subscribe((book: Book[]) => {
           resolve(book);
         });
-      }, 500);
+      }, 100);
     });
   }
   fetchBooks() {
