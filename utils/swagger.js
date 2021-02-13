@@ -9,7 +9,7 @@ var swaggerDefinition = {
       url: "https://www.linkedin.com/in/dikshagoyal26/",
     },
   },
-  host: "localhost:5000",
+  host: "https://book-cart-app.herokuapp.com/",
   basePath: "/",
 };
 

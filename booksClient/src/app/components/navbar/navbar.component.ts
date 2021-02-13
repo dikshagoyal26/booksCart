@@ -7,7 +7,7 @@ import { User } from 'src/app/shared/models/user';
 import { UserService } from 'src/app/shared/services/user.service';
 import { WishlistService } from 'src/app/shared/services/wishlist.service';
 import { CartService } from '../../shared/services/cart.service';
-
+import { Url } from '../../shared/models/backendUrl.model';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -25,8 +25,9 @@ export class NavbarComponent implements OnInit {
 
   public userDataSubscription: Subscription;
   public user: User;
-
+  public backendUrl: string;
   ngOnInit(): void {
+    this.backendUrl = Url.backendUrl;
     window.scrollTo({ top: 0 });
     this.cartService.cartItemcount$.subscribe((length: Number) => {
       this.cartItems = length;
