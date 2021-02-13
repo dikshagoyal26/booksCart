@@ -1,0 +1,211 @@
+{
+  "info": {
+    "title": "BookCart API",
+    "version": "v1",
+    "contact": {
+      "name": "Diksha Goyal",
+      "url": "https://www.linkedin.com/in/dikshagoyal26/"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "swagger": "2.0",
+  "paths": {
+    "/user/login": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Login to the application",
+        "parameters": [
+          {
+            "name": "UserName",
+            "in": "body",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "password": "Password",
+            "in": "body",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "description": null,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Book": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "Category": {
+          "type": "object",
+          "$ref": "#/definitions/Category"
+        },
+        "price": {
+          "type": "number"
+        },
+        "created_at": {
+          "type": "date"
+        },
+        "user_type": {
+          "type": "string"
+        }
+      }
+    },
+    "CartItems": {
+      "properties": {
+        "book": {
+          "$ref": "#/definitions/Book"
+        },
+        "quantity": {
+          "type": "number"
+        }
+      }
+    },
+    "Cart": {
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "date"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CartItems"
+          }
+        }
+      }
+    },
+    "Category": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "category_type": {
+          "type": "string"
+        }
+      }
+    },
+    "Address": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "line_1": {
+          "type": "string"
+        },
+        "line_2": {
+          "type": "string"
+        },
+        "pincode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "Order": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "date"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CartItems"
+          }
+        },
+        "total": {
+          "type": "number"
+        },
+        "Address": {
+          "$ref": "#/definitions/Address"
+        }
+      }
+    },
+    "User": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "user_type": {
+          "type": "string"
+        }
+      }
+    },
+    "Wishlist": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "books": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Book"
+          }
+        }
+      }
+    }
+  },
+  "responses": {},
+  "parameters": {},
+  "securityDefinitions": {},
+  "tags": []
+}

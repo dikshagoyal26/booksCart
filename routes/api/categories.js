@@ -3,6 +3,32 @@ const CategoryRouter = express.Router();
 
 const categoryOperations = require("../../db/helpers/categoryCrud");
 
+/**
+ * @swagger
+ * definitions:
+ *   Category:
+ *     properties:
+ *       _id:
+ *         type: string
+ *       category_type:
+ *         type: string
+ */
+
+/**
+ * @swagger
+ * /category/fetch:
+ *   get:
+ *      tags:
+ *         - Category
+ *      summary : Fetch Categories
+ *      responses:
+ *        200:
+ *           description: Success
+ *           schema:
+ *              type: array
+ *              $ref: '#/definitions/Category'
+ */
+
 CategoryRouter.get("/fetch", (req, res) => {
   categoryOperations.listCategories(res);
 });

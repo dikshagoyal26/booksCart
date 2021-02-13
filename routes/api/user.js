@@ -6,6 +6,8 @@ const userOperations = require("../../db/helpers/userCrud");
  * definitions:
  *   User:
  *     properties:
+ *       _id:
+ *         type: string
  *       firstName:
  *         type: string
  *       lastName:
@@ -25,14 +27,14 @@ const userOperations = require("../../db/helpers/userCrud");
  * /user/login:
  *   post:
  *     tags:
- *       - Login
+ *       - User
  *     summary : Login to the application
  *     parameters:
  *       - name: UserName
  *         in: body
  *         required: true
  *         type: string
- *       - password: Password
+ *       - name: Password
  *         in: body
  *         required: true
  *         type: string
@@ -46,10 +48,12 @@ const userOperations = require("../../db/helpers/userCrud");
  *               schema:
  *                 $ref: '#/definitions/User'
  *     responses:
- *       200:
- *         description: Success
- *         schema:
- *           $ref: '#/definitions/User'
+ *        200 :
+ *          description: Success
+ *          schema:
+ *            $ref: '#/definitions/User'
+ *        400 :
+ *          description: Invalid Data
  */
 userRouter.post("/login", (req, res) => {
   if (!req.body) {
@@ -63,6 +67,51 @@ userRouter.post("/login", (req, res) => {
   }
   userOperations.loginUser(user, res);
 });
+/**
+ * @swagger
+ * /user/register:
+ *   post:
+ *     tags:
+ *       - User
+ *     summary : Register to the application
+ *     parameters:
+ *       - name: UserName
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: Password
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: firstname
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: lastname
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: gender
+ *         in: body
+ *         required: true
+ *         type: string
+ *     requestBody:
+ *       description:
+ *       content:
+ *          application/json :
+ *              schema:
+ *               $ref: '#/definitions/User'
+ *          text/json:
+ *               schema:
+ *                 $ref: '#/definitions/User'
+ *     responses:
+ *        200 :
+ *          description: Success
+ *          schema:
+ *            $ref: '#/definitions/User'
+ *        400 :
+ *          description: Invalid Data
+ */
 userRouter.post("/register", (req, res) => {
   if (!req.body) {
     res.status(400).send();
@@ -71,6 +120,26 @@ userRouter.post("/register", (req, res) => {
   let user = req.body;
   userOperations.registerUser(user, res);
 });
+
+/**
+ * @swagger
+ * /user/validate-username:
+ *   get:
+ *     tags:
+ *       - User
+ *     summary : Username Validation for unique
+ *     parameters:
+ *       - name: UserName
+ *         in: query
+ *         required: true
+ *         type: string
+ *     responses:
+ *        200 :
+ *          description: Success
+ *        400 :
+ *          description: Not Available or Invalid username
+ */
+
 userRouter.get("/validate-username", (req, res) => {
   if (!req.query) {
     res.status(400).send();

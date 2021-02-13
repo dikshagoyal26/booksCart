@@ -15,7 +15,51 @@ var storage = multer.diskStorage({
 });
 var uploadCoverImage = multer({ storage: storage }).single("cover");
 
-adminRouter.post("/add", (req, res) => {
+/**
+ * @swagger
+ * /admin/book/add:
+ *   post:
+ *     tags:
+ *       - User
+ *     summary : Admin update a book
+ *     parameters:
+ *       - name: Title
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: Author
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: Category
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: Price
+ *         in: body
+ *         required: true
+ *         type: number
+ *       - name: Image
+ *         in: body
+ *         required: false
+ *         type: string
+ *     requestBody:
+ *       description:
+ *       content:
+ *          application/json :
+ *              schema:
+ *               $ref: '#/definitions/Book'
+ *          text/json:
+ *               schema:
+ *                 $ref: '#/definitions/Book'
+ *     responses:
+ *        200 :
+ *          description: Success
+ *        400 :
+ *          description: Invalid Data
+ */
+
+adminRouter.post("/book/add", (req, res) => {
   uploadCoverImage(req, res, (err) => {
     if (err) {
       console.log({ err });
@@ -36,7 +80,55 @@ adminRouter.post("/add", (req, res) => {
   });
 });
 
-adminRouter.post("/update/:bookId", (req, res) => {
+/**
+ * @swagger
+ * /admin/book/update/${bookId}:
+ *   post:
+ *     tags:
+ *       - User
+ *     summary : Admin update a book
+ *     parameters:
+ *       - name: Book Id
+ *         in: path
+ *         required: true
+ *         type: string
+ *       - name: Title
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: Author
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: Category
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: Price
+ *         in: body
+ *         required: true
+ *         type: number
+ *       - name: Image
+ *         in: body
+ *         required: false
+ *         type: string
+ *     requestBody:
+ *       description:
+ *       content:
+ *          application/json :
+ *              schema:
+ *               $ref: '#/definitions/Book'
+ *          text/json:
+ *               schema:
+ *                 $ref: '#/definitions/Book'
+ *     responses:
+ *        200 :
+ *          description: Success
+ *        400 :
+ *          description: Invalid Data
+ */
+
+adminRouter.post("/book/update/:bookId", (req, res) => {
   const bookId = req.params.bookId;
   uploadCoverImage(req, res, (err) => {
     if (err) {
@@ -55,7 +147,26 @@ adminRouter.post("/update/:bookId", (req, res) => {
   });
 });
 
-adminRouter.delete("/delete/:id", (req, res) => {
+/**
+ * @swagger
+ * /admin/book/delete/${bookId}:
+ *   delete:
+ *     tags:
+ *       - Admin
+ *     summary : Delete a book
+ *     parameters:
+ *       - name: Book Id
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *        200 :
+ *          description: Success
+ *        400 :
+ *          description: Invalid Data
+ */
+
+adminRouter.delete("/book/delete/:id", (req, res) => {
   const book = req.params.id;
   booksCrud.deleteBookById(book, res);
 });
