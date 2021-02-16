@@ -114,7 +114,6 @@ export class BooksFormComponent implements OnInit {
       },
       (err) => {
         this.isSavingBook = false;
-        console.log(err);
         this.snackbarService.show('issue in book update', 'danger');
       }
     );

@@ -52,7 +52,6 @@ export class CartComponent implements OnInit {
         this.getTotalPrice();
       },
       (err) => {
-        console.log(err);
         this.snackbarService.show('Something Went Wrong!', 'danger');
       }
     );
@@ -65,7 +64,6 @@ export class CartComponent implements OnInit {
         this.snackbarService.show('One Item removed from Cart!');
       },
       (err) => {
-        console.log(err);
         this.snackbarService.show('Something Went Wrong!', 'danger');
       }
     );
@@ -84,7 +82,6 @@ export class CartComponent implements OnInit {
         this.snackbarService.show('Book Deleted from Cart.!');
       },
       (err) => {
-        console.log(err);
         this.snackbarService.show('Something Went Wrong!', 'danger');
       }
     );
@@ -96,7 +93,6 @@ export class CartComponent implements OnInit {
         this.snackbarService.show('Cart Cleared.!');
       },
       (err) => {
-        console.log(err);
         this.snackbarService.show('Something Went Wrong!', 'danger');
       }
     );

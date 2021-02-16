@@ -55,7 +55,6 @@ export class NavbarComponent implements OnInit {
         else this.cartService.cartItemcount$.next(0);
       },
       (err) => {
-        console.log(err);
         this.cartService.cartItemcount$.next(0);
       }
     );
