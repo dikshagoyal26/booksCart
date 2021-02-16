@@ -2,13 +2,13 @@
   <a class="navbar-brand" routerLink="/books">
     <h2 class="nav-title"> <i class="fa fa-book" aria-hidden="true"></i>BookCart</h2>
   </a>
-  <app-search-bar></app-search-bar>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <app-search-bar></app-search-bar>
     <ul class="nav navbar-nav navbar-right ml-auto">
       <li class="nav-item mr-4" *ngIf="this.user && this.user.isLoggedIn">
         <i class="fa fa-heart pointer cart mt-2" aria-hidden="true" title="Wishlisted Items" routerLink="/wishlist"></i>

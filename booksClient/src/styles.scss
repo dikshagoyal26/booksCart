@@ -113,7 +113,6 @@ form label {
   align-items: center;
 }
 .panel {
-  min-width: 30rem;
   border: 1px solid #dee2e6;
 }
 .panel-header {
@@ -152,4 +151,9 @@ form label {
 
 button:disabled {
   cursor: not-allowed;
+}
+@media (max-width: 600px) {
+  .btn {
+    font-size: 0.89rem;
+  }
 }
