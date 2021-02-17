@@ -4,6 +4,7 @@ import { Book } from 'src/app/shared/models/books.model';
 import { BooksService } from 'src/app/shared/services/books.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-admin-books',
@@ -16,6 +17,9 @@ export class AdminBooksComponent implements OnInit {
   public modalRef: BsModalRef;
   public selectedBook: Book;
   public isLoading: boolean = true;
+  public itemsPerPage: number = 15;
+  public returnedArray: Book[] = [];
+  public endIndex: number = 0;
   constructor(
     private booksService: BooksService,
     private router: Router,
@@ -30,6 +34,8 @@ export class AdminBooksComponent implements OnInit {
   fetchBooks() {
     this.booksService.fetchBooks().subscribe((books: Book[]) => {
       this.books = books;
+      if (this.books)
+        this.returnedArray = this.books.slice(0, this.itemsPerPage);
       this.isLoading = false;
     });
   }
@@ -54,5 +60,12 @@ export class AdminBooksComponent implements OnInit {
       template,
       Object.assign({}, { class: 'gray modal-md' })
     );
+  }
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    window.scrollTo({ top: 0 });
+    this.returnedArray = this.books.slice(startItem, endItem);
+    this.endIndex = startItem;
   }
 }

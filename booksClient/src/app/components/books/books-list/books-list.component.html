@@ -5,7 +5,9 @@
     </div>
     <div class="d-flex center" *ngIf="books.length>itemsPerPage"
       [ngClass]="{'align-bottom':returnedArray.length<(itemsPerPage)/2}">
-      <pagination [totalItems]="books.length" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)">
+      <pagination [boundaryLinks]="true" [rotate]="true" [totalItems]="books.length" [itemsPerPage]="itemsPerPage"
+        [maxSize]="3" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+        (pageChanged)="pageChanged($event)">
       </pagination>
     </div>
   </div>

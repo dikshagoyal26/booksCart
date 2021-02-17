@@ -6,7 +6,8 @@
     </div>
     <div class="panel-form">
       <div class="mb-2">
-        <input type="text" class="form-control" [(ngModel)]="searchData" placeholder="Filter">
+        <input type="text" class="form-control" [(ngModel)]="searchData"
+          placeholder="Filter by Title, Author or Category">
       </div>
       <table class="table capitalise">
         <thead>
@@ -20,8 +21,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let book of books |filter:searchData; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
+          <tr *ngFor="let book of returnedArray |filter:searchData; let i = index">
+            <th scope="row">{{ i + 1 + endIndex }}</th>
             <td class="book-title">{{ book.title }}</td>
             <td>{{ book.author }}</td>
             <td>{{ book.category.category_type }}</td>
@@ -34,6 +35,13 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="d-flex center mt-3" *ngIf="books.length>itemsPerPage"
+      [ngClass]="{'align-bottom':returnedArray.length<(itemsPerPage)/2}">
+      <pagination [boundaryLinks]="true" [rotate]="true" [totalItems]="books.length" [itemsPerPage]="itemsPerPage"
+        [maxSize]="3" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+        (pageChanged)="pageChanged($event)">
+      </pagination>
     </div>
   </div>
 </div>
