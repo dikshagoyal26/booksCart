@@ -1,3 +1,3 @@
 export enum Url {
-  backendUrl = 'https://book-cart-app.herokuapp.com/', // 'http://localhost:5000/',
+  backendUrl = 'http://localhost:5000/', // 'https://book-cart-app.herokuapp.com/', // 'http://localhost:5000/',
 }

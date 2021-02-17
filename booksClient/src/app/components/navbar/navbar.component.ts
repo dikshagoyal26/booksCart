@@ -71,4 +71,18 @@ export class NavbarComponent implements OnInit {
     this.userService.logout();
     this.router.navigate(['/login']);
   }
+  navigateToRoute(route: string) {
+    this.hideNavbarSupportedContent();
+    this.router.navigate([route]);
+  }
+  hideNavbarSupportedContent() {
+    let collapseBtn = document.querySelector('#navbar-toggler');
+    if (collapseBtn) {
+      collapseBtn.setAttribute('aria-expanded', 'false');
+      collapseBtn.classList.add('collapsed');
+      document
+        .querySelector('#navbarSupportedContent')
+        ?.classList.remove('show');
+    }
+  }
 }
