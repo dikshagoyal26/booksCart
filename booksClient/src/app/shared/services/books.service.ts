@@ -70,7 +70,10 @@ export class BooksService {
         return Url.backendUrl + 'uploads/' + book.cover;
       }
     } else {
-      return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxa-H7vHgjDI9F3X1dNDtq_u5B6fGCluebxA&usqp=CAU';
+      return this.getNoImageUrl();
     }
+  }
+  getNoImageUrl() {
+    return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxa-H7vHgjDI9F3X1dNDtq_u5B6fGCluebxA&usqp=CAU';
   }
 }

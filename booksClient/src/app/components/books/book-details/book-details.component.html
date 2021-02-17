@@ -6,7 +6,7 @@
         <div class="panel-form">
             <div class="row">
                 <div class="col-md-4 book-img">
-                    <img [src]="getCover()" alt="book cover" [title]="book.title">
+                    <img [src]="coverImage" alt="book cover" [title]="book.title" (error)="getNoImageUrl()">
                 </div>
                 <div class="col-md-8 details w-100">
                     <table class="table w-100">
@@ -32,7 +32,6 @@
                     <div class="d-flex w-100 ">
                         <app-add-to-cart [bookId]="book._id" class="mr-2"></app-add-to-cart>
                         <app-toggle-wishlist [bookId]="book._id" [showButton]=true></app-toggle-wishlist>
-
                     </div>
                 </div>
             </div>

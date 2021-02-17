@@ -28,6 +28,7 @@ nav {
   font-size: 0.75rem;
   text-align: center;
   position: absolute;
+  left: 30px;
 }
 .nav-item .btn-link:hover {
   background: #238cd1; // #212529;
@@ -43,4 +44,19 @@ nav {
 .navbar {
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+@media (max-width: 990px) {
+  .nav-collapse-div.show,
+  .nav-collapse-div.collapsing {
+    flex-direction: column-reverse;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .navbar-collapse {
+    align-items: unset;
+  }
+  .ml-auto,
+  .mx-auto {
+    margin-left: 0px !important;
+  }
 }

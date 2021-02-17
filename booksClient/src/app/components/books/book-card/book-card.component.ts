@@ -14,4 +14,7 @@ export class BookCardComponent implements OnInit {
   ngOnInit() {
     this.coverImage = this.booksService.getCoverImage(this.book);
   }
+  getNoImageUrl() {
+    this.coverImage = this.booksService.getNoImageUrl();
+  }
 }

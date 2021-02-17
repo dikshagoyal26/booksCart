@@ -14,6 +14,7 @@ export class BookDetailsComponent implements OnInit {
   public book: Book;
   public userDataSubscription: Subscription;
   public user: User;
+  public coverImage: string;
   constructor(
     private route: ActivatedRoute,
     private booksService: BooksService,
@@ -34,13 +35,16 @@ export class BookDetailsComponent implements OnInit {
         this.user = data;
       });
   }
+  getCover() {
+    this.coverImage = this.booksService.getCoverImage(this.book);
+  }
+  getNoImageUrl() {
+    this.coverImage = this.booksService.getNoImageUrl();
+  }
   private fetchDetails(BookId) {
     this.booksService.fetchBookById(BookId).subscribe((data: Book) => {
       if (data) this.book = data;
       else this.router.navigate(['not-found']);
     });
-  }
-  getCover() {
-    return this.booksService.getCoverImage(this.book);
   }
 }

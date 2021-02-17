@@ -7,15 +7,19 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse nav-collapse-div" id="navbarSupportedContent">
     <app-search-bar></app-search-bar>
     <ul class="nav navbar-nav navbar-right ml-auto">
-      <li class="nav-item mr-4" *ngIf="this.user && this.user.isLoggedIn">
-        <i class="fa fa-heart pointer cart mt-2" aria-hidden="true" title="Wishlisted Items" routerLink="/wishlist"></i>
+      <li class="nav-item" *ngIf="this.user && this.user.isLoggedIn">
+        <a routerLink="/wishlist" class="btn btn-link mr-2">
+          <i class="fa fa-heart pointer cart" aria-hidden="true" title="Wishlisted Items"></i>
+        </a>
         <span class="cart-count"> {{wishlistItems}} </span>
       </li>
-      <li class="nav-item mr-4" *ngIf="this.user && this.user.isLoggedIn">
-        <i class="fa fa-shopping-cart pointer cart mt-2" title="Cart" routerLink="/cart" aria-hidden="true"></i>
+      <li class="nav-item" *ngIf="this.user && this.user.isLoggedIn">
+        <a routerLink="/cart" class="btn btn-link mr-2">
+          <i class="fa fa-shopping-cart pointer cart" title="Cart" aria-hidden="true"></i>
+        </a>
         <span class="cart-count"> {{cartItems}} </span>
       </li>
       <li class="nav-item active" *ngIf="!this.user || (this.user && !this.user.isLoggedIn)">
@@ -34,7 +38,6 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" routerLink="/myorders">My Orders</a>
-            <!-- <a class="dropdown-item">Change Password</a> -->
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="logout()">Logout</a>
           </div>
@@ -49,7 +52,7 @@
       <li class="nav-item">
         <a [href]="backendUrl" target="_blank" class="btn btn-link d-flex">
           <img class="swagger" src="https://static1.smartbear.co/swagger/media/assets/swagger_fav.png" alt="">
-          <span>Swagger</span>
+          <span> Swagger</span>
         </a>
       </li>
     </ul>

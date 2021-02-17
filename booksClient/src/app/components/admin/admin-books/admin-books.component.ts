@@ -58,7 +58,7 @@ export class AdminBooksComponent implements OnInit {
     this.selectedBook = book;
     this.modalRef = this.modalService.show(
       template,
-      Object.assign({}, { class: 'gray modal-md' })
+      Object.assign({}, { class: 'gray modal-md', backdrop: true })
     );
   }
   pageChanged(event: PageChangedEvent): void {

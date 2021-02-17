@@ -26,7 +26,6 @@ input[type="text"] {
   position: absolute;
   z-index: 99;
   max-height: 250px;
-  width: 300px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -49,3 +48,12 @@ input[type="text"] {
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
+.width {
+  width: 300px;
+}
+// @media (max-width: 990px) {
+//   .width {
+//     width: 100%;
+//   }
+// }
