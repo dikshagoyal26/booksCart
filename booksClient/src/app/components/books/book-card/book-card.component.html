@@ -1,6 +1,6 @@
 <div class="card">
   <div class="bookImg">
-    <img class=" pointer" [src]="coverImage" alt="Book image cap" routerLink="/books/details/{{ book._id }}"
+    <img class="pointer" [src]="coverImage" alt="Book image cap" routerLink="/books/details/{{ book._id }}"
       [tooltip]="book.title" placement="bottom" (error)="getNoImageUrl()" />
     <app-toggle-wishlist [bookId]="book._id" class="wishlist"></app-toggle-wishlist>
   </div>

@@ -23,4 +23,10 @@ input[type="file"] {
 img {
   max-width: 200px;
   max-height: 250px;
+  margin: auto;
+}
+@media (max-width: 767px) {
+  form {
+    flex-flow: column-reverse;
+  }
 }

@@ -1,6 +1,5 @@
-.categories {
-  flex: 0 0 17.5rem;
-  width: 230px;
-  max-width: 230px;
-  margin-right: 8px;
+@media (max-width: 768px) {
+  .book-list {
+    margin-top: 10px;
+  }
 }

@@ -4,6 +4,9 @@ nav {
   top: 0;
   z-index: 100;
 }
+.navbar-brand {
+  cursor: pointer;
+}
 .nav-item .btn-link,
 .nav-item .dropdown {
   color: #fff;

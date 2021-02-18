@@ -1,10 +1,10 @@
-<div class="d-flex center w-100" *ngIf="!isLoading; else loader">
+<div class="d-flex center" *ngIf="!isLoading; else loader">
   <div class="panel book-form">
     <div class="panel-header">
       <span class="heading">{{formTitle}} Book</span>
     </div>
     <div class="panel-form">
-      <form [formGroup]="bookForm" class="d-flex">
+      <form [formGroup]="bookForm" class="row">
         <div class="panel-card p-2 my-2 ">
           <div class="form-contents">
             <div class="form-group mt-2">
